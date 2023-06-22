@@ -1,0 +1,45 @@
+.navbar {
+    background-color: rgba(0, 0, 0, 0.714);
+}
+
+.navbar .navbar-brand {
+    color: #E50914;
+    font-weight: bold;
+}
+
+.navbar .navbar-brand:hover {
+    opacity: 0.7;
+}
+
+.navbar-nav .nav-item .nav-link{
+    color: #E50914;
+}
+
+.btn {
+    outline:auto #E50914;
+    border: 1px solid #E50914;
+    color: gray;
+}
+
+.btn:hover {
+    background-color: #E50914;
+}
+
+.dropdown-menu {
+    background-color: black;
+}
+
+.dropdown-menu .dropdown-item {
+    color: gray;
+}
+.dropdown-menu .dropdown-item:hover {
+    background-color: #E50914;
+}
+form input {
+    outline: #E50914 !important;
+    border: 2px #E50914 !important;
+}
+form input:focus {
+    box-shadow: 0 1px 1px #E50914 inset, 0 0 8px #E50914;
+  outline: 0 none;
+}

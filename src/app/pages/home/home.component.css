@@ -1,0 +1,50 @@
+#title {
+    color: #E50914;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.452) !important;
+    /* width: 100% !important; */
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+.rowposter {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.rowimg {
+    width: 300px;
+    transition: transform 450ms;
+    z-index: 100;
+    margin-right: 7px;
+}
+
+.rowimg:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.rowposter::-webkit-scrollbar {
+    height: 2px;
+}
+
+/* Track */
+.rowposter::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 5px;
+}
+
+/* Handle */
+.rowposter::-webkit-scrollbar-thumb {
+    background: #E50914;
+    border-radius: 5px;
+    /* width: 1px; */
+    /* height: 1px; */
+}

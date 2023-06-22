@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { MovieApiService } from './services/movie-api-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,28 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'showtime';
+  genres!: any[]
+  navbg: any
+  constructor(private route: Router, private movieApiService: MovieApiService){
+    this.movieApiService.getGenres().subscribe(genres => this.genres = genres.genres)
+  }
+  @HostListener('document:scroll') scrollover(){
+    if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0){
+      this.navbg = {
+        'background-color': '#000000'
+      }
+    } else {
+      this.navbg = {
+        'background-color': 'rgba(0, 0, 0, 0.714)'
+      }
+    }
+  }
+
+  search(s: string){
+    this.route.navigateByUrl('search/' + s)
+  }
+
+  checkValue(s: number){
+    console.log(s)
+  }
 }

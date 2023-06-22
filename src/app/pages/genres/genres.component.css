@@ -1,0 +1,53 @@
+h2 {
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    max-height: 600px;
+    /* overflow: hidden; */
+    /* white-space: nowrap; */
+    /* text-overflow: ellipsis !important; */
+    transition: transform 0.4s;
+    background-color: black;
+    outline: #E50914;
+    border-bottom: 3px solid #e509149a;
+}
+
+h5 {
+    color: #E50914;;
+    font-weight: bold;
+}
+
+a p {
+    /* position: relative; */
+    /* overflow: hidden; */
+    /* white-space: nowrap; */
+    color: gray;
+    /* display: inline-block; */
+    /* max-height: 100px; */
+    /* text-overflow: ellipsis !important */
+}
+
+a p{
+    height: 28px;
+    width: 200px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    margin: 0 5px 0 5px;
+    /* text-align: center; */
+    text-decoration: none;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    color: gray;
+  }
+
+/* a img {
+    transition: transform 0.4s;
+} */
+
+a:hover {
+    transform: scale(1.02);
+}
