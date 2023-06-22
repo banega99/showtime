@@ -1,5 +1,5 @@
 
-<div id="carouselExampleCaptions" class="carousel slide">
+<div id="carouselExampleCaptions" class="carousel slide mt-5">
     <div  class="carousel-inner">
         <div *ngFor="let movie of bannerMovies; let i = index" class="carousel-item" [ngClass]="{active:i===0}">
             <img routerLink="movie/{{movie.id}}" src="https://image.tmdb.org/t/p/original{{movie.backdrop_path}}" class="d-block w-100" alt="...">

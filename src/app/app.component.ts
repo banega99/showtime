@@ -21,7 +21,7 @@ export class AppComponent {
       }
     } else {
       this.navbg = {
-        'background-color': 'rgba(0, 0, 0, 0.714)'
+        'background-color': '#000000'
       }
     }
   }

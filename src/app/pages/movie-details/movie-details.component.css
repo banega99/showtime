@@ -33,6 +33,10 @@ h5 a:not(:last-child)::after {
     content: ',';
     color: white;
 }
+
+h5 span {
+    margin-right: 5px;
+}
 h5 span:not(:last-child)::after {
     content: ',';
     color: white;

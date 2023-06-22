@@ -14,6 +14,7 @@
             <h5>Release date: {{movie.release_date}}</h5>
             <h5>Status: {{movie.status}}</h5>
             <h5>Production counties: <span *ngFor="let country of movie.production_countries">{{country.name}}</span></h5>
+            <h5>Production companies: <span *ngFor="let company of movie.production_companies">{{company.name}}</span></h5>
         </div> 
         <div *ngIf="movieTrailerUrl$ | async as trailerUrl" class="trailer col-md-6">
             <h5>Trailer:</h5>
@@ -29,7 +30,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center">
         <h4>Cast</h4>
         <div *ngFor="let cast of casts$ | async" class="cast">
             <img src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}">
