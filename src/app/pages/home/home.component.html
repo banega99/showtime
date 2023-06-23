@@ -3,9 +3,9 @@
     <div  class="carousel-inner">
         <div *ngFor="let movie of bannerMovies; let i = index" class="carousel-item" [ngClass]="{active:i===0}">
             <img routerLink="movie/{{movie.id}}" src="https://image.tmdb.org/t/p/original{{movie.backdrop_path}}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption">
                 <h5 id="title">{{movie.original_title}}</h5>
-                <p>{{movie.overview}}</p>
+                <p class="d-none d-md-inline">{{movie.overview}}</p>
             </div>
         </div>
     </div>

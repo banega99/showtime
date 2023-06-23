@@ -48,3 +48,17 @@ img:hover {
     /* width: 1px; */
     /* height: 1px; */
 }
+
+@media (max-width: 767px) {
+    .carousel-caption {
+        background-color: transparent!important;
+        /* width: 100% !important; */
+    }
+    #title {
+        font-size: 20px !important;
+        text-shadow: 0px 0px 1.5px white;
+    }
+    .rowimg {
+        width: 100px;
+    }
+}
