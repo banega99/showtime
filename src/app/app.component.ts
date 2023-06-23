@@ -30,6 +30,7 @@ export class AppComponent {
     e.preventDefault()
     if(searchTerm == '') return
     this.route.navigateByUrl('search/' + searchTerm)
+    document.querySelector('.navbar-collapse')?.classList.remove('show')
   }
 
 }
