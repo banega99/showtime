@@ -17,8 +17,8 @@
         </li>
       </ul>
       <form class="d-flex" role="search">
-        <input #s (keyup.enter)="search(s.value)" [value]="s.value" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button (click)="search(s.value)" class="btn">Search</button>
+        <input #s (keyup.enter)="search($event, s.value)" [value]="s.value" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button (click)="search($event, s.value)" class="btn">Search</button>
       </form>
     </div>
   </div>

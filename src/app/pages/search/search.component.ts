@@ -13,7 +13,7 @@ export class SearchComponent {
   resLength!: number
   constructor(private activatedRoute: ActivatedRoute, private movieApiService: MovieApiService){
     activatedRoute.params.subscribe(params => {
-      if(!params) return
+       
       this.searchRes$ = this.movieApiService.getMovieBytitle(params.movieTitle).pipe(map(res => res.results))
       this.movieApiService.getMovieBytitle(params.movieTitle).subscribe(res => this.resLength = res.results.length)
     })

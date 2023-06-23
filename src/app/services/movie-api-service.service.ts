@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { Observable, map } from 'rxjs';
 export class MovieApiService{
 
   constructor(private http:HttpClient) {
-    // this.getGenres().subscribe((res) => console.log(res));
+    this.getGenres().pipe(map((res:any) => res.genres.find((data:any) => data.name == 'Animation'))).subscribe(console.log)
    }
 
   baseUrl = "https://api.themoviedb.org/3"

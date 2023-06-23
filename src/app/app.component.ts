@@ -14,23 +14,22 @@ export class AppComponent {
   constructor(private route: Router, private movieApiService: MovieApiService){
     this.movieApiService.getGenres().subscribe(genres => this.genres = genres.genres)
   }
-  @HostListener('document:scroll') scrollover(){
-    if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0){
-      this.navbg = {
-        'background-color': '#000000'
-      }
-    } else {
-      this.navbg = {
-        'background-color': '#000000'
-      }
-    }
+  // @HostListener('document:scroll') scrollover(){
+  //   if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0){
+  //     this.navbg = {
+  //       'background-color': '#000000'
+  //     }
+  //   } else {
+  //     this.navbg = {
+  //       'background-color': '#000000'
+  //     }
+  //   }
+  // }
+
+  search(e: Event, searchTerm: string){
+    e.preventDefault()
+    if(searchTerm == '') return
+    this.route.navigateByUrl('search/' + searchTerm)
   }
 
-  search(s: string){
-    this.route.navigateByUrl('search/' + s)
-  }
-
-  checkValue(s: number){
-    console.log(s)
-  }
 }
