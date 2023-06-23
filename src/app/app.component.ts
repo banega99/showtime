@@ -1,36 +1,15 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieApiService } from './services/movie-api-service.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'showtime';
-  genres!: any[]
-  navbg: any
-  constructor(private route: Router, private movieApiService: MovieApiService){
-    this.movieApiService.getGenres().subscribe(genres => this.genres = genres.genres)
+export class AppComponent implements OnChanges{
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
   }
-  // @HostListener('document:scroll') scrollover(){
-  //   if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0){
-  //     this.navbg = {
-  //       'background-color': '#000000'
-  //     }
-  //   } else {
-  //     this.navbg = {
-  //       'background-color': '#000000'
-  //     }
-  //   }
-  // }
-
-  search(e: Event, searchTerm: string){
-    e.preventDefault()
-    if(searchTerm == '') return
-    this.route.navigateByUrl('search/' + searchTerm)
-    document.querySelector('.navbar-collapse')?.classList.remove('show')
-  }
-
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -12,6 +12,7 @@ import { GenresComponent } from './pages/genres/genres.component';
 import { NotFoundComponent } from './partial/not-found/not-found.component';
 import { LoadingComponent } from './partial/loading/loading.component'
 import { LoadingInterceptor } from './loading.interceptor';
+import { NavbarComponent } from './partial/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +23,15 @@ import { LoadingInterceptor } from './loading.interceptor';
     SafePipe,
     GenresComponent,
     NotFoundComponent,
-    LoadingComponent
+    LoadingComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},

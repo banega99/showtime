@@ -26,7 +26,7 @@ export class MovieDetailsComponent implements OnInit {
       
       // movieApiService.getMovieDetails(params.id).subscribe((results => console.log(results)));
       // this.movieApiService.getMovieCast(params.id).pipe(map(data => data.cast.map((data:any) => data.name.replace(' ', '_')))).subscribe(console.log)
-      this.movieApiService.getMovieCast(params.id).subscribe(console.log)
+      // this.movieApiService.getMovieCast(params.id).subscribe(console.log)
     })
   }
 

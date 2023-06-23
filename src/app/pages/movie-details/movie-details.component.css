@@ -74,10 +74,6 @@ h5 span:not(:last-child)::after {
     justify-content: center;
     align-items: center;
 }
-.ratgen {
-    /* width: fit-content; */
-}
-
 .trailer h5 {
     align-self: self-start;
     margin-right: 10px;
