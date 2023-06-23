@@ -54,4 +54,9 @@ export class NavbarComponent implements OnInit{
     let toggle = window.innerWidth < 992 ? document.querySelector('.navbar-collapse')?.classList.contains('show') : true
     return toggle
   }
+
+  hideError(){
+    document.querySelector('.navbar-collapse')?.classList.remove('show')
+  }
+
 }
