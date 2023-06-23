@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
     this.upcomingData()
     this.topRatedData()
     this.nowPlayingData()
-    console.log(this.bannerMovies)
   }
 
   bannerData(){

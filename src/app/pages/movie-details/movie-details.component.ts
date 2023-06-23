@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class MovieDetailsComponent implements OnInit {
   movieRecommendations$!: Observable<any>
   casts$!: Observable<any>
   id!: string
+  castName!: string
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute) {
     activatedRoute.params.subscribe(params => {
       if(!params) return
@@ -22,7 +23,10 @@ export class MovieDetailsComponent implements OnInit {
       .pipe(map(data => `https://www.themoviedb.org/video/play?key=${data.results[0].key}`))
       this.casts$ = this.movieApiService.getMovieCast(params.id).pipe(map(data => data.cast))
       this.movieRecommendations$ = this.movieApiService.getRecommended(params.id).pipe(map(data => data.results))
-      movieApiService.getMovieDetails(params.id).subscribe((results => console.log(results)));
+      
+      // movieApiService.getMovieDetails(params.id).subscribe((results => console.log(results)));
+      // this.movieApiService.getMovieCast(params.id).pipe(map(data => data.cast.map((data:any) => data.name.replace(' ', '_')))).subscribe(console.log)
+      this.movieApiService.getMovieCast(params.id).subscribe(console.log)
     })
   }
 

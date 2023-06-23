@@ -38,16 +38,14 @@
     <div class="container justify-content-center">
         <h4>Cast</h4>
         <div class="row castrow justify-content-center justify-content-md-start">
-            <div *ngFor="let cast of casts$ | async" class="cast">
-                <img src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}">
+            <a *ngFor="let cast of casts$ | async" class="cast"
+                href="https://en.wikipedia.org/wiki/{{cast.name.replace(' ', '_')}}"><img
+                    src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}">
                 <div class="details">
                     <h4>{{cast.name}}</h4>
                     <p>{{cast.character}}</p>
                 </div>
-
-            </div>
+            </a>
         </div>
-        
-
     </div>
 </div>
