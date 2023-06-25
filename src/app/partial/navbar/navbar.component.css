@@ -1,4 +1,5 @@
 .navbar {
+    /* z-index: 100; */
     /* height: 80px !important; */
     background-color: #000000;
 }
@@ -17,13 +18,14 @@
 }
 
 .btn {
-    outline:auto #E50914;
+    /* outline:auto #E50914; */
     border: 1px solid #E50914;
     color: gray;
 }
 
 .btn:hover {
     background-color: #E50914;
+    color: white;
 }
 
 .dropdown-menu {
@@ -42,16 +44,29 @@ form {
     
 }
 form input {
+    color: white;
+    background-color: #0000;
     position: relative;
     outline: #E50914 !important;
-    border: 2px #E50914 !important;
+    border: 1px solid #E50914;
 }
+
+/* form input::placeholder {
+    color: gray;
+} */
+/* .form-control{
+    color: white;
+    background-color: gray;
+} */
+
+
 form input:focus {
     box-shadow: 0 1px 1px #E50914 inset, 0 0 8px #E50914;
   outline: 0 none;
 }
 
 .error-container {
+    display: none;
     position: absolute;
     width: fit-content;
     bottom: 3px;
@@ -67,6 +82,82 @@ form input:focus {
     border: 2px solid #e72929;
 }
 
+.show-error{
+    display: block;
+}
+
+.search-dropdown {
+    visibility: hidden;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: fit-content;
+    /* z-index: -1000; */
+    background-color: #000000;
+    /* transform: translateY(-80px); */
+    /* transition: all 0.3s; */
+    /* overflow-y: scroll; */
+}
+
+
+
+.search-dropdown::-webkit-scrollbar {
+    width: 2px;
+}
+
+/* Track */
+.search-dropdown::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 5px;
+}
+
+/* Handle */
+.search-dropdown::-webkit-scrollbar-thumb {
+    background: #E50914;
+    border-radius: 5px;
+    /* width: 1px; */
+    /* height: 1px; */
+}
+
+.search-show {
+    visibility: visible;
+    transform: translateY(80px);
+}
+
+.search-card {
+    display: none;
+    /* border-bottom: 1px solid #E50914; */
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* .search-card:not(:last-child) {
+    border-bottom: 1px solid #E50914
+} */
+
+
+.show-card {
+    display: flex;
+    align-items: center;
+}
+
+.show-card:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.show-card:hover h4 {
+    color: #E50914;
+}
+
+.show-card h4 {
+    margin-left: 20px;
+    color: gray
+}
+
+.show-card:not(:last-child) {
+    border-bottom: 1px solid #E50914
+}
 
 .navbar-toggler-icon {
     background-image: url(
@@ -81,6 +172,11 @@ form input:focus {
         position: absolute;
         width: fit-content;
         top: -20px
+    }
+
+    .search-show {
+        visibility: visible;
+        transform: translateY(140px);
     }
 }
 

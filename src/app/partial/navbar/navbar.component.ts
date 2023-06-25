@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 
 @Component({
@@ -13,6 +14,8 @@ export class NavbarComponent implements OnInit{
   genres!: any[]
   navbg: any
   searchForm!: FormGroup
+  searchResults$!: Observable<any>
+  @ViewChild('s') searchInput!: ElementRef
   constructor(private route: Router, private movieApiService: MovieApiService, private fb: FormBuilder){
     this.movieApiService.getGenres().subscribe(genres => this.genres = genres.genres)
   }
@@ -23,10 +26,10 @@ export class NavbarComponent implements OnInit{
     })
   }
 
-  // ngOnChanges(changes: SimpleChanges){
-  //   console.log(changes)
-  //   // this.showError = this.fc.searchTerm.invalid && this.fc.searchTerm.touched
-  // }
+  resetInputValue(e: any){
+    console.log(this.searchInput.nativeElement.value, e.target)
+    this.searchInput.nativeElement.value = ''
+  }
 
   get fc(){
     return this.searchForm.controls
@@ -45,14 +48,22 @@ export class NavbarComponent implements OnInit{
 
   search(e: Event, searchTerm: string){
     e.preventDefault()
-    if(searchTerm == '') return
+    // if(this.fc.searchTerm.touched && this.fc.searchTerm.invalid){
+    //   document.querySelector('.error-container')?.classList.add('show-error')
+    // }
+    if(searchTerm == '') {
+      document.querySelector('.error-container')?.classList.add('show-error')
+      return
+    }
+    this.searchInput.nativeElement.value = ''
     this.route.navigateByUrl('search/' + searchTerm)
     document.querySelector('.navbar-collapse')?.classList.remove('show')
   }
 
-  get toggle(){
-    let toggle = window.innerWidth < 992 ? document.querySelector('.navbar-collapse')?.classList.contains('show') : true
-    return toggle
+  showResults(title: string){
+    if(title == '') return
+    this.searchResults$ = this.movieApiService.getMovieBytitle(title)
+    this.movieApiService.getMovieBytitle(title).subscribe(console.log)
   }
 
   hideError(){

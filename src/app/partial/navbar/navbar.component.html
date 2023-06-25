@@ -5,7 +5,7 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div #collapse class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown ms-lg-auto mb-1">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -19,14 +19,29 @@
       </ul>
       <form [formGroup]="searchForm" (submit)="search($event, s.value)" class="d-flex" role="search">
         <!-- <div class="input"> -->
-          <input formControlName="searchTerm" #s (keyup.enter)="search($event, s.value)" [value]="s.value"
+          <input id="searchInput" formControlName="searchTerm" (keyup)="showResults(s.value)" #s (keyup.enter)="search($event, s.value)" [value]="s.value"
             class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <div *ngIf="fc.searchTerm.touched && fc.searchTerm.invalid && toggle" class="error-container">
-            <div *ngIf="fc.searchTerm.errors?.required" class="error">You must insert search term</div>
+          <div class="error-container">
+            <div class="error">You must insert search term</div>
           </div>
         <!-- </div> -->
-        <button (click)="search($event, s.value)" class="btn">Search</button>
+        <!-- <li class="nav-item dropdown ms-lg-auto mb-1"> -->
+          <button (click)="search($event, s.value)" class="btn" >Search</button>
+          <!-- <ul class="dropdown-menu ">
+            <li *ngFor="let genre of genres"><a class="dropdown-item"
+                routerLink="genres/{{genre.name}}/{{genre.id}}">{{genre.name}}</a></li>
+          </ul> -->
+        <!-- </li> -->
+        
       </form>
+      
     </div>
   </div>
+  <div class="search-dropdown" *ngIf="searchResults$ |async as searchResults"  [ngClass]="{'search-show': s.value != ''}">
+        <div (click)="s.value = ''; collapse.classList.remove('show')" *ngFor="let movie of searchResults.results; let i = index" routerLink="movie/{{movie.id}}" class="search-card" [ngClass]="{'show-card':i < 4}">
+          <img src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" alt="" srcset="" width="100px">
+          <h4>{{movie.title}}</h4>
+        </div>
+  </div>
 </nav>
+

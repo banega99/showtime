@@ -31,6 +31,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     // this.movieDetails()
     // this.movieVideo()
   }

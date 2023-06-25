@@ -8,7 +8,6 @@ import { Observable, map, tap } from 'rxjs';
 export class MovieApiService{
 
   constructor(private http:HttpClient) {
-    // this.getGenres().pipe(map((res:any) => res.genres.find((data:any) => data.name == 'Animation'))).subscribe(console.log)
    }
 
   baseUrl = "https://api.themoviedb.org/3"
