@@ -24,7 +24,7 @@ export class MovieDetailsComponent implements OnInit {
       this.casts$ = this.movieApiService.getMovieCast(params.id).pipe(map(data => data.cast))
       this.movieRecommendations$ = this.movieApiService.getRecommended(params.id).pipe(map(data => data.results))
       
-      // movieApiService.getMovieDetails(params.id).subscribe((results => console.log(results)));
+      movieApiService.getMovieDetails(params.id).subscribe((results => console.log(results)));
       // this.movieApiService.getMovieCast(params.id).pipe(map(data => data.cast.map((data:any) => data.name.replace(' ', '_')))).subscribe(console.log)
       // this.movieApiService.getMovieCast(params.id).subscribe(console.log)
     })

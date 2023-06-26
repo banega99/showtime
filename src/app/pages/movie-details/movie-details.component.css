@@ -42,6 +42,17 @@ h5 span:not(:last-child)::after {
     color: white;
 }
 
+.title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* #title2 {
+    color: gray;
+
+} */
+
 .castrow {
     margin: 0;
 }

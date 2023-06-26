@@ -13,6 +13,7 @@ import { NotFoundComponent } from './partial/not-found/not-found.component';
 import { LoadingComponent } from './partial/loading/loading.component'
 import { LoadingInterceptor } from './loading.interceptor';
 import { NavbarComponent } from './partial/navbar/navbar.component';
+import { FilterComponent } from './pages/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NavbarComponent } from './partial/navbar/navbar.component';
     GenresComponent,
     NotFoundComponent,
     LoadingComponent,
-    NavbarComponent
+    NavbarComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,

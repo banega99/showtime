@@ -19,6 +19,10 @@ img:hover {
     overflow-y: hidden;
 }
 
+.imgcont {
+    position: relative;
+}
+
 .rowimg {
     width: 300px;
     transition: transform 450ms;
@@ -29,6 +33,7 @@ img:hover {
 .rowimg:hover {
     transform: scale(1.1);
     cursor: pointer;
+    content: 'dsdsdsd';
 }
 
 .rowposter::-webkit-scrollbar {

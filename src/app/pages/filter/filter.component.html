@@ -1,0 +1,15 @@
+<app-not-found [visible]="resLength == 0"></app-not-found>
+<div *ngIf="searchRes$" class="container mt-5 p-3">
+    <div class="row justify-content-center justify-content-md-start">
+        <a routerLink="/movie/{{movie.id}}" *ngFor="let movie of searchRes$ | async" class="card ms-md-2 mb-3" style="width: 18rem;">
+
+            <img src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="card-img-top"
+                alt="{{movie.title}}">
+            <div class="card-body">
+                <h5 class="card-title">{{movie.title}}</h5>
+                <p class="card-text">{{movie.overview}}</p>
+            </div>
+
+        </a>
+    </div>
+</div>
