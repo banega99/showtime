@@ -22,15 +22,9 @@ form ul.dropdown-menu {
     width: fit-content !important;
     height: fit-content !important;
     overflow: hidden;
-}
-form ul.dropdown-menu.show {
-    display: flex;
-    flex-direction: column;
-    width: 100px !important;
-    height: fit-content !important;
-    overflow: hidden;
     transform: translateX(0);
 }
+
 
 form li:hover {
     cursor: pointer;
@@ -56,15 +50,10 @@ form input::placeholder {
     color: gray;
 }
 
-  input:focus::-webkit-search-cancel-button {
-
-    cursor: pointer;
-  }
 form input:focus{
     box-shadow: none !important;
   outline: 0 none;
 }
-
 
 
 .search-dropdown {
@@ -117,10 +106,6 @@ form input:focus{
     border-bottom: 1px solid #E50914
 }
 
-.navbar-toggler-icon {
-    background-image: url(
-"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(128, 128, 128)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-}
 
 .filter {
     visibility: hidden;
@@ -300,12 +285,8 @@ form input:focus{
         position: absolute;
         z-index: 3000!important;
         transform: translateX(0);
-        --bs-dropdown-zindex: 3000!important
     }
-    .filter-show .dropdown-menu {
 
-        --bs-dropdown-zindex: 3000!important;
-    }
     .filter .dropdown-toggle {
         font-size: 12px;
     }
