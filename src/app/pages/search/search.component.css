@@ -55,9 +55,19 @@ h5 {
     font-weight: bold;
 }
 
+a p {
+    /* position: relative; */
+    /* overflow: hidden; */
+    /* white-space: nowrap; */
+    color: gray;
+    /* display: inline-block; */
+    /* max-height: 100px; */
+    /* text-overflow: ellipsis !important */
+}
+
 a p{
     height: 28px;
-    /* width: 200px; */
+    width: 200px;
     padding: 0;
     overflow: hidden;
     position: relative;
@@ -69,12 +79,18 @@ a p{
     white-space: nowrap;
     color: gray;
   }
+
 /* a img {
     transition: transform 0.4s;
 } */
 
 a:hover {
     transform: scale(1.02);
+}
+
+.row {
+    margin: 20px auto !important;
+    padding: 0;
 }
 
 .img-cover {

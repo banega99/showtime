@@ -46,6 +46,10 @@ h5 span:not(:last-child)::after {
     color: white;
 }
 
+.container {
+    margin-top: 90px!important;
+}
+
 .title {
     display: flex;
     flex-direction: row;
@@ -135,6 +139,11 @@ iframe {
 }
 
 @media (max-width: 767px) {
+    .title {
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: start;
+    }
     .rowimg {
         width: 100px;
         

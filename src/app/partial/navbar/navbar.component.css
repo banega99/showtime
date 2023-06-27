@@ -70,12 +70,16 @@ form input:focus{
     transform: translateY(80px);
 }
 
+
 .search-card {
     display: none;
     padding: 5px;
     border-radius: 5px;
 }
 
+.search-card .details h4 {
+    margin: 0px;
+}
 
 .show-card {
     display: flex;

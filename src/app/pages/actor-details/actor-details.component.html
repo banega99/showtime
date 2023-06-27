@@ -4,7 +4,7 @@
             <img src="https://image.tmdb.org/t/p/original{{actorDetails.profile_path}}" alt="" width="200px">
             <div class="details-more">
                 <h3><span class="white">Name: </span> <span class="red">{{actorDetails.name}}</span></h3>
-                <h3 *ngIf="actorDetails.birthday"><span class="white">Date of birth:</span> {{actorDetails.birthday}}</h3>
+                <h3 *ngIf="actorDetails.birthday"><span class="white">Date of birth:</span> {{actorDetails.birthday}} ({{yearsOld}})</h3>
                 <h3 *ngIf="actorDetails.place_of_birth"><span class="white">Place of birth:</span> {{actorDetails.place_of_birth}}</h3>
                 <h3 *ngIf="actorDetails.deathday"><span class="white">Date of death:</span> {{actorDetails.name}}</h3>
                 <h3><span class="white">Popularity:</span> {{actorDetails.popularity}}</h3>

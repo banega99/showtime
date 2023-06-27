@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit{
     movieApiService.getAllCountries().subscribe(data => {
       this.countries = data.slice(1, data.length - 1)
     })
-    for (let i = 1940; i < 2024; i++) {
+    for (let i = 1900; i < new Date().getFullYear()+ 1; i++) {
       this.years.push(i)
   }
   
@@ -80,6 +80,8 @@ export class NavbarComponent implements OnInit{
   }
 
   showResults(title: string){
+    console.log(title);
+    
     if(title == '') return
     if(this.searchType == 'All'){
       // this.searchResults = []
@@ -165,11 +167,12 @@ export class NavbarComponent implements OnInit{
     }    
 
     filter(){
-      if(this.genreValue.length == 0 && this.yearValue.length == 0 && this.countriesValue.length == 0 && this.sortValue == '') return 
+      if(this.genreValue.length == 0 && this.yearValue.length == 0 && this.countriesValue.length == 0 && !this.sortValue) return 
       let genres = this.genreValue.length > 0 ? this.genreValue : ' '
       let years = this.yearValue.length > 0 ? this.yearValue : ' '
       let countries = this.countriesValue.length > 0 ? this.countriesValue : ' '
       let sort = this.sortValue != '' ? this.sortValue : ' '
+      // if(!this.sortValue) return 
       this.route.navigateByUrl(`/filter/${genres}/${years}/${countries}/${sort}`)
     }
 
