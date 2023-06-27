@@ -42,18 +42,19 @@ body {
 }
 
 
-.dropdown-menu::-webkit-scrollbar {
+.dropdown-menu::-webkit-scrollbar, .search-dropdown::-webkit-scrollbar {
     width: 2px;
 }
 
 /* Track */
-.dropdown-menu::-webkit-scrollbar-track {
+.dropdown-menu::-webkit-scrollbar-track, .search-dropdown::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey;
     border-radius: 5px;
 }
 
 /* Handle */
-.dropdown-menu::-webkit-scrollbar-thumb {
+.dropdown-menu::-webkit-scrollbar-thumb, .search-dropdown::-webkit-scrollbar-thumb {
     background: #E50914;
     border-radius: 5px;    
 }
+
