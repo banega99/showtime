@@ -14,6 +14,7 @@ import { LoadingComponent } from './partial/loading/loading.component'
 import { LoadingInterceptor } from './loading.interceptor';
 import { NavbarComponent } from './partial/navbar/navbar.component';
 import { FilterComponent } from './pages/filter/filter.component';
+import { ActorDetailsComponent } from './pages/actor-details/actor-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FilterComponent } from './pages/filter/filter.component';
     NotFoundComponent,
     LoadingComponent,
     NavbarComponent,
-    FilterComponent
+    FilterComponent,
+    ActorDetailsComponent
   ],
   imports: [
     BrowserModule,

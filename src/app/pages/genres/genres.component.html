@@ -3,8 +3,9 @@
     <div class="row justify-content-center justify-content-md-start">
         <a routerLink="/movie/{{movie.id}}" *ngFor="let movie of movies" class="card ms-md-3 mb-3" style="width: 18rem;">
 
-            <img src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="card-img-top"
+            <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="card-img-top"
                 alt="{{movie.title}}">
+            <div *ngIf="!movie.poster_path" class="img-cover"></div>
             <div class="card-body">
                 <h5 class="card-title">{{movie.title}}</h5>
                 <p class="card-text">{{movie.overview}}</p>

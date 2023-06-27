@@ -1,0 +1,29 @@
+<div *ngIf="actorDetails$ | async as actorDetails" class="container">
+    <div class="row details-row">
+        <div class="details">
+            <img src="https://image.tmdb.org/t/p/original{{actorDetails.profile_path}}" alt="" width="200px">
+            <div class="details-more">
+                <h3><span class="white">Name: </span> <span class="red">{{actorDetails.name}}</span></h3>
+                <h3 *ngIf="actorDetails.birthday"><span class="white">Date of birth:</span> {{actorDetails.birthday}}</h3>
+                <h3 *ngIf="actorDetails.place_of_birth"><span class="white">Place of birth:</span> {{actorDetails.place_of_birth}}</h3>
+                <h3 *ngIf="actorDetails.deathday"><span class="white">Date of death:</span> {{actorDetails.name}}</h3>
+                <h3><span class="white">Popularity:</span> {{actorDetails.popularity}}</h3>
+            </div>
+
+        </div>
+        <div class="biography">
+            <h3>Biography: </h3>
+            <p>{{actorDetails.biography}}</p>
+        </div>
+        <div class="container mt-4 p-3">
+            <h5 class="text-white">Appears in movies</h5>
+            <div class="rowposter" #rowposter (wheel)="scrollX($event)">
+                <ng-container class="imgcont" *ngFor="let mc of movieCredits$ | async">
+                    <img routerLink="/movie/{{mc.id}}" src="https://image.tmdb.org/t/p/original{{mc.poster_path}}"
+                        class="rowimg largeposter" alt="">
+                </ng-container>
+            </div>
+        </div>
+
+    </div>
+</div>

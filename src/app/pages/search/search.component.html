@@ -1,10 +1,29 @@
 <app-not-found [visible]="resLength == 0"></app-not-found>
-<div *ngIf="searchRes$" class="container mt-5 p-3">
-    <div class="row justify-content-center justify-content-md-start">
-        <a routerLink="/movie/{{movie.id}}" *ngFor="let movie of searchRes$ | async" class="card ms-md-2 mb-3" style="width: 18rem;">
+<div *ngIf="type == 'Actor' || type == 'All'" class="container actors p-3">
+    <h2>Actors</h2>
+    <div class="row">
+        <a routerLink="/actor-details/{{actor.id}}" *ngFor="let actor of searchActors$" class="actor col-12 col-md-6 col-lg-4 mb-3">
+            <img src="https://image.tmdb.org/t/p/original{{actor.profile_path}}" alt="">
+            <div class="details">
+                <h5>{{actor.name}}</h5>
+                <h6>Actor</h6>
+                <h6>{{actor.known_for[0].title}}</h6>
+                
+            </div>
+        </a>
+        
+    </div>
+</div>
+<div *ngIf="type == 'Movie' || type == 'All'" class="container movies mt-5 p-3">
+    <h2>Movies</h2>
+    <div class="row">
+        <a routerLink="/movie/{{movie.id}}" *ngFor="let movie of searchRes$" class="card col-12 col-md-4 ms-md-2 mb-3" style="width: 18rem;">
 
-            <img src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="card-img-top"
+            <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="card-img-top"
                 alt="{{movie.title}}">
+            <div *ngIf="!movie.poster_path" class="img-cover">
+                <h2>SHOWTIME</h2>
+            </div>
             <div class="card-body">
                 <h5 class="card-title">{{movie.title}}</h5>
                 <p class="card-text">{{movie.overview}}</p>

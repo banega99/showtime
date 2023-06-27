@@ -1,0 +1,93 @@
+.container {
+    margin-top: 100px;
+}
+
+.details {
+    display: flex;
+}
+.details-more {
+    color: gray;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+.details-more .red {
+    color: #E50914;
+}
+.details-more .white {
+    color: white;
+}
+
+.biography {
+    margin-top: 30px;
+}
+
+.biography h3 {
+    color: white;
+}
+.biography p {
+    color: gray;
+}
+
+
+
+img {
+    width: 200px;
+}
+
+.rowposter {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.rowimg {
+    width: 200px;
+    transition: transform 450ms;
+    z-index: 100;
+    margin-right: 7px;
+}
+
+.rowimg:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.rowposter::-webkit-scrollbar {
+    height: 2px;
+}
+
+/* Track */
+.rowposter::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 5px;
+}
+
+/* Handle */
+.rowposter::-webkit-scrollbar-thumb {
+    background: #E50914;
+    border-radius: 5px;
+    /* width: 1px; */
+    /* height: 1px; */
+}
+
+@media (max-width: 767px) {
+    .details {
+        flex-direction: column;
+        
+    }
+    .details img {
+        width: 350px;
+        margin: 0 auto 20px auto;
+    }
+    .details-more {
+        margin-left: 0px;
+    }
+    .rowimg {
+        width: 100px;
+        
+    }
+}

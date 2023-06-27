@@ -27,6 +27,12 @@ export class MovieApiService{
   getMovieBytitle(title: string): Observable<any>{
     return this.http.get(`${this.baseUrl}/search/movie?api_key=${this.apiKey}&query=${title}`)
   }
+  getMulti(title: string): Observable<any>{
+    return this.http.get(`${this.baseUrl}/search/multi?api_key=${this.apiKey}&query=${title}`)
+  }
+  getActor(title: string): Observable<any>{
+    return this.http.get(`${this.baseUrl}/search/person?api_key=${this.apiKey}&query=${title}`)
+  }
 
   getMovieDetails(data: any): Observable<any> {
     return this.http.get(`${this.baseUrl}/movie/${data}?api_key=${this.apiKey}`)
@@ -102,6 +108,12 @@ export class MovieApiService{
     }
     getAllCountries(): Observable<any>{
       return this.http.get(`https://api.themoviedb.org/3/configuration/languages?api_key=${this.apiKey}`)
+    }
+    getActorDetails(id: string): Observable<any>{
+      return this.http.get(`https://api.themoviedb.org/3/person/${id}?api_key=${this.apiKey}`)
+    }
+    getMovieCredits(id: string): Observable<any>{
+      return this.http.get(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${this.apiKey}`)
     }
     test(): Observable<any>{
       return this.http.get(`https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&sort_by=vote_average.desc`)

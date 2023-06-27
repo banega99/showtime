@@ -15,13 +15,16 @@ export class NavbarComponent implements OnInit{
   countries!: any[]
   navbg: any
   searchForm!: FormGroup
-  searchResults$!: Observable<any>
+  searchResults: any[] = []
+  movieResults: any[] = []
+  actorResults: any[] = []
   years: number[] = []
   genreValue: number[] = []
   yearValue: number[] = []
   statusValue = []
   countriesValue: string[] = []
   sortValue!: string
+  searchType: string = 'All'
   @ViewChild('s') searchInput!: ElementRef
   @ViewChildren('inputCheckbox') inputCheckbox!: QueryList<ElementRef>
   constructor(private route: Router, private movieApiService: MovieApiService, private fb: FormBuilder){
@@ -72,13 +75,45 @@ export class NavbarComponent implements OnInit{
       return
     }
     this.searchInput.nativeElement.value = ''
-    this.route.navigateByUrl('search/' + searchTerm)
+    this.route.navigateByUrl(`search/${this.searchType}/${searchTerm}`)
     document.querySelector('.navbar-collapse')?.classList.remove('show')
   }
 
   showResults(title: string){
     if(title == '') return
-    this.searchResults$ = this.movieApiService.getMovieBytitle(title).pipe(map(data => data.results.slice(0, 4)))
+    if(this.searchType == 'All'){
+      // this.searchResults = []
+      this.movieApiService.getMovieBytitle(title).subscribe(data => {
+        // this.searchResults.push(data.results.slice(0, 2))
+        this.movieResults = data.results.slice(0, 2)
+        // console.log(data.results.slice(0, 2));
+        
+      })
+      this.movieApiService.getActor(title).subscribe(data => {
+        // this.searchResults.push(data.results.slice(0, 2))
+        this.actorResults = data.results.slice(0, 2).filter((data:any) => data.popularity > 0.6)
+        // console.log(data.results.slice(0, 2));
+      })
+      this.searchResults = this.movieResults.concat(this.actorResults)
+      // console.log(this.searchResults)
+    } else if(this.searchType == 'Movie'){
+      this.movieApiService.getMovieBytitle(title).subscribe(data => {
+        // this.searchResults.push(data.results.slice(0, 2))
+        this.movieResults = data.results.slice(0, 4)
+        // console.log(data.results.slice(0, 2));
+        
+      })
+      this.searchResults = this.movieResults
+    } else if(this.searchType == 'Actor'){
+      this.movieApiService.getActor(title).subscribe(data => {
+        // this.searchResults.push(data.results.slice(0, 2))
+        this.actorResults = data.results.slice(0, 4).filter((data:any) => data.popularity > 0.6)
+        // console.log(data.results.slice(0, 4));
+      })
+      this.searchResults = this.actorResults
+      // console.log(this.searchResults)
+    }
+    
     this.movieApiService.getMovieBytitle(title).pipe(map(data => data.results.slice(0, 4))).subscribe(console.log)
   }
 
@@ -148,6 +183,18 @@ export class NavbarComponent implements OnInit{
       this.yearValue = []
       this.countriesValue = []
     }
-  
+
+    showFilter(f: any, fb: any, a: any) {
+      let attributeSrc = a.getAttribute('src')
+      f.classList.contains('filter-show')? f.classList.remove('filter-show') : f.classList.add('filter-show')
+      fb.classList.contains('guide-move')? fb.classList.remove('guide-move') : fb.classList.add('guide-move')
+      if(attributeSrc == '../../../assets/images/guideWhite_left.png')a.setAttribute('src', '../../../assets/images/guideWhite_right.png')
+      else if(attributeSrc == '../../../assets/images/guideWhite_right.png')a.setAttribute('src', '../../../assets/images/guideWhite_left.png')
+    }
+    
+    changeSearchType(value:  HTMLLIElement) {
+      this.searchType = value.innerText
+      this.searchResults = []
+    }
 
 }

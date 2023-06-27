@@ -5,13 +5,15 @@ import { SearchComponent } from './pages/search/search.component';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { GenresComponent } from './pages/genres/genres.component';
 import { FilterComponent } from './pages/filter/filter.component';
+import { ActorDetailsComponent } from './pages/actor-details/actor-details.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
-  {path: 'search/:movieTitle', component:SearchComponent},
+  {path: 'search/:type/:title', component:SearchComponent},
   {path: 'movie/:id', component:MovieDetailsComponent},
   {path: 'genres/:genre/:id', component:GenresComponent},
   {path: 'filter/:genre/:year/:country/:sort', component:FilterComponent},
+  {path: 'actor-details/:id', component:ActorDetailsComponent},
 
 ];
 

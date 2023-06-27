@@ -20,9 +20,13 @@ h5 {
 }
 
 h5 a {
-    color: gray;
+    color: #E50914;
     text-decoration: none;
     margin-right: 5px;
+}
+
+.gray {
+    color: gray;
 }
 
 h5 a:hover {
@@ -128,4 +132,11 @@ iframe {
     border-radius: 5px;
     /* width: 1px; */
     /* height: 1px; */
+}
+
+@media (max-width: 767px) {
+    .rowimg {
+        width: 100px;
+        
+    }
 }

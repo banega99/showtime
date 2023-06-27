@@ -36,3 +36,24 @@ a p{
 a:hover {
     transform: scale(1.02);
 }
+
+.img-cover {
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    width: 100%;
+    height: 393px;
+    background-color: gray;
+    border: 1px solid #E50914;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-cover h2 {
+    color: #E50914;
+    text-align: center;
+    text-justify: center;
+    font-weight: bold;
+}
