@@ -12,6 +12,7 @@ export class ActorDetailsComponent {
   actorDetails$!: Observable<any>
   movieCredits!: any
   yearsOld!: any
+  yearsOldDead!: any
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute){
     activatedRoute.params.subscribe(params =>{
       if(!params)return
@@ -22,6 +23,7 @@ export class ActorDetailsComponent {
       movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
       .subscribe(res => this.movieCredits = res)
       movieApiService.getActorDetails(params.id).subscribe(actor => {
+        this.yearsOldDead = parseInt(actor.deathday.split('-')[0]) - parseInt(actor.birthday.split('-')[0])
         this.yearsOld = new Date().getFullYear() - parseInt(actor.birthday.split('-')[0])
       })
     })
