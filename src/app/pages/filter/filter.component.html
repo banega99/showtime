@@ -1,8 +1,8 @@
 <div class="container filter-cont">
     <div class="div">
         <h3>Genres: 
-            <span routerLink="/genres/{{genre.name}}/{{genre.id}}/1" *ngFor="let genre of genres" class="gray" [ngClass]="{red: genre.name}">{{genre.name? genre.name : ' / '}}</span>
-            <span class="gray" *ngIf="genres.length == 0">/</span>
+            <span routerLink="/genres/{{genre?.name}}/{{genre?.id}}/1" *ngFor="let genre of genres" class="gray" [ngClass]="{red: genre?.name}">{{genre?.name? genre.name : ' / '}}</span>
+            <span class="gray" *ngIf="genres?.length == 0">/</span>
         </h3>
     </div>
     <div class="div">
@@ -12,8 +12,8 @@
     </div>
     <div class="div">
         <h3>Country production: 
-            <span *ngFor="let country of countries" class="gray">{{country.english_name}}</span>
-            <span class="gray" *ngIf="countries.length == 0">/</span></h3>
+            <span *ngFor="let country of countries" class="gray">{{country?.english_name}}</span>
+            <span class="gray" *ngIf="countries?.length == 0">/</span></h3>
     </div>
     <div class="div">
         <h3>Sorted by: <span class="gray">{{sortedBy}}</span></h3>

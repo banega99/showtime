@@ -1,10 +1,35 @@
 <div *ngIf="movie" class="container mt-5 p-3">
+    <div class="scrollSection">
+        <a (click)="scrollToDet(det)">Movie Details </a>
+        <a (click)="scrollToRec(rec)">Recommended Movies </a>
+        <a (click)="scrollToCast(cast)">Cast </a>
+        <a (click)="scrollToRev(rev)">Reviews</a>
+    </div>
+
     <div class="row">
-        <img src="https://image.tmdb.org/t/p/original{{movie.backdrop_path? movie.backdrop_path : movie.poster_path}}"
+        <div *ngIf="backdrops?.length > 0" id="carouselExampleAutoplaying" class="carousel slide mt-5" data-bs-ride="carousel">
+            <div  class="carousel-inner">
+                <div *ngFor="let image of backdrops; let i = index" class="carousel-item" [ngClass]="{active:i===0}" data-bs-interval="5000">
+                    <img src="https://image.tmdb.org/t/p/original{{image.file_path}}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption">
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <img *ngIf="backdrops?.length == 0" src="https://image.tmdb.org/t/p/original{{movie.backdrop_path? movie.backdrop_path : movie.poster_path}}"
             alt="" srcset="">
         <!-- <iframe [src]="movieTrailerUrl | safe" frameborder="0"></iframe> -->
-        <div class="title">
-            <h3 class="me-2">{{movie.title}}</h3>
+
+        <div #det class="title">
+            <h3>{{movie.title}}</h3>
             <h5 id="title2">({{movie.original_title}})</h5>
         </div>
         <p>{{movie.overview}}</p>
@@ -16,14 +41,18 @@
                     <img #img src="../../../assets/images/{{watchlist ? 'xRed2.png':'watchRed.png'}}" alt="" srcset="">
                 </div>
             </h4>
-            <div class="little-details">
+            <div  class="little-details">
                 <h5>⭐Rating: </h5>
-                <span class="gray">{{movie.vote_average | number: '1.0-1'}}({{movie.vote_count
-                }}🗣️)</span>
+                <span class="gray">{{movie.vote_average | number: '1.0-1'}}
+                    <span class="votes">
+                        ({{movie.vote_count / 1000| number : '1.0-1'}}k🗣️)
+                    </span>
+                </span>
             </div>
             <div class="little-details">
                 <h5>Genres: </h5>
-                <a *ngFor="let genre of movie.genres" routerLink="/genres/{{genre.name}}/{{genre.id}}/1">{{genre.name}}</a>
+                <a *ngFor="let genre of movie.genres"
+                    routerLink="/genres/{{genre.name}}/{{genre.id}}/1">{{genre.name}}</a>
             </div>
             <div class="little-details">
                 <h5>Runtime: </h5>
@@ -31,21 +60,20 @@
             </div>
             <div class="little-details">
                 <h5>Release date: </h5>
-                <span class="gray">{{movie.release_date}}</span>
+                <span class="gray">{{movie.release_date | date}}</span>
             </div>
             <div class="little-details">
                 <h5>Status: </h5>
                 <span class="gray">{{movie.status}}</span>
-            </div> 
+            </div>
             <div class="little-details">
                 <h5>Production counrties: </h5>
                 <span class="gray" *ngFor="let country of movie.production_countries">{{country.name}}</span>
             </div>
             <div class="little-details">
-                <h5>Production companies: 
+                <h5>Production companies:
                 </h5>
-                <span class="gray"
-                        *ngFor="let company of movie.production_companies">{{company.name}}</span>
+                <span class="gray" *ngFor="let company of movie.production_companies">{{company.name}}</span>
             </div>
 
         </div>
@@ -54,21 +82,53 @@
             <iframe [src]=" trailerUrl | safe" frameborder="2"></iframe>
         </div>
     </div>
+    <div #rec class="div"></div>
     <app-movies-scroll-x-container title="Recommended Movies" [movies]="movieRecommendations"
         width="200px"></app-movies-scroll-x-container>
 
     <div class="container justify-content-center">
-        <h4>Cast</h4>
+        <h4 #cast>Cast <span class="gray">({{casts?.length? casts?.length : 0}})</span></h4>
         <div class="row castrow justify-content-center justify-content-md-start">
-            <a *ngFor="let cast of casts$ | async" class="cast col-12 col-md-6 col-lg-4"
+            <a *ngFor="let cast of casts" class="cast col-12 col-md-6 col-lg-4"
                 routerLink="/actor-details/{{cast.id}}">
                 <img *ngIf="cast.profile_path" src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}">
-                <img *ngIf="!cast.profile_path" src="../../../assets/images/profile.jpg" alt="">
+                <img *ngIf="!cast.profile_path" src="../../../assets/images/profile.jpg" alt="" height="150px">
                 <div class="details">
-                    <h4>{{cast.name}}</h4>
-                    <p>{{cast.character}}</p>
+                    <h4 style="font-size: 20px;">{{cast.name}}</h4>
+                    <h6 style="font-size: 16px;" class="date">{{cast.known_for_department
+                    }}</h6>
+                    <p style="font-size: 15px;">{{cast.character}}</p>
+                    
                 </div>
             </a>
+        </div>
+    </div>
+    <div #rev class="container reviews">
+        <h4 >Reviews <span class="gray">({{totalReviews}})</span></h4>
+        <div class="row">
+            <div #rc class="review" *ngFor="let review of reviews">
+                <div class="review-details">
+                    <div class="imgs" style="position: relative; width: 100px; height: 100px; float: left; ">
+                        <img class=""
+                            *ngIf="review.author_details.avatar_path != null || !review.author_details.avatar_path?.includes('/https://secure.gravatar')"
+                            src="https://image.tmdb.org/t/p/original{{review.author_details.avatar_path}}" alt=""
+                            width="100px" height="100px" style="border-radius: 50%; position: absolute;">
+                        <img class=""
+                            *ngIf="review.author_details.avatar_path == null ||  review.author_details.avatar_path?.includes('/https://secure.gravatar') "
+                            src="../../../assets/images/profile.jpg" alt="" width="100px" height="100px"
+                            style="border-radius: 50%; position: absolute;">
+                    </div>
+
+                    <h6 class="name">{{review.author}}</h6>
+                    <h6 class="date">{{review.created_at | date}}</h6>
+                    <h6 class="rating">⭐ {{review.author_details.rating}}/10</h6>
+                    <p #p>{{review.content}}</p>
+                    <div #a *ngIf="p.getBoundingClientRect().height > 100" class="arrow"
+                        (click)="expandReview(p, rc, a)">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

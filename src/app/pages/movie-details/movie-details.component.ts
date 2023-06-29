@@ -13,32 +13,77 @@ export class MovieDetailsComponent {
   movie: any
   movieTrailerUrl$!: Observable<any>
   movieRecommendations!: any
-  casts$!: Observable<any>
+  casts!: any
   id!: string
   castName!: string
   watchlist: boolean = false
+  reviews!: any
+  totalReviews!: number
+  avatarUrl!: string
+  backdrops!: any 
+  castLength!: number
+
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute,
     private watchlistService: WatchlistService) {
     activatedRoute.params.subscribe(params => {
       if (!params) return
       movieApiService.getMovieDetails(params.id).subscribe(movieDetails => {
+        console.log(movieDetails)
         this.movie = movieDetails
         watchlistService.watchlistAsObservable().pipe(map(watchlist => {
-          return watchlist.some((movie:any )=> movie.id == movieDetails.id)
-        })).subscribe(res => this.watchlist = res)
+          return watchlist.some((movie: any) => movie.id == movieDetails.id)
+        })).subscribe(res => {
+          this.watchlist = res
+        })
       })
       this.movieTrailerUrl$ = this.movieApiService.getMovieVideo(params.id)
-        .pipe(map(data => `https://www.themoviedb.org/video/play?key=${data.results[1].key}`))
-      this.casts$ = this.movieApiService.getMovieCast(params.id).pipe(map(data => data.cast))
+        .pipe(map(data => `https://www.themoviedb.org/video/play?key=${data.results[1]?.key}`))
+      this.movieApiService.getMovieCast(params.id).pipe(map(data => {
+        return data.cast
+      })).subscribe(data => {
+        this.casts = data
+      })
       this.movieApiService.getRecommended(params.id).pipe(map(data => data.results))
         .subscribe(res => this.movieRecommendations = res)
-      // movieApiService.getMovieDetails(params.id).
-      //   subscribe((results => console.log(results)));
+      movieApiService.getMovieReviews(params.id).subscribe(reviews => {
+        this.totalReviews = reviews.total_results
+        this.reviews = reviews.results
+        console.log(reviews.results)
+      })
+      movieApiService.getMovieImages(params.id).subscribe(images => {
+        this.backdrops = images.backdrops
+      })
     })
+
   }
 
   addToWatchlist(movie: any, imgUrl: any) {
     this.watchlistService.addToWatchlist(movie, imgUrl)
+  }
+
+  expandReview(p: any, rc: any, a: any) {
+    console.log(rc.classList)
+    if (rc.classList.contains('review-expand')) {
+      a.classList.remove('arrow-rotate')
+      rc.classList.remove('review-expand')
+    } else {
+      a.classList.add('arrow-rotate')
+      
+      rc.classList.add('review-expand')
+    }
+  }
+
+  scrollToDet(section: any){
+    section.scrollIntoView()
+  }
+  scrollToRec(section: any){
+    section.scrollIntoView()
+  }
+  scrollToCast(section: any){
+    section.scrollIntoView()
+  }
+  scrollToRev(section: any){
+    section.scrollIntoView()
   }
 
 }

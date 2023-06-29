@@ -132,4 +132,12 @@ export class MovieApiService{
     createSession(token:any): Observable<any>{
       return this.http.post(`https://api.themoviedb.org/3/authentication/session/new?api_key=${this.apiKey}`, {'request_token': token})
     }
+
+    getMovieReviews(id: string): Observable<any> {
+      return this.http.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${this.apiKey}`)
+    }
+
+    getMovieImages(id: string): Observable<any> {
+      return this.http.get(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${this.apiKey}`)
+    }
 }
