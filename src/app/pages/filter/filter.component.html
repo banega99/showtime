@@ -19,5 +19,5 @@
         <h3>Sorted by: <span class="gray">{{sortedBy}}</span></h3>
     </div>
 </div>
-<app-movie-card [searchRes$]="searchRes$" type="Movie" title="Movies" [visible]="searchRes$.length > 0"></app-movie-card>
+<app-movie-card [searchRes$]="searchRes$" type="Movie" title="" [visible]="searchRes$.length > 0" [totalRes]="searchRes$.length"></app-movie-card>
 

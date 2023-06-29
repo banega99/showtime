@@ -61,19 +61,19 @@
           Sort by
         </a>
         <ul class="dropdown-menu radio-dropdown">
-          <li class="dropdown-item sort-radiobox" (click)="$event.preventDefault()">
+          <li class="dropdown-item sort-radiobox">
             <input (change)="checkboxValue($event)" class="radio-input" type="radio" name="check" id="vad" value="vote_average.desc">
             <label for="#vad">Rating Descending</label>
           </li>
-          <li class="dropdown-item sort-radiobox" (click)="$event.preventDefault()">
+          <li class="dropdown-item sort-radiobox">
             <input (change)="checkboxValue($event)" class="radio-input" type="radio" name="check" id="vaa" value="vote_average.asc">
             <label for="#vaa">Rating Ascending</label>
           </li>
-          <li class="dropdown-item sort-radiobox" (click)="$event.preventDefault()">
+          <li class="dropdown-item sort-radiobox">
             <input (change)="checkboxValue($event)" class="radio-input" type="radio" name="check" id="pd" value="popularity.desc">
             <label for="#pd">Popularity Descending</label>
           </li>
-          <li class="dropdown-item sort-radiobox" (click)="$event.preventDefault()">
+          <li class="dropdown-item sort-radiobox">
             <input  (change)="checkboxValue($event)"class="radio-input" type="radio" name="check" id="pa" value="popularity.asc">
             <label for="#pa">Popularity Ascending</label>
           </li>
