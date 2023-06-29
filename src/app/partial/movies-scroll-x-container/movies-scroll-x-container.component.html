@@ -1,0 +1,8 @@
+<div class="container mt-4 p-3">
+    <h5 class="text-white">{{title}}</h5>
+    <div class="rowposter" #rowposter (wheel)="scrollX($event)">
+        <ng-container class="imgcont" *ngFor="let movie of movies">
+            <img routerLink="/movie/{{movie.id}}" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="rowimg largeposter" alt="" [ngStyle]="{width: width}" [ngClass]="{'mobile' : windowWidth < 767}">
+        </ng-container>
+    </div>
+</div>

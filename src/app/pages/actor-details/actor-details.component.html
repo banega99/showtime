@@ -11,19 +11,11 @@
             </div>
 
         </div>
-        <div class="biography">
+        <div *ngIf="actorDetails.biography" class="biography">
             <h3>Biography: </h3>
             <p>{{actorDetails.biography}}</p>
         </div>
-        <div class="container mt-4 p-3">
-            <h5 class="text-white">Appears in movies</h5>
-            <div class="rowposter" #rowposter (wheel)="scrollX($event)">
-                <ng-container class="imgcont" *ngFor="let mc of movieCredits$ | async">
-                    <img routerLink="/movie/{{mc.id}}" src="https://image.tmdb.org/t/p/original{{mc.poster_path}}"
-                        class="rowimg largeposter" alt="">
-                </ng-container>
-            </div>
-        </div>
+        <app-movies-scroll-x-container title="Appears in Movies" [movies]="movieCredits" width="200px"></app-movies-scroll-x-container>
 
     </div>
 </div>

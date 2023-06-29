@@ -1,18 +1,23 @@
-<app-not-found [visible]="resLength == 0"></app-not-found>
-<div *ngIf="searchRes$" class="container mt-5 p-3">
-    <div class="row justify-content-center justify-content-md-start">
-        <a routerLink="/movie/{{movie.id}}" *ngFor="let movie of searchRes$ | async" class="card ms-md-2 mb-3" style="width: 18rem;">
-
-            <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="card-img-top"
-                alt="{{movie.title}}">
-            <div *ngIf="!movie.poster_path" class="img-cover">
-                <h2>SHOWTIME</h2>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{movie.title}}</h5>
-                <p class="card-text">{{movie.overview}}</p>
-            </div>
-
-        </a>
+<div class="container filter-cont">
+    <div class="div">
+        <h3>Genres: 
+            <span routerLink="/genres/{{genre.name}}/{{genre.id}}/1" *ngFor="let genre of genres" class="gray" [ngClass]="{red: genre.name}">{{genre.name? genre.name : ' / '}}</span>
+            <span class="gray" *ngIf="genres.length == 0">/</span>
+        </h3>
+    </div>
+    <div class="div">
+        <h3>Year of release: 
+            <span *ngFor="let year of years" class="gray">{{year}}</span>
+        </h3>
+    </div>
+    <div class="div">
+        <h3>Country production: 
+            <span *ngFor="let country of countries" class="gray">{{country.english_name}}</span>
+            <span class="gray" *ngIf="countries.length == 0">/</span></h3>
+    </div>
+    <div class="div">
+        <h3>Sorted by: <span class="gray">{{sortedBy}}</span></h3>
     </div>
 </div>
+<app-movie-card [searchRes$]="searchRes$" type="Movie" title="Movies" [visible]="searchRes$.length > 0"></app-movie-card>
+

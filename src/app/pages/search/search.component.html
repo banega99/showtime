@@ -1,9 +1,10 @@
-<app-not-found [visible]="resLength == 0"></app-not-found>
-<div *ngIf="type == 'Actor' || type == 'All'" class="container actors p-3">
-    <h2 class="mb-3">Actors</h2>
+<app-not-found title="Actor not found!" [visible]="searchActors$.length== 0 && type == 'Actor'|| searchActors$.length== 0 && type == 'All'"></app-not-found>
+<div *ngIf="searchActors$.length > 0 && type == 'Actor' || searchActors$.length > 0 && type == 'All'" class="container actors p-3">
+    <h2 class="mb-3">Actors <span class="gray">({{searchActors$.length}})</span></h2>
     <div class="row">
         <a routerLink="/actor-details/{{actor.id}}" *ngFor="let actor of searchActors$" class="actor col-12 col-md-6 col-lg-4 mb-3">
-            <img src="https://image.tmdb.org/t/p/original{{actor.profile_path}}" alt="">
+            <img *ngIf="actor.profile_path" src="https://image.tmdb.org/t/p/original{{actor.profile_path}}" alt="">
+            <img *ngIf="!actor.profile_path" src="../../../assets/images/profile.jpg" alt="">
             <div class="details">
                 <h5>{{actor.name}}</h5>
                 <h6>Actor</h6>
@@ -11,24 +12,18 @@
                 
             </div>
         </a>
-        
     </div>
 </div>
-<div *ngIf="type == 'Movie' || type == 'All'" class="container movies mt-5 p-3">
-    <h2 class="mb-3">Movies</h2>
-    <div class="row justify-content-center justify-content-md-start">
-        <a routerLink="/movie/{{movie.id}}" *ngFor="let movie of searchRes$" class="card ms-md-2 mb-3" style="width: 18rem;">
-
-            <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="card-img-top"
-                alt="{{movie.title}}">
-            <div *ngIf="!movie.poster_path" class="img-cover">
-                <h2>SHOWTIME</h2>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{movie.title}}</h5>
-                <p class="card-text">{{movie.overview}}</p>
-            </div>
-
-        </a>
+<app-movie-card [searchRes$]="searchRes$" [type]="type" title="Movies" [visible]="searchRes$.length > 0" [totalRes]="totalResults"></app-movie-card>
+<div *ngIf="type == 'Movie' || type == 'All'" class="container">
+    <div class="pages">
+        <a *ngIf="currentPage > 1 " routerLink="/search/{{type}}/{{title}}/{{currentPage - 1}}">&larr; Prev Page</a>
+        <a *ngIf="currentPage > 1 + 5" #fp  routerLink="/search/{{type}}/{{title}}/1" [ngClass]="{'active':1 == currentPage}">1</a>
+        <a *ngIf="currentPage > 1 + 5">...</a>
+        <a #cp *ngFor="let page of pages" routerLink="/search/{{type}}/{{title}}/{{page}}" [ngClass]="{'active':page == currentPage}">{{page}}</a>
+        <a *ngIf="currentPage < totalPages - 5">...</a>
+        <a #lp routerLink="/search/{{type}}/{{title}}/{{totalPages}}" [ngClass]="{'active':totalPages == currentPage}">{{totalPages}}</a>
+        <a *ngIf="currentPage < totalPages " routerLink="/search/{{type}}/{{title}}/{{currentPage + 1}}">Next Page &rarr;</a>
     </div>
 </div>
+<!-- https://image.tmdb.org/t/p/original{{actor.profile_path}} -->

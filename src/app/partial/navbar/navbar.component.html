@@ -8,19 +8,24 @@
     </button>
     <div #collapse class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/watchlist">
+            Watchlist
+            <img src="../../../assets/images/watchRed.png" alt="" srcset="" width="20px">
+          </a>
+        </li>
         <li class="nav-item dropdown ms-lg-auto mb-1">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Genres
           </a>
           <ul class="dropdown-menu ">
             <li *ngFor="let genre of genres"><a class="dropdown-item"
-                routerLink="genres/{{genre.name}}/{{genre.id}}">{{genre.name}}</a></li>
+                routerLink="genres/{{genre.name}}/{{genre.id}}/1">{{genre.name}}</a></li>
           </ul>
         </li>
         <form [formGroup]="searchForm" (submit)="search($event, s.value)" class="d-flex" role="search">
-          <!-- <div class="input"> -->
-            <div class="btn" data-bs-toggle="dropdown">{{searchType}}</div>
-            <ul class="dropdown-menu w-25">
+            <div class="btn type-btn" data-bs-toggle="dropdown">{{searchType}}</div>
+            <ul class="dropdown-menu types w-25">
               <li #all (click)="changeSearchType(all)" class="dropdown-item">All</li>
               <li #movie (click)="changeSearchType(movie)" class="dropdown-item">Movie</li>
               <li #actor (click)="changeSearchType(actor)" class="dropdown-item">Actor</li>
@@ -35,12 +40,6 @@
             (click)="search($event, s.value)" class="btn">
             <img #img src="../../../assets/images/lupaSiva.png" alt="" srcset="" width="30px">
           </button>
-          <!-- <ul class="dropdown-menu ">
-              <li *ngFor="let genre of genres"><a class="dropdown-item"
-                  routerLink="genres/{{genre.name}}/{{genre.id}}">{{genre.name}}</a></li>
-            </ul> -->
-          <!-- </li> -->
-  
         </form>
         
       </ul>
@@ -60,91 +59,3 @@
   </div>
   
 </nav>
-<div id="guide" #fb (click)="showFilter(f, fb, a)" >
-  <div class="white-cover"></div>
-  <div class="arrow">
-    <img #a id="toggleArrow" src="../../../assets/images/guideWhite_left.png" alt="" srcset="">
-      <div class="letters">
-          <p>F</p>
-          <p>I</p>
-          <p>L</p>
-          <p>T</p>
-          <p>E</p>
-          <p>R</p>
-      </div>
-      
-  </div>
-  <div class="buttons">
-      
-  </div>
-</div>
-<div #f class="filter">
-  <ul class="navbar-nav">
-    <li class="nav-item dropdown ms-lg-auto mb-1">
-      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Genres
-      </a>
-      <ul class="dropdown-menu filter-dropdown">
-        <li class="dropdown-item genre-checkbox" *ngFor="let genre of genres">
-          <input #inputCheckbox class="genre-input checkbox-input" (change)="checkboxValue($event)" type="checkbox" name="" id="{{genre.name}}" [value]="genre.id">
-          <label for="#{{genre.name}}">{{genre.name}}</label>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <ul class="navbar-nav">
-    <li class="nav-item dropdown ms-lg-auto mb-1">
-      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Year
-      </a>
-      <ul class="dropdown-menu ">
-        <li class="dropdown-item genre-checkbox" *ngFor="let year of years">
-          <input #inputCheckbox class="year-input checkbox-input" (change)="checkboxValue($event)" type="checkbox" name="checkbox" id="{{year}}" [value]="year">
-          <label for="#{{year}}">{{year}}</label>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <ul class="navbar-nav">
-    <li class="nav-item dropdown ms-lg-auto mb-1">
-      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Country
-      </a>
-      <ul class="dropdown-menu ">
-        <li class="dropdown-item genre-checkbox" *ngFor="let country of countries; let i = index">
-          <input #inputCheckbox class="countries-input checkbox-input" (change)="checkboxValue($event)" type="checkbox" name="checkbox" id="{{country.english_name}}" [value]="country.iso_639_1">
-          <label for="#{{country.english_name}}">{{country.english_name}}</label>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <ul class="navbar-nav">
-    <li class="nav-item dropdown ms-lg-auto mb-1">
-      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Sort by
-      </a>
-      <ul class="dropdown-menu radio-dropdown">
-        <li class="dropdown-item sort-radiobox">
-          <input (change)="checkboxValue($event)" class="radio-input" type="radio" name="check" id="vad" value="vote_average.desc">
-          <label for="#vad">Vote Average Descending</label>
-        </li>
-        <li class="dropdown-item sort-radiobox">
-          <input (change)="checkboxValue($event)" class="radio-input" type="radio" name="check" id="vaa" value="vote_average.asc">
-          <label for="#vaa">Vote Average Ascending</label>
-        </li>
-        <li class="dropdown-item sort-radiobox">
-          <input (change)="checkboxValue($event)" class="radio-input" type="radio" name="check" id="pd" value="popularity.desc">
-          <label for="#pd">Popularity Descending</label>
-        </li>
-        <li class="dropdown-item sort-radiobox">
-          <input  (change)="checkboxValue($event)"class="radio-input" type="radio" name="check" id="pa" value="popularity.asc">
-          <label for="#pa">Popularity Ascending</label>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <div class="btns">
-    <button (click)="filter()" class="btn filter-btn">Filter</button>
-    <button (click)="resetFilter()" class="btn reset-btn">Reset</button>
-  </div>
-</div>

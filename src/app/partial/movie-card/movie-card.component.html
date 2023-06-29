@@ -1,0 +1,21 @@
+<app-not-found [title]="onWatchlist? 'Watchlist empty!' : 'Movie not found!'" [visible]="!visible && type == 'Movie' || !visible && type == 'All'"></app-not-found>
+<div *ngIf="visible && type == 'Movie' || visible && type == 'All'" class="container movies mt-5 p-3"[ngStyle]="{'marginTop': actors? '20px': '90px'}">
+    <h2 class="mb-3">{{title}} {{onWatchlist? '' : "Movies"}} <span class="gray">({{totalRes | number }})</span></h2>
+    <div class="row justify-content-center justify-content-md-start">
+        <a (click)="route($event, movie)" *ngFor="let movie of searchRes$" class="card ms-md-2 mb-3">
+            <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="card-img-top"alt="{{movie.title}}">
+            <div *ngIf="!movie.poster_path" class="img-cover">
+                <h2>SHOWTIME</h2>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{movie.title}}</h5>
+                <p class="card-text">{{movie.overview}}</p>
+            </div>
+            
+            <div class="watchlist" (click)="addToWatchlist(movie, img)" (mouseenter)="showPopover(popover)" (mouseleave)="hidePopover(popover)">
+                <img #img src="../../../assets/images/{{title == 'Watchlist' ? 'x.png':'6748737.png'}}" alt="" srcset="">
+                <div #popover class="popover">{{!onWatchlist? 'Add to Watchlist' : 'Remove from Watchlist'}}</div>
+            </div>
+        </a>
+    </div>
+</div>

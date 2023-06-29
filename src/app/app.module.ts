@@ -15,6 +15,13 @@ import { LoadingInterceptor } from './loading.interceptor';
 import { NavbarComponent } from './partial/navbar/navbar.component';
 import { FilterComponent } from './pages/filter/filter.component';
 import { ActorDetailsComponent } from './pages/actor-details/actor-details.component';
+import { MovieCardComponent } from './partial/movie-card/movie-card.component';
+import { MoviesScrollXContainerComponent } from './partial/movies-scroll-x-container/movies-scroll-x-container.component';
+import { FilterSearchComponent } from './partial/filter-search/filter-search.component';
+import { WatchlistComponent } from './pages/watchlist/watchlist.component';
+import { ToastrModule } from 'ngx-toastr'
+// import NoopAnimationsModule from ''
+import { BrowserAnimationsModule,  NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,14 +35,25 @@ import { ActorDetailsComponent } from './pages/actor-details/actor-details.compo
     LoadingComponent,
     NavbarComponent,
     FilterComponent,
-    ActorDetailsComponent
+    ActorDetailsComponent,
+    MovieCardComponent,
+    MoviesScrollXContainerComponent,
+    FilterSearchComponent,
+    WatchlistComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-center',
+      // newestOnTop: false
+    })
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},

@@ -33,46 +33,10 @@
 }
 
 
-
 img {
     width: 200px;
 }
 
-.rowposter {
-    display: flex;
-    overflow-x: scroll;
-    overflow-y: hidden;
-}
-
-.rowimg {
-    width: 200px;
-    transition: transform 450ms;
-    z-index: 100;
-    margin-right: 7px;
-}
-
-.rowimg:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-}
-
-.rowposter::-webkit-scrollbar {
-    height: 2px;
-}
-
-/* Track */
-.rowposter::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 5px;
-}
-
-/* Handle */
-.rowposter::-webkit-scrollbar-thumb {
-    background: #E50914;
-    border-radius: 5px;
-    /* width: 1px; */
-    /* height: 1px; */
-}
 
 @media (max-width: 767px) {
     .details {
@@ -85,9 +49,5 @@ img {
     }
     .details-more {
         margin-left: 0px;
-    }
-    .rowimg {
-        width: 100px;
-        
     }
 }

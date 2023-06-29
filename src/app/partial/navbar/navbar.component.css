@@ -1,7 +1,11 @@
+.nav-link:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
 
 form {
     position: relative;
-    /* display: flex; */
     border: 1px solid #E50914;
     border-radius: 6px;
     
@@ -55,6 +59,37 @@ form input:focus{
   outline: 0 none;
 }
 
+ul.dropdown-menu.types{
+    width: 100px!important;
+}
+
+.type-btn{
+    background-color: gray;
+    color: black !important;
+    outline: none !important;
+    border: none !important;
+    border-radius: 3.8px 0 0 3.8px !important;
+    transition: all .4s;
+}
+
+.type-btn:hover {
+    color: white;
+    cursor: pointer;
+    background-color: #E50914;
+    outline: none !important;
+    border: none !important;
+    border-radius: 4px 0 0 4px !important;
+    
+}
+
+.types {
+    /* border: 1px solid #E50914; */
+    width: 100px !important;
+}
+.types li.dropdown-item {
+    /* width: fit-content!important; */
+}
+
 
 .search-dropdown {
     visibility: hidden;
@@ -102,7 +137,7 @@ form input:focus{
 }
 
 .show-card h4 {
-    margin-left: 20px;
+    /* margin-left: 20px; */
     color: gray
 }
 
@@ -110,32 +145,6 @@ form input:focus{
     border-bottom: 1px solid #E50914
 }
 
-
-.filter {
-    visibility: hidden;
-    padding: 10px;
-    position: fixed;
-    right: -200px;
-    top: 50%;
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    height: fit-content;
-    background-color: black;
-    z-index: 5000;
-    /* border: 2px solid white; */
-    justify-content: space-around;
-    align-items: center;
-    transform: translateY(-50%);
-    transition: all 0.3s;
-    /* color: white; */
-    border-radius: 5px 0 0 5px;
-}
-
-.filter-show {
-    visibility: visible;
-    transform: translateX(-200px) translateY(-50%);
-}
 
 .dropdown-menu.show {
     display: flex;
@@ -146,153 +155,29 @@ form input:focus{
     transform: translateX(-25%);
 }
 
-.radio-dropdown.show{
-    height: fit-content !important;
-    overflow: hidden;
-}
-
-
-.filter-btn, .reset-btn {
-    color: gray;
-    border: 1px solid #E50914 !important;
-    border-radius: 6px;
-    margin-right: 10px;
-}
-
-.filter-btn:hover, .reset-btn:hover {
-    color: white;
-    cursor: pointer;
-    background-color: #E50914;
-}
-
-#guide {
-    position: fixed;
-    top: 50%;
-    right: 0px;
-    display: flex;
-    width: 30px;
-    height: fit-content; 
-    transform: translateY(-50%);
-    z-index: 6000;
-    background-color: #E50914;
-    border-radius: 5px 0 0 5px;
-    /* justify-content: space-between;
-    align-items: center; */
-    transition: all 0.3;
-}
-
-#guide:hover{
-    cursor: pointer;
-}
-#guide:hover img{
-    opacity: 0.5;
-}
-
-
-.guide-move {
-    transform: translateX(-200px);
-}
-
-.buttons {
-    /* margin-left: 10px; */
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    transform: translate(-10px);
-    font-size: 13px;
-    transition: all 0.3s linear;
-}
-
-.button {
-    display: flex;
-    align-items: center;
-    /* text-align: center; */
-}
-
-.buttons img {
-    width: 40px;
-    height: 40px;
-}
-
-.space img {
-    width: 70px;
-}
-
-.arrow {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #E50914;
-    border-radius: 5px 0 0 5px;
-    z-index: 7000;
-}
-
-.arrow img {
-    width: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.white-cover {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 90%;
-    height: 100%;
-    z-index: 6000;
-    background-color: white;
-    border-radius: 5px 0 0 5px;
-
-}
-
-.letters {
-    display: flex;
-    flex-direction: column;
-    font-size: 12px;
-    align-content: center;
-    justify-items: center;
-}
-
-.letters p {
-    font-weight: 600;
-    margin: 0;
-    text-align: center;
-    color: black;
-}
-#guide:hover .letters p {
-    opacity: 0.5;
-}
 
 
 @media (max-width: 992px) {
+    ul.dropdown-menu.show {
+        width: 100%!important;
+    }
+    a.dropdown-item{
+        width: 100%!important;
+    }
     form {
         position: relative;
     }
 
     .search-show {
         visibility: visible;
-        transform: translateY(140px);
+        transform: translateY(180px);
     }
-    .btns {
-        display: flex;
-        flex-direction: row;
-    }
+
     .dropdown-menu.show{
         transform: translate(0);
     }
     form input{
         z-index: 0!important;
-    }
-    .filter-show .dropdown-menu.show {
-        position: absolute;
-        z-index: 3000!important;
-        transform: translateX(0);
-    }
-
-    .filter .dropdown-toggle {
-        font-size: 12px;
     }
 }
 

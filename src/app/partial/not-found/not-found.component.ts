@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class NotFoundComponent {
   @Input()visible: boolean = false;
+  @Input()title: string = 'Movie not found'
 }

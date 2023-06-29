@@ -4,3 +4,12 @@ body {
 html {
     overflow: hidden;
 }
+/* 
+.nav-link:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+.dropdow-toggle:hover {
+    cursor: pointer;
+    opacity: 0.6;
+} */

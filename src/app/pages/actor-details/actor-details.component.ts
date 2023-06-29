@@ -10,7 +10,7 @@ import { MovieApiService } from 'src/app/services/movie-api-service.service';
 })
 export class ActorDetailsComponent {
   actorDetails$!: Observable<any>
-  movieCredits$!: Observable<any>
+  movieCredits!: any
   yearsOld!: any
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute){
     activatedRoute.params.subscribe(params =>{
@@ -19,17 +19,11 @@ export class ActorDetailsComponent {
       movieApiService.getActorDetails(params.id).subscribe(console.log)
       movieApiService.getMovieCredits(params.id).subscribe(console.log)
       this.actorDetails$ = movieApiService.getActorDetails(params.id)
-      this.movieCredits$ = movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
+      movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
+      .subscribe(res => this.movieCredits = res)
       movieApiService.getActorDetails(params.id).subscribe(actor => {
         this.yearsOld = new Date().getFullYear() - parseInt(actor.birthday.split('-')[0])
       })
-    })
-  }
-
-  scrollX(e: any){
-    e.preventDefault();
-    e.target.closest('.rowposter').scrollBy({
-      left: e.deltaY < 0 ? -60 : 60
     })
   }
 

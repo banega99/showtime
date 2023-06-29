@@ -40,11 +40,4 @@ export class HomeComponent implements OnInit {
     this.movieApiService.getNowPlaying().subscribe(data => this.nowPlayingMovies = data.results);
   }
 
-  
-  scrollX(e: any){
-    e.preventDefault();
-    e.target.closest('.rowposter').scrollBy({
-      left: e.deltaY < 0 ? -60 : 60
-    })
-  }
 }

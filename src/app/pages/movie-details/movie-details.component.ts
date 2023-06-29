@@ -2,54 +2,45 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
+import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.service';
 
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.css']
 })
-export class MovieDetailsComponent implements OnInit {
-  movie$!: Observable<any>
+export class MovieDetailsComponent {
+  movie: any
   movieTrailerUrl$!: Observable<any>
-  movieRecommendations$!: Observable<any>
+  movieRecommendations!: any
   casts$!: Observable<any>
   id!: string
   castName!: string
-  constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute) {
+  watchlist: boolean = false
+  constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute,
+    private watchlistService: WatchlistService) {
     activatedRoute.params.subscribe(params => {
-      if(!params) return
-      this.movie$ = movieApiService.getMovieDetails(params.id)
+      if (!params) return
+      movieApiService.getMovieDetails(params.id).subscribe(movieDetails => {
+        this.movie = movieDetails
+        watchlistService.watchlistAsObservable().pipe(map(watchlist => {
+          return watchlist.some((movie:any )=> movie.id == movieDetails.id)
+        })).subscribe(res => this.watchlist = res)
+      })
       this.movieTrailerUrl$ = this.movieApiService.getMovieVideo(params.id)
-      .pipe(map(data => `https://www.themoviedb.org/video/play?key=${data.results[0].key}`))
+        .pipe(map(data => `https://www.themoviedb.org/video/play?key=${data.results[1].key}`))
       this.casts$ = this.movieApiService.getMovieCast(params.id).pipe(map(data => data.cast))
-      this.movieRecommendations$ = this.movieApiService.getRecommended(params.id).pipe(map(data => data.results))
-      
-      movieApiService.getMovieDetails(params.id).subscribe((results => console.log(results)));
-      // this.movieApiService.getMovieCast(params.id).pipe(map(data => data.cast.map((data:any) => data.name.replace(' ', '_')))).subscribe(console.log)
-      // this.movieApiService.getMovieCast(params.id).subscribe(console.log)
+      this.movieApiService.getRecommended(params.id).pipe(map(data => data.results))
+        .subscribe(res => this.movieRecommendations = res)
+      // movieApiService.getMovieDetails(params.id).
+      //   subscribe((results => console.log(results)));
     })
   }
 
-  ngOnInit(): void {
-    
-    // this.movieDetails()
-    // this.movieVideo()
+  addToWatchlist(movie: any, imgUrl: any) {
+    this.watchlistService.addToWatchlist(movie, imgUrl)
   }
 
-  // movieVideo() {
-  //   this.movieApiService.getMovieVideo(this.id).subscribe(data => {
-  //     this.movieTrailerUrl = `https://www.themoviedb.org/video/play?key=${data.results[0].key}`
-  //     console.log(data.results[0].key)
-  //   })
-
-  // }
-
-  scrollX(e: any){
-    e.preventDefault();
-    e.target.closest('.rowposter').scrollBy({
-      left: e.deltaY < 0 ? -60 : 60
-    })
-  }
 }
 
 

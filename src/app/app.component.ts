@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { MovieApiService } from './services/movie-api-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavbarComponent } from './partial/navbar/navbar.component';
+import { FilterComponent } from './pages/filter/filter.component';
+import { FilterSearchComponent } from './partial/filter-search/filter-search.component';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +13,21 @@ import { NavbarComponent } from './partial/navbar/navbar.component';
 })
 export class AppComponent implements OnChanges{
   @ViewChild('navbar') navbar!: NavbarComponent
+  @ViewChild('filter') filter!: FilterSearchComponent
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes)
   }
 
   @HostListener('document:click', ['$event'])
     onClick(ev: PointerEvent) {
-      
       let target = ev.target as Element
+      let guide = target.closest('#guide') ? true : false
+      if(target.closest('.filter') || guide)return
+      if(document.querySelector('.filter')?.classList.contains('filter-show')){
+        document.querySelector('.filter')?.classList.remove('filter-show')
+        this.filter.img.nativeElement.setAttribute('src', '../../../assets/images/guideWhite_left.png')
+      }
+      
       if(document.querySelector('.search-dropdown')?.classList.contains('search-show')){
         document.querySelector('.search-dropdown')?.classList.remove('search-show')
       }
@@ -29,4 +38,5 @@ export class AppComponent implements OnChanges{
       }
       
      }
+
 }

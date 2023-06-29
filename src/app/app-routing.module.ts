@@ -6,14 +6,16 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
 import { GenresComponent } from './pages/genres/genres.component';
 import { FilterComponent } from './pages/filter/filter.component';
 import { ActorDetailsComponent } from './pages/actor-details/actor-details.component';
+import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
-  {path: 'search/:type/:title', component:SearchComponent},
+  {path: 'search/:type/:title/:page', component:SearchComponent},
   {path: 'movie/:id', component:MovieDetailsComponent},
-  {path: 'genres/:genre/:id', component:GenresComponent},
-  {path: 'filter/:genre/:year/:country/:sort', component:FilterComponent},
+  {path: 'genres/:genre/:id/:page', component:GenresComponent},
+  {path: 'filter/:genre/:year/:country/:sort/:page', component:FilterComponent},
   {path: 'actor-details/:id', component:ActorDetailsComponent},
+  {path: 'watchlist', component:WatchlistComponent},
 
 ];
 

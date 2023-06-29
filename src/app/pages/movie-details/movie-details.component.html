@@ -1,4 +1,4 @@
-<div *ngIf="movie$ | async as movie" class="container mt-5 p-3">
+<div *ngIf="movie" class="container mt-5 p-3">
     <div class="row">
         <img src="https://image.tmdb.org/t/p/original{{movie.backdrop_path? movie.backdrop_path : movie.poster_path}}"
             alt="" srcset="">
@@ -11,16 +11,21 @@
     </div>
     <div class="row mb-5">
         <div class="ratgen col-md-6">
+            <h4 (click)="addToWatchlist(movie, img)">{{watchlist? 'Remove from Watchlist':'Add to Watchlist'}} <div class="watchlist">
+                <img #img src="../../../assets/images/{{watchlist ? 'xRed2.png':'watchRed.png'}}" alt="" srcset="">
+            </div></h4>
             <h5>⭐Rating: <span class="gray">{{movie.vote_average | number: '1.0-1'}}({{movie.vote_count
-            }}🗣️)</span></h5>
+                    }}🗣️)</span></h5>
             <h5>Genres: <a *ngFor="let genre of movie.genres"
-                    routerLink="/genres/{{genre.name}}/{{genre.id}}">{{genre.name}}</a></h5>
+                    routerLink="/genres/{{genre.name}}/{{genre.id}}/1">{{genre.name}}</a></h5>
             <h5>Runtime: <span class="gray">{{movie.runtime}}m</span></h5>
             <h5>Release date: <span class="gray">{{movie.release_date}}</span></h5>
             <h5>Status: <span class="gray">{{movie.status}}</span></h5>
-            <h5>Production counties: <span class="gray" *ngFor="let country of movie.production_countries">{{country.name}}</span>
+            <h5>Production counrties: <span class="gray"
+                    *ngFor="let country of movie.production_countries">{{country.name}}</span>
             </h5>
-            <h5>Production companies: <span class="gray" *ngFor="let company of movie.production_companies">{{company.name}}</span>
+            <h5>Production companies: <span class="gray"
+                    *ngFor="let company of movie.production_companies">{{company.name}}</span>
             </h5>
         </div>
         <div *ngIf="movieTrailerUrl$ | async as trailerUrl" class="trailer col-md-6">
@@ -28,22 +33,16 @@
             <iframe [src]=" trailerUrl | safe" frameborder="2"></iframe>
         </div>
     </div>
-    <div class="container mt-4 p-3">
-        <h5 class="text-white">Recommended Movies</h5>
-        <div class="rowposter" #rowposter (wheel)="scrollX($event)">
-            <ng-container class="imgcont" *ngFor="let rm of movieRecommendations$ | async">
-                <img routerLink="/movie/{{rm.id}}" src="https://image.tmdb.org/t/p/original{{rm.poster_path}}"
-                    class="rowimg largeposter" alt="">
-            </ng-container>
-        </div>
-    </div>
+    <app-movies-scroll-x-container title="Recommended Movies" [movies]="movieRecommendations"
+        width="200px"></app-movies-scroll-x-container>
 
     <div class="container justify-content-center">
         <h4>Cast</h4>
         <div class="row castrow justify-content-center justify-content-md-start">
-            <a *ngFor="let cast of casts$ | async" class="cast"
-                routerLink="/actor-details/{{cast.id}}"><img
-                    src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}">
+            <a *ngFor="let cast of casts$ | async" class="cast col-12 col-md-6 col-lg-4"
+                routerLink="/actor-details/{{cast.id}}">
+                <img *ngIf="cast.profile_path" src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}">
+                <img *ngIf="!cast.profile_path" src="../../../assets/images/profile.jpg" alt="">
                 <div class="details">
                     <h4>{{cast.name}}</h4>
                     <p>{{cast.character}}</p>

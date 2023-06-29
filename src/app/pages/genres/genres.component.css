@@ -1,83 +1,32 @@
-.container {
-    margin-top: 90px !important;
-}
-
-h2 {
-    color: white;
-}
-
-a {
-    text-decoration: none;
-    max-height: 600px;
-    /* overflow: hidden; */
-    /* white-space: nowrap; */
-    /* text-overflow: ellipsis !important; */
-    transition: transform 0.4s;
-    background-color: black;
-    outline: #E50914;
-    border-bottom: 3px solid #e509149a;
-}
-
-h5 {
-    color: #E50914;;
-    font-weight: bold;
-}
-
-a p {
-    /* position: relative; */
-    /* overflow: hidden; */
-    /* white-space: nowrap; */
-    color: gray;
-    /* display: inline-block; */
-    /* max-height: 100px; */
-    /* text-overflow: ellipsis !important */
-}
-
-a p{
-    height: 28px;
-    width: 200px;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    margin: 0 5px 0 5px;
-    /* text-align: center; */
-    text-decoration: none;
-    text-overflow:ellipsis;
-    white-space: nowrap;
-    color: gray;
-  }
-
-/* a img {
-    transition: transform 0.4s;
-} */
-
-a:hover {
-    transform: scale(1.02);
-}
-
-.row {
-    margin: 20px auto !important;
-    padding: 0;
-}
-
-.img-cover {
-    /* position: absolute;
-    top: 0;
-    left: 0; */
-    width: 100%;
-    height: 393px;
-    background-color: gray;
-    border: 1px solid #E50914;
-    border-radius: 5px 5px 0 0;
+.pages {
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    margin-bottom: 30px;
 }
 
-.img-cover h2 {
+.pages a {
     color: #E50914;
-    text-align: center;
-    text-justify: center;
-    font-weight: bold;
+    text-decoration: none!important;
+}
+.pages a:not(:last-child) {
+    margin-right: 30px;
+    color: #E50914;
+}
+.pages a:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+.pages a:visited {
+    color: #691116;
+}
+
+.active {
+    /* font-size: 20px;
+    font-weight: 600; */
+    transform: scale(1.5)!important;
+    text-decoration: underline!important;
+    border-bottom: 1px solid #691116;
+    border-top: 1px solid #691116;
+    border-radius: 2px 2px 2px 2px;
 }
