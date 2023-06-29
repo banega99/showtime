@@ -23,8 +23,9 @@ export class ActorDetailsComponent {
       movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
       .subscribe(res => this.movieCredits = res)
       movieApiService.getActorDetails(params.id).subscribe(actor => {
-        this.yearsOldDead = parseInt(actor.deathday.split('-')[0]) - parseInt(actor.birthday.split('-')[0])
         this.yearsOld = new Date().getFullYear() - parseInt(actor.birthday.split('-')[0])
+        if(!actor.deathday)return
+        this.yearsOldDead = parseInt(actor.deathday.split('-')[0]) - parseInt(actor.birthday.split('-')[0])
       })
     })
   }
