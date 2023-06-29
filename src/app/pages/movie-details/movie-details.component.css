@@ -12,32 +12,50 @@ h4 {
 }
 
 h5 {
+    margin-right: 5px;
+    margin-bottom: 0;
     color: white;
 }
 
-h5 a {
+.little-details {
+    display: flex;
+    justify-content: baseline;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+}
+
+.little-details a {
     color: #E50914;
     text-decoration: none;
     margin-right: 5px;
+    font-size: 20px;
 }
 
 .gray {
+    font-size: 20px;
+    height: fit-content;
+    /* margin-left: 50px; */
+    color: gray;
+}
+.gray:first-child {
+    /* margin-left: 5px; */
     color: gray;
 }
 
-h5 a:hover {
+.little-details  a:hover {
     opacity: 0.5;
 }
 
-h5 a:not(:last-child)::after {
+.little-details  a:not(:last-child)::after {
     content: ',';
     color: white;
 }
 
-h5 span {
-    margin-right: 5px;
+.little-details span:first-child{
+    /* margin-left: 5px; */
 }
-h5 span:not(:last-child)::after {
+.little-details  span:not(:last-child)::after {
     content: ',';
     color: white;
 }
@@ -85,6 +103,7 @@ h5 span:not(:last-child)::after {
 }
 
 .trailer {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
