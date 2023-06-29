@@ -22,7 +22,8 @@ export class MovieDetailsComponent {
   avatarUrl!: string
   backdrops!: any 
   castLength!: number
-
+  videos: any = []
+  moreVideos: any = []
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute,
     private watchlistService: WatchlistService) {
     activatedRoute.params.subscribe(params => {
@@ -53,6 +54,18 @@ export class MovieDetailsComponent {
       movieApiService.getMovieImages(params.id).subscribe(images => {
         this.backdrops = images.backdrops
       })
+
+      this.movieApiService.getMovieVideo(params.id).subscribe(videos=> {
+        console.log(videos)
+        videos.results.slice(0, 4).forEach((element:any) => {
+          let url = `https://www.themoviedb.org/video/play?key=${element?.key}`
+          this.videos.push(url)
+        });
+        videos.results.slice(0, 9).forEach((element:any) => {
+          let url = `https://www.themoviedb.org/video/play?key=${element?.key}`
+          this.moreVideos.push(url)
+        });
+      })
     })
 
   }
@@ -63,14 +76,8 @@ export class MovieDetailsComponent {
 
   expandReview(p: any, rc: any, a: any) {
     console.log(rc.classList)
-    if (rc.classList.contains('review-expand')) {
-      a.classList.remove('arrow-rotate')
-      rc.classList.remove('review-expand')
-    } else {
-      a.classList.add('arrow-rotate')
-      
-      rc.classList.add('review-expand')
-    }
+    rc.classList.toggle('review-expand')
+    a.classList.toggle('arrow-rotate')
   }
 
   scrollToDet(section: any){
@@ -84,6 +91,14 @@ export class MovieDetailsComponent {
   }
   scrollToRev(section: any){
     section.scrollIntoView()
+  }
+
+  showVideos(section: any){
+    section.classList.toggle('videos-show')
+  }
+
+  hideVideos(section: any){
+    section.classList.toggle('videos-show')
   }
 
 }

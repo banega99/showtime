@@ -81,12 +81,8 @@
 
 #guide:hover, #guide:hover .filter, .filter:hover {
     cursor: pointer;
-    opacity: 1;
+    opacity: 1!important;
 }
-/* #guide:hover img{
-    opacity: 0.5;
-} */
-
 
 .guide-move {
     transform: translateX(-200px);

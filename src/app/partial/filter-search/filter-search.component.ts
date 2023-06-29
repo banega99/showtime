@@ -97,8 +97,8 @@ export class FilterSearchComponent {
 
     showFilter(f: any, fb: any, a: any) {
       let attributeSrc = a.getAttribute('src')
-      f.classList.contains('filter-show')? f.classList.remove('filter-show') : f.classList.add('filter-show')
-      fb.classList.contains('guide-move')? fb.classList.remove('guide-move') : fb.classList.add('guide-move')
+      f.classList.toggle('filter-show')
+      fb.classList.toggle('guide-move')
       if(attributeSrc == '../../../assets/images/guideWhite_left.png')a.setAttribute('src', '../../../assets/images/guideWhite_right.png')
       else if(attributeSrc == '../../../assets/images/guideWhite_right.png')a.setAttribute('src', '../../../assets/images/guideWhite_left.png')
     }
