@@ -72,3 +72,87 @@ body {
 .toast-span {
     color: gray
 }
+
+/* za svaki slucaj */
+
+
+iframe {
+    /* width: 100px; */
+}
+
+.ratgen h4 {
+    color: #E50914;
+    width: fit-content;
+}
+.ratgen h4:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.watchlist {
+    position: relative;
+    display: inline-block;
+    /* background-color: #E50914; */
+    border-radius: 3px;
+    /* border: 2px solid #E50914; */
+}
+
+.watchlist img {
+    height: 25px;
+    width: 20px;
+}
+
+.dudu {
+    visibility: hidden;
+    width: fit-content;
+    position: absolute;
+    top: 0;
+}
+
+.review {
+    position: relative;
+    margin: 10px 0 10px 0;
+    border-bottom: 3px solid #E50914;
+    border-radius: 0 0 4px 4px;
+    padding: 10px;
+    min-height: fit-content;
+    max-height: 200px;
+    overflow: hidden;
+    padding-right: 15px;
+    transition: all .6s ease;
+    opacity: 1;
+    transition-timing-function: cubic-bezier(1, 1, 1, 1)
+}
+
+.review.review-expand {
+    max-height: fit-content;
+}
+
+.review img {
+    float: left;
+    margin-right: 10px;
+    shape-outside: circle(50%);
+}
+
+.imgs {
+    float: left;
+    margin-right: 10px;
+    shape-outside: circle(50%);
+}
+
+.review-expand {
+    max-height: fit-content!important;
+}
+
+.arrow {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    width: 12px;
+    height: 12px;
+    border-bottom: 3px solid #E50914;
+    border-right: 3px solid #E50914;
+    transform: rotate(45deg);
+    /* z-index: 8000; */
+    transition: all .3s;
+}
