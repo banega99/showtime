@@ -139,19 +139,112 @@ h5 {
 }
 
 .trailer {
+    position: relative;
     margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 620px;
+    height: 320px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     /* background-color: #e50914a2; */
+    /* filter: blur(3px); */
+}
+
+.trailer:hover {
+    cursor: pointer;
+    opacity: 0.6;
 }
 .trailer h5 {
     align-self: self-start;
     margin-right: 10px;
+    text-shadow: 0 0 3px black;
 }
 
+.trailer-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 620px;
+    height: 320px;
+    background-color: rgba(128, 128, 128, 0.84);
+    /* opacity: 0.7; */
+    filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trailer h5{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-self: center;
+    color: #E50914;
+    /* filter: invert(100%) */
+    z-index: 100;
+}
+
+.videos {
+    visibility: hidden;
+    position: fixed;
+    display: grid;
+    width: 0px;
+    height: 0px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: rgba(0, 0, 0, 0.84);
+    z-index: 9000;
+    transition: all 0.3s;
+    opacity: 0;
+    /* filter: blur(2px); */
+}
+
+.videos iframe {
+    visibility: hidden;
+    opacity: 0;
+    width: 90%;
+    height: 90%;
+    align-self: center;
+    justify-self: center;
+    transform: all 0.3s;
+}
+
+.videos.videos-show {
+    visibility: visible;
+    width: 90%;
+    height: 90%;
+    opacity: 1;
+    z-index: 10000;
+}
+.videos.videos-show iframe {
+    visibility: visible;
+    opacity: 1;
+}
+
+.x {
+    background-image: url('../../../assets/images/xRed.png');
+    background-size: cover;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    z-index: 10000;
+}
+
+.x:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+
+
 iframe {
-    width: 300px;
+    /* width: 100px; */
 }
 
 .ratgen h4 {
@@ -193,7 +286,13 @@ iframe {
     max-height: 200px;
     overflow: hidden;
     padding-right: 15px;
-    transition: all .3s;
+    transition: all .6s ease;
+    opacity: 1;
+    transition-timing-function: cubic-bezier(1, 1, 1, 1)
+}
+
+.review.review-expand {
+    max-height: fit-content;
 }
 
 .review img {
@@ -284,6 +383,32 @@ iframe {
         color: #E50914;
         display: block;
     }
+
+    .trailer {
+        justify-self: center;
+        align-self: center;
+        width: 100%;
+    }
+
+    .trailer-cover {
+        width: 100%;
+    }
+
+    .trailer iframe {
+        width: 150px;
+        justify-self: center;
+        align-self: center;
+    }
+
+    .videos {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .videos.videos-show {
+        height: 80%;
+    }
+
+    
     
 }
 @media (max-width: 992px) {
