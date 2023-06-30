@@ -25,6 +25,7 @@ h5 {
     left: 50%;
     transform: translate(-50%, -50%);
     transition: all 0.4s;
+    text-align: center;
 }
 
 .trailer {
