@@ -75,23 +75,12 @@
                 </h5>
                 <span class="gray" *ngFor="let company of movie.production_companies">{{company.name}}</span>
             </div>
+            
+            
+        </div>
+     
+            <app-movie-videos></app-movie-videos>
 
-        </div>
-        <div (click)="showVideos(v)" *ngIf="movieTrailerUrl$ | async as trailerUrl" class="trailer">
-            <!-- <h5>Trailer:</h5> -->
-            <!-- <iframe [src]=" trailerUrl | safe" frameborder="2"></iframe> -->
-            <iframe allowfullscreen="true" *ngFor="let video of videos"  [src]="video | safe"></iframe>
-            <div class="trailer-cover">
-                
-            </div>
-            
-            <h5>Show more videos</h5>
-            
-        </div>
-        <div #v class="videos">
-            <iframe allowfullscreen="true" *ngFor="let video of moreVideos" [src]="video | safe" frameborder="0"></iframe>
-            <div (click)="hideVideos(v)" class="x"></div>
-        </div>
     </div>
     <div #rec class="div"></div>
     <app-movies-scroll-x-container title="Recommended Movies" [movies]="movieRecommendations"

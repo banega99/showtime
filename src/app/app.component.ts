@@ -23,7 +23,7 @@ export class AppComponent implements OnChanges{
       let target = ev.target as Element
       let guide = target.closest('#guide') ? true : false
       if(target.closest('.filter') || guide)return
-      if(document.querySelector('.filter')?.classList.contains('filter-show')){
+      else if(document.querySelector('.filter')?.classList.contains('filter-show')){
         document.querySelector('.filter')?.classList.remove('filter-show')
         this.filter.img.nativeElement.setAttribute('src', '../../../assets/images/guideWhite_left.png')
       }
@@ -35,6 +35,10 @@ export class AppComponent implements OnChanges{
       this.navbar.searchInput.nativeElement.value = ''
       if(document.querySelector('.error-container')?.classList.contains('show-error')){
         document.querySelector('.error-container')?.classList.remove('show-error')
+      }
+      // if(target.closest('.videos') || target.closest('trailer'))return
+      else if (document.querySelector('.videos')?.classList.contains('videos-show') && !target.closest('.trailer')){
+        document.querySelector('.videos')?.classList.remove('videos-show')
       }
       
      }

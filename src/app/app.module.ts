@@ -22,6 +22,7 @@ import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { ToastrModule } from 'ngx-toastr'
 // import NoopAnimationsModule from ''
 import { BrowserAnimationsModule,  NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MovieVideosComponent } from './partial/movie-videos/movie-videos.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { BrowserAnimationsModule,  NoopAnimationsModule } from '@angular/platfor
     MovieCardComponent,
     MoviesScrollXContainerComponent,
     FilterSearchComponent,
-    WatchlistComponent
+    WatchlistComponent,
+    MovieVideosComponent
   ],
   imports: [
     BrowserModule,

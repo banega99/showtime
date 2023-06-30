@@ -26,6 +26,8 @@ export class MovieDetailsComponent {
   moreVideos: any = []
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute,
     private watchlistService: WatchlistService) {
+      this.videos = []
+      this.moreVideos = []
     activatedRoute.params.subscribe(params => {
       if (!params) return
       movieApiService.getMovieDetails(params.id).subscribe(movieDetails => {
@@ -93,14 +95,7 @@ export class MovieDetailsComponent {
     section.scrollIntoView()
   }
 
-  showVideos(section: any){
-    section.classList.toggle('videos-show')
-  }
-
-  hideVideos(section: any){
-    section.classList.toggle('videos-show')
-  }
-
+  
 }
 
 
