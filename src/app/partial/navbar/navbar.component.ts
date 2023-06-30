@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
@@ -18,15 +18,15 @@ export class NavbarComponent implements OnInit {
   movieResults: any[] = []
   actorResults: any[] = []
   searchType: string = 'All'
-  
+  @ViewChild('l')line!: ElementRef
   @ViewChild('s') searchInput!: ElementRef
   @ViewChildren('inputCheckbox') inputCheckbox!: QueryList<ElementRef>
   constructor(private route: Router, private movieApiService: MovieApiService, private fb: FormBuilder) {
     this.movieApiService.getGenres().subscribe(genres => this.genres = genres.genres)
+    
   }
 
   ngOnInit(): void {
-
     this.searchForm = this.fb.group({
       searchTerm: ['', [Validators.required]]
     })
@@ -91,5 +91,17 @@ export class NavbarComponent implements OnInit {
     this.searchType = value.innerText
     this.searchResults = []
   }
+  i = 0
+  @HostListener('window:scroll', ['$event'])
+    onScroll(e: any) {
+      // console.log(this.line)
+      // this.lineWidth()
+      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      console.log(height)
+      var scrolled = (winScroll / height) * 100;
+      this.line.nativeElement.style.width = scrolled + "%";
+    }
+
 
 }

@@ -188,6 +188,15 @@ ul.dropdown-menu.types{
     transform: translateX(-25%);
 }
 
+.line {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    height: 3px;
+    background-color: #E50914;
+    width:0px
+}
+
 
 
 @media (max-width: 992px) {
@@ -211,6 +220,9 @@ ul.dropdown-menu.types{
     }
     form input{
         z-index: 0!important;
+    }
+    .line {
+        top: 56px;
     }
 }
 
