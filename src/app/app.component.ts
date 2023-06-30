@@ -37,7 +37,7 @@ export class AppComponent implements OnChanges{
         document.querySelector('.error-container')?.classList.remove('show-error')
       }
       // if(target.closest('.videos') || target.closest('trailer'))return
-      else if (document.querySelector('.videos')?.classList.contains('videos-show') && !target.closest('.trailer')){
+      else if (document.querySelector('.videos')?.classList.contains('videos-show') && !target.closest('.trailer-cont') && !target.closest('.videos')){
         document.querySelector('.videos')?.classList.remove('videos-show')
       }
       
