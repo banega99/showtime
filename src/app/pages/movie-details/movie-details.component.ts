@@ -31,7 +31,6 @@ export class MovieDetailsComponent {
     activatedRoute.params.subscribe(params => {
       if (!params) return
       movieApiService.getMovieDetails(params.id).subscribe(movieDetails => {
-        console.log(movieDetails)
         this.movie = movieDetails
         watchlistService.watchlistAsObservable().pipe(map(watchlist => {
           return watchlist.some((movie: any) => movie.id == movieDetails.id)
@@ -51,14 +50,12 @@ export class MovieDetailsComponent {
       movieApiService.getMovieReviews(params.id).subscribe(reviews => {
         this.totalReviews = reviews.total_results
         this.reviews = reviews.results
-        console.log(reviews.results)
       })
       movieApiService.getMovieImages(params.id).subscribe(images => {
         this.backdrops = images.backdrops
       })
 
       this.movieApiService.getMovieVideo(params.id).subscribe(videos=> {
-        console.log(videos)
         videos.results.slice(0, 4).forEach((element:any) => {
           let url = `https://www.themoviedb.org/video/play?key=${element?.key}`
           this.videos.push(url)

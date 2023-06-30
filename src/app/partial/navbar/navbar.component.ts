@@ -33,7 +33,6 @@ export class NavbarComponent implements OnInit {
   }
 
   resetInputValue(e: any) {
-    console.log(this.searchInput.nativeElement.value, e.target)
     this.searchInput.nativeElement.value = ''
   }
 
@@ -61,13 +60,10 @@ export class NavbarComponent implements OnInit {
     if (this.searchType == 'All') {
       this.movieApiService.getMovieBytitle(title, 1).subscribe(data => {
         this.movieResults = data.results.slice(0, 2)
-        // this.searchResults = this.movieResults
       })
       this.movieApiService.getActor(title, 1).subscribe(data => {
         this.actorResults = data.results.filter((data: any) => data.popularity > 0.6).slice(0, 2)
-        this.searchResults = this.movieResults.concat(this.actorResults)
-        console.log(this.searchResults);
-        
+        this.searchResults = this.movieResults.concat(this.actorResults) 
       })
     } else if (this.searchType == 'Movie') {
       this.movieApiService.getMovieBytitle(title, 1).subscribe(data => {

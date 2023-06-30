@@ -16,13 +16,9 @@ export class ActorDetailsComponent {
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute){
     activatedRoute.params.subscribe(params =>{
       if(!params)return
-      console.log(params.id);
-      movieApiService.getActorDetails(params.id).subscribe(console.log)
-      movieApiService.getMovieCredits(params.id).subscribe(console.log)
       this.actorDetails$ = movieApiService.getActorDetails(params.id)
       movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
       .subscribe(res => {
-        
         this.movieCredits = res
       })
       movieApiService.getActorDetails(params.id).subscribe(actor => {
