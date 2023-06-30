@@ -1,4 +1,4 @@
-<div *ngIf="videos" class="cont">
+<div *ngIf="videos.length > 0" class="cont">
     <div  (click)="showVideos(v)" class="trailer-cont">
         <div   class="trailer">
             <iframe frameborder="0" allowfullscreen="true" *ngFor="let video of videos"  [src]="video | safe"></iframe>
