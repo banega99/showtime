@@ -93,10 +93,10 @@ h5 {
         width: 100%;
     }
     .pages a:not(:last-child){
-        margin-right: 8px;
+        margin-right: 10px;
     }
     .pages a {
-        font-size: 8px;
+        font-size: 9px;
     }
 }
 
