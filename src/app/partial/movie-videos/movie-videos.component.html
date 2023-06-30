@@ -1,14 +1,17 @@
-<div (click)="showVideos(v)" class="trailer-cont">
-    <div  *ngIf="videos" class="trailer">
-        <iframe frameborder="0" allowfullscreen="true" *ngFor="let video of videos"  [src]="video | safe"></iframe>
-        <div class="trailer-cover">
+<div *ngIf="videos" class="cont">
+    <div  (click)="showVideos(v)" class="trailer-cont">
+        <div   class="trailer">
+            <iframe frameborder="0" allowfullscreen="true" *ngFor="let video of videos"  [src]="video | safe"></iframe>
+            <div class="trailer-cover">
+            </div>
         </div>
+        <h5>Show more videos <img src="../../../assets/images/videosRed.png" alt="" srcset="" width="50px"></h5>
     </div>
-    <h5>Show more videos <img src="../../../assets/images/videosRed.png" alt="" srcset="" width="50px"></h5>
+    
+    
+    <div #v class="videos">
+        <iframe allowfullscreen="true" *ngFor="let video of moreVideos" [src]="video | safe" frameborder="0"></iframe>
+        <div (click)="hideVideos(v)" class="x"></div>
+    </div>
 </div>
 
-
-<div #v class="videos">
-    <iframe allowfullscreen="true" *ngFor="let video of moreVideos" [src]="video | safe" frameborder="0"></iframe>
-    <div (click)="hideVideos(v)" class="x"></div>
-</div>

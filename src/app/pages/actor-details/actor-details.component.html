@@ -10,7 +10,6 @@
                 <h3 *ngIf="actorDetails.deathday"><span class="white">Date of death:</span> {{actorDetails.deathday | date}} ({{yearsOldDead}})</h3>
                 <h3><span class="white">Popularity:</span> {{actorDetails.popularity}}</h3>
             </div>
- | date
         </div>
         <div *ngIf="actorDetails.biography" class="biography">
             <h3>Biography: </h3>
