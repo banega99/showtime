@@ -44,7 +44,7 @@ export class SearchComponent implements OnInit {
           this.searchRes$ = res.results
           this.totalPages = res.total_pages > 500 ? 500 : res.total_pages
           this.totalResults = res.total_results
-          for (let i = params.page - 5; i < parseInt(params.page) + 5; i++) {
+          for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {
             // console.log(this.totalPages)
 
             if (i > 0 && i < this.totalPages) {
@@ -70,7 +70,7 @@ export class SearchComponent implements OnInit {
           this.searchRes$ = res.results
           this.totalPages = res.total_pages > 500 ? 500 : res.total_pages
           this.totalResults = res.total_results
-          for (let i = params.page - 5; i < parseInt(params.page) + 5; i++) {
+          for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {
             // console.log(this.totalPages)
 
             if (i > 0 && i < this.totalPages) {

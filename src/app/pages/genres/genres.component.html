@@ -2,10 +2,10 @@
 <div class="container">
     <div class="pages">
         <a *ngIf="currentPage > 1 " routerLink="/genres/{{genre}}/{{genreId}}/{{currentPage - 1}}">&larr; Prev Page</a>
-        <a *ngIf="currentPage > 1 + 5" #fp  routerLink="/genres/{{genre}}/{{genreId}}/1" [ngClass]="{'active':1 == currentPage}">1</a>
-        <a *ngIf="currentPage > 1 + 5">...</a>
+        <a *ngIf="currentPage > 1 + 3" #fp  routerLink="/genres/{{genre}}/{{genreId}}/1" [ngClass]="{'active':1 == currentPage}">1</a>
+        <a *ngIf="currentPage > 1 + 4">...</a>
         <a #cp *ngFor="let page of pages" routerLink="/genres/{{genre}}/{{genreId}}/{{page}}" [ngClass]="{'active':page == currentPage}">{{page}}</a>
-        <a *ngIf="currentPage < totalPages - 5">...</a>
+        <a *ngIf="currentPage < totalPages - 4">...</a>
         <a #lp routerLink="/genres/{{genre}}/{{genreId}}/{{totalPages}}" [ngClass]="{'active':totalPages == currentPage}">{{totalPages}}</a>
         <a *ngIf="currentPage < totalPages " routerLink="/genres/{{genre}}/{{genreId}}/{{currentPage + 1}}">Next Page &rarr;</a>
 

@@ -30,3 +30,16 @@
     border-top: 1px solid #691116;
     border-radius: 2px 2px 2px 2px;
 }
+
+@media (max-width: 768px) {
+    .pages {
+        width: 100%;
+    }
+    .pages a:not(:last-child){
+        margin-right: 8px;
+    }
+    .pages a {
+        font-size: 8px;
+    }
+}
+

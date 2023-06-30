@@ -32,7 +32,7 @@ export class GenresComponent implements OnInit {
         this.movies = result.results
         this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
         this.totalResults = result.total_results
-        for (let i = params.page - 5; i < parseInt(params.page) + 5; i++) {  
+        for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {  
           if(i > 0 && i < this.totalPages){
             this.pages.push(i)
           }
