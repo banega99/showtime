@@ -9,7 +9,8 @@ app-movie-videos {
 }
 
 .scrollSection {
-    margin-bottom: 20px;
+    margin-top: 10px;
+    /* margin-bottom: 5px; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;

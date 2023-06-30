@@ -9,7 +9,7 @@ export class MovieApiService{
 
   constructor(private http:HttpClient) {
     // this.getGenres().subscribe(console.log)
-    // this.getAllCountries().subscribe(console.log)
+    this.getAllCountries().subscribe(console.log)
    }
 
   baseUrl = "https://api.themoviedb.org/3"
