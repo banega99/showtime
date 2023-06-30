@@ -94,11 +94,8 @@ export class NavbarComponent implements OnInit {
   i = 0
   @HostListener('window:scroll', ['$event'])
     onScroll(e: any) {
-      // console.log(this.line)
-      // this.lineWidth()
       var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      console.log(height)
       var scrolled = (winScroll / height) * 100;
       this.line.nativeElement.style.width = scrolled + "%";
     }
