@@ -4,7 +4,7 @@
     <div class="row justify-content-center justify-content-md-start">
         <a (click)="route($event, movie)" *ngFor="let movie of searchRes$" class="card ms-md-2 mb-3">
             <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="card-img-top"alt="{{movie.title}}">
-            <div *ngIf="!movie.poster_path" class="img-cover">
+            <div *ngIf="!movie.poster_path" class="card-img-top img-cover">
                 <h2>SHOWTIME</h2>
             </div>
             <div class="card-body">

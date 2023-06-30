@@ -15,7 +15,7 @@
             <h3>Biography: </h3>
             <p>{{actorDetails.biography}}</p>
         </div>
-        <div *ngIf="movieCredits?.length > 0">
+        <div class="rec" *ngIf="movieCredits?.length > 0">
             <app-movies-scroll-x-container title="Appears in Movies" [movies]="movieCredits" width="200px"></app-movies-scroll-x-container>
         </div>
         

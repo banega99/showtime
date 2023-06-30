@@ -28,7 +28,9 @@ export class AppComponent implements OnChanges{
         this.filter.img.nativeElement.setAttribute('src', '../../../assets/images/guideWhite_left.png')
       }
       
-      if(document.querySelector('.search-dropdown')?.classList.contains('search-show')){
+      if(document.querySelector('.search-dropdown')?.classList.contains('search-show') &&
+       !target.classList.contains('form-control') &&
+       !target.classList.contains('type-btn')){
         document.querySelector('.search-dropdown')?.classList.remove('search-show')
       }
       if (target.classList.contains('btn') || target.classList.contains('form-control')) return
@@ -37,7 +39,9 @@ export class AppComponent implements OnChanges{
         document.querySelector('.error-container')?.classList.remove('show-error')
       }
       // if(target.closest('.videos') || target.closest('trailer'))return
-      else if (document.querySelector('.videos')?.classList.contains('videos-show') && !target.closest('.trailer-cont') && !target.closest('.videos')){
+      else if (document.querySelector('.videos')?.classList.contains('videos-show') &&
+       !target.closest('.trailer-cont') &&
+        !target.closest('.videos')){
         document.querySelector('.videos')?.classList.remove('videos-show')
       }
       

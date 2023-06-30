@@ -23,39 +23,48 @@
                 routerLink="genres/{{genre.name}}/{{genre.id}}/1">{{genre.name}}</a></li>
           </ul>
         </li>
-        <form [formGroup]="searchForm" (submit)="search($event, s.value)" class="d-flex" role="search">
-            <div class="btn type-btn" data-bs-toggle="dropdown">{{searchType}}</div>
-            <ul class="dropdown-menu types w-25">
-              <li #all (click)="changeSearchType(all)" class="dropdown-item">All</li>
-              <li #movie (click)="changeSearchType(movie)" class="dropdown-item">Movie</li>
-              <li #actor (click)="changeSearchType(actor)" class="dropdown-item">Actor</li>
-            </ul>
+        <form (mouseleave)="form.classList.remove('form-expand')" #form [formGroup]="searchForm"
+          (submit)="search($event, s.value)" class="d-flex" role="search">
+          <div class="btn type-btn" data-bs-toggle="dropdown">{{searchType}}</div>
+          <ul class="dropdown-menu types w-25">
+            <li #all (click)="changeSearchType(all)" class="dropdown-item">All</li>
+            <li #movie (click)="changeSearchType(movie)" class="dropdown-item">Movie</li>
+            <li #actor (click)="changeSearchType(actor)" class="dropdown-item">Actor</li>
+          </ul>
           <input id="searchInput" formControlName="searchTerm" (keyup)="showResults(s.value)" #s
             (keyup.enter)="search($event, s.value)" [value]="s.value" class="form-control me-2" type="search"
             placeholder="Search SHOWTIME" aria-label="Search">
           <!-- </div> -->
           <!-- <li class="nav-item dropdown ms-lg-auto mb-1"> -->
-          <button (mouseover)="img.setAttribute('src', '../../../assets/images/lupaCrvena.png')"
+          <button
+            (mouseover)="img.setAttribute('src', '../../../assets/images/lupaCrvena.png'); form.classList.add('form-expand')"
             (mouseleave)="img.setAttribute('src', '../../../assets/images/lupaSiva.png')"
             (click)="search($event, s.value)" class="btn">
             <img #img src="../../../assets/images/lupaSiva.png" alt="" srcset="" width="30px">
           </button>
         </form>
-        
+
       </ul>
     </div>
   </div>
-  <div class="search-dropdown" *ngIf="searchResults.length > 0"
+  <div class="search-dropdown" *ngIf="searchResults.length > 0 && s.value != ''"
     [ngClass]="{'search-show': s.value != ''}">
     <div (click)="s.value = ''; collapse.classList.remove('show')" *ngFor="let movie of searchResults"
       routerLink="{{movie.title ? 'movie' : 'actor-details'}}/{{movie.id}}" class="search-card show-card">
-      <img src="https://image.tmdb.org/t/p/original{{movie.poster_path? movie.poster_path : movie.profile_path}}" alt="" srcset="" width="100px">
+      <img *ngIf="movie.poster_path || movie.profile_path"
+        src="https://image.tmdb.org/t/p/original{{movie.poster_path? movie.poster_path : movie.profile_path}}" alt=""
+        srcset="" width="100px">
+      <div *ngIf="movie.title && !movie.poster_path" class="img-cover">
+        <h2>SHOWTIME</h2>
+      </div>
+      <img *ngIf="movie.name && !movie.profile_path" src="../../../assets/images/profile.jpg" height="150px"
+        width="100px" alt="">
       <div class="details">
         <h4>{{movie.title? movie.title : movie.name}}</h4>
-      <h5>{{movie.title? 'Movie' : "Actor"}}</h5>
+        <h5>{{movie.title? 'Movie' : "Actor"}}</h5>
       </div>
-      
+
     </div>
   </div>
-  
+
 </nav>

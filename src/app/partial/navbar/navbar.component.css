@@ -8,16 +8,23 @@ form {
     position: relative;
     border: 1px solid #E50914;
     border-radius: 6px;
-    
+    /* width: 50px; */
+    /* opacity: 0; */
+    transition: all .3s;
 }
 
 form .btn {
+    /* position: absolute; */
     border-right: 1px solid #E50914;
     border-radius: 0px;
+    right: 0;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
+
 
 form ul.dropdown-menu {
     position: absolute;
@@ -98,6 +105,7 @@ ul.dropdown-menu.types{
     width: 100%;
     height: fit-content;
     background-color: #000000;
+    transition: all .3s;
 }
 
 .search-show {
@@ -107,17 +115,42 @@ ul.dropdown-menu.types{
 
 
 .search-card {
-    display: none;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
     padding: 5px;
     border-radius: 5px;
+    transition: all 0.3s;
 }
+
+.img-cover {
+    width: 100px;
+    height: 140px;
+    background-color: gray;
+    border: 1px solid #E50914;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-cover h2 {
+    color: #E50914;
+    text-align: center;
+    text-justify: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 
 .search-card .details h4 {
     margin: 0px;
 }
 
 .show-card {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    /* display: flex; */
     align-items: center;
 }
 
@@ -186,4 +219,44 @@ ul.dropdown-menu.types{
         height: 80px !important;
         background-color: #000000;
     }
+    form .btn:first-child {
+        opacity: 0;
+    }
+    form .btn:last-child {
+        opacity: 1;
+        position: absolute;
+        border-right: none;
+        border-radius: 0px;
+        right: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #000000;
+        /* border: none; */
+        /* z-index: 3000; */
+    }
+    form {
+        position: relative;
+        /* border: 1px solid #E50914; */
+        border: none;
+        border-radius: 6px;
+        width: 50px;
+        /* opacity: 0; */
+        transition: all .3s;
+    }
+    .form-expand {
+        width: 400px;
+        border: 1px solid #E50914;
+    }
+    
+    .form-expand .btn:last-child {
+        /* position: relative; */
+        background-color: transparent;
+    }
+    .form-expand .btn:first-child {
+        opacity: 1;
+        /* background-color: transparent; */
+    }
+    
 }

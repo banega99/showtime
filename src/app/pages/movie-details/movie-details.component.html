@@ -82,9 +82,9 @@
             <app-movie-videos></app-movie-videos>
 
     </div>
-    <div #rec class="div"></div>
-    <app-movies-scroll-x-container title="Recommended Movies" [movies]="movieRecommendations"
-        width="200px"></app-movies-scroll-x-container>
+    <div #rec class="rec"> <app-movies-scroll-x-container title="Recommended Movies" [movies]="movieRecommendations"
+        width="200px"></app-movies-scroll-x-container></div>
+   
 
     <div class="container justify-content-center">
         <h4 #cast>Cast <span class="gray">({{casts?.length? casts?.length : 0}})</span></h4>

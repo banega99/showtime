@@ -4,7 +4,7 @@
     <div class="row">
         <a routerLink="/actor-details/{{actor.id}}" *ngFor="let actor of searchActors$" class="actor col-12 col-md-6 col-lg-4 mb-3">
             <img *ngIf="actor.profile_path" src="https://image.tmdb.org/t/p/original{{actor.profile_path}}" alt="">
-            <img *ngIf="!actor.profile_path" src="../../../assets/images/profile.jpg" alt="">
+            <img *ngIf="!actor.profile_path" src="../../../assets/images/profile.jpg" height="150px" alt="">
             <div class="details">
                 <h5>{{actor.name}}</h5>
                 <h6>Actor</h6>

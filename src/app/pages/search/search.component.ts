@@ -33,23 +33,23 @@ export class SearchComponent implements OnInit {
       this.pages = []
       this.title = params.title
       this.currentPage = parseInt(params.page)
-      console.log(params)
+      // console.log(params)
       if (params.type == 'All') {
         // this.genre = params.genre
         // this.genreId = params.id
         this.type = params.type
-        this.movieApiService.getMovieBytitle(params.title, 1).subscribe(console.log)
+        // this.movieApiService.getMovieBytitle(params.title, 1).subscribe(console.log)
         this.movieApiService.getMovieBytitle(params.title, 1).subscribe(res => {
           if (!res) return
           this.searchRes$ = res.results
           this.totalPages = res.total_pages > 500 ? 500 : res.total_pages
           this.totalResults = res.total_results
           for (let i = params.page - 5; i < parseInt(params.page) + 5; i++) {
-            console.log(this.totalPages)
+            // console.log(this.totalPages)
 
             if (i > 0 && i < this.totalPages) {
               this.pages.push(i)
-              console.log(this.pages)
+              // console.log(this.pages)
             }
 
           }
@@ -64,24 +64,24 @@ export class SearchComponent implements OnInit {
       }
       else if (params.type == 'Movie') {
         this.type = params.type
-        this.movieApiService.getMovieBytitle(params.title, 1).subscribe(console.log)
+        // this.movieApiService.getMovieBytitle(params.title, 1).subscribe(console.log)
         this.movieApiService.getMovieBytitle(params.title, 1).subscribe(res => {
           if (!res) return
           this.searchRes$ = res.results
           this.totalPages = res.total_pages > 500 ? 500 : res.total_pages
           this.totalResults = res.total_results
           for (let i = params.page - 5; i < parseInt(params.page) + 5; i++) {
-            console.log(this.totalPages)
+            // console.log(this.totalPages)
 
             if (i > 0 && i < this.totalPages) {
               this.pages.push(i)
-              console.log(this.pages)
+              // console.log(this.pages)
             }
           }})
       }
       else if (params.type == 'Actor') {
         this.type = params.type
-        this.movieApiService.getActor(params.title, 1).subscribe(console.log)
+        // this.movieApiService.getActor(params.title, 1).subscribe(console.log)
         this.movieApiService.getActor(params.title, 1)
           .subscribe(res => {
             if (!res) return

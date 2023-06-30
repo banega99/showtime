@@ -55,7 +55,8 @@ import { MovieVideosComponent } from './partial/movie-videos/movie-videos.compon
       timeOut: 3000,
       positionClass: 'toast-top-center',
       // newestOnTop: false
-    })
+    }),
+    
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},

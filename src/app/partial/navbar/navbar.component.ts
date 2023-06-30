@@ -54,28 +54,36 @@ export class NavbarComponent implements OnInit {
   }
 
   showResults(title: string) {
-    if (title == '') return
+    if (title == '') {
+      this.searchResults = []
+      return
+    }
     if (this.searchType == 'All') {
       this.movieApiService.getMovieBytitle(title, 1).subscribe(data => {
         this.movieResults = data.results.slice(0, 2)
+        // this.searchResults = this.movieResults
       })
       this.movieApiService.getActor(title, 1).subscribe(data => {
-        this.actorResults = data.results.slice(0, 2).filter((data: any) => data.popularity > 0.6)
+        this.actorResults = data.results.filter((data: any) => data.popularity > 0.6).slice(0, 2)
+        this.searchResults = this.movieResults.concat(this.actorResults)
+        console.log(this.searchResults);
+        
       })
-      this.searchResults = this.movieResults.concat(this.actorResults)
     } else if (this.searchType == 'Movie') {
       this.movieApiService.getMovieBytitle(title, 1).subscribe(data => {
         this.movieResults = data.results.slice(0, 4)
+        this.searchResults = this.movieResults
       })
-      this.searchResults = this.movieResults
+      
     } else if (this.searchType == 'Actor') {
       this.movieApiService.getActor(title, 1).subscribe(data => {
         this.actorResults = data.results.slice(0, 4).filter((data: any) => data.popularity > 0.6)
+        this.searchResults = this.actorResults
       })
-      this.searchResults = this.actorResults
+      
     }
 
-    this.movieApiService.getMovieBytitle(title, 1).pipe(map(data => data.results.slice(0, 4))).subscribe(console.log)
+
   }
 
   hideError() {
