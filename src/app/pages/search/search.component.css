@@ -93,10 +93,10 @@ h5 {
         width: 100%;
     }
     .pages a:not(:last-child){
-        margin-right: 10px;
+        margin-right: 10px!important;
     }
     .pages a {
-        font-size: 9px;
+        font-size: 9px!important;
     }
 }
 
@@ -104,6 +104,12 @@ h5 {
 @media (max-width: 992px) {
     .actors {
         margin-top: 50px;
+    }
+    .pages a:not(:last-child){
+        margin-right: 18px;
+    }
+    .pages a {
+        font-size:16px;
     }
 }
 
