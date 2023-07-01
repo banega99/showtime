@@ -1,13 +1,22 @@
 <div *ngIf="actorDetails$ | async as actorDetails" class="container">
     <div class="row details-row">
         <div class="details">
-            <img *ngIf="actorDetails.profile_path" src="https://image.tmdb.org/t/p/original{{actorDetails.profile_path}}" alt="" width="200px">
-            <img *ngIf="!actorDetails.profile_path" src="../../../assets/images/profile.jpg" alt="" width="200px">
+            <div (click)="showGallery()" class="photo justify-content-center">
+                <img *ngIf="actorDetails.profile_path"
+                    src="https://image.tmdb.org/t/p/original{{actorDetails.profile_path}}" alt="" width="200px">
+                <img *ngIf="!actorDetails.profile_path" src="../../../assets/images/profile.jpg" alt="" width="200px">
+                <div class="img-cover">
+                    SHOW {{images.length > 1? 'GALLERY' : 'PHOTO'}}
+                </div>
+            </div>
             <div class="details-more">
                 <h3><span class="white">Name: </span> <span class="red">{{actorDetails.name}}</span></h3>
-                <h3 *ngIf="actorDetails.birthday"><span class="white">Date of birth:</span> {{actorDetails.birthday | date}} <span *ngIf="!actorDetails.deathday">({{yearsOld}})</span></h3>
-                <h3 *ngIf="actorDetails.place_of_birth"><span class="white">Place of birth:</span> {{actorDetails.place_of_birth}}</h3>
-                <h3 *ngIf="actorDetails.deathday"><span class="white">Date of death:</span> {{actorDetails.deathday | date}} ({{yearsOldDead}})</h3>
+                <h3 *ngIf="actorDetails.birthday"><span class="white">Date of birth:</span> {{actorDetails.birthday |
+                    date}} <span *ngIf="!actorDetails.deathday">({{yearsOld}})</span></h3>
+                <h3 *ngIf="actorDetails.place_of_birth"><span class="white">Place of birth:</span>
+                    {{actorDetails.place_of_birth}}</h3>
+                <h3 *ngIf="actorDetails.deathday"><span class="white">Date of death:</span> {{actorDetails.deathday |
+                    date}} ({{yearsOldDead}})</h3>
                 <h3><span class="white">Popularity:</span> {{actorDetails.popularity}}</h3>
             </div>
         </div>
@@ -16,9 +25,28 @@
             <p>{{actorDetails.biography}}</p>
         </div>
         <div class="rec" *ngIf="movieCredits?.length > 0">
-            <app-movies-scroll-x-container title="Appears in Movies" [movies]="movieCredits" width="200px"></app-movies-scroll-x-container>
+            <app-movies-scroll-x-container title="Appears in Movies" [movies]="movieCredits"
+                width="200px"></app-movies-scroll-x-container>
         </div>
-        
+
 
     </div>
 </div>
+<div #gall id="carouselExampleAutoplaying" class="carousel slide gallery" data-bs-ride="carousel">
+    <div  class="carousel-inner">
+        <div *ngFor="let image of images; let i = index" class="carousel-item" [ngClass]="{active:i===0}" data-bs-interval="5000">
+            <img src="https://image.tmdb.org/t/p/original{{image.file_path}}" class="d-block w-100" alt="...">
+            <div class="carousel-caption">
+            </div>
+        </div>
+    </div>
+    <button *ngIf="images?.length > 1" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button *ngIf="images?.length > 1" class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<div #blur class="blur"></div>

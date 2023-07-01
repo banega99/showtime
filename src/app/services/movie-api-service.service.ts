@@ -140,4 +140,7 @@ export class MovieApiService{
     getMovieImages(id: string): Observable<any> {
       return this.http.get(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${this.apiKey}`)
     }
+    getActorImages(id: string): Observable<any> {
+      return this.http.get(`https://api.themoviedb.org/3/person/${id}/images?api_key=${this.apiKey}`)
+    }
 }

@@ -8,8 +8,8 @@ import { MovieApiService } from 'src/app/services/movie-api-service.service';
   styleUrls: ['./movie-videos.component.css']
 })
 export class MovieVideosComponent {
-  videos : any []= []
-  moreVideos: any [] = []
+  videos: any[] = []
+  moreVideos: any[] = []
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute) {
     activatedRoute.params.subscribe(params => {
       if (!params) return
@@ -30,10 +30,31 @@ export class MovieVideosComponent {
   }
   showVideos(section: any) {
     section.classList.toggle('videos-show')
+    document.querySelector('.blur')?.classList.toggle('blur-show')
+    document.documentElement.style.overflow = 'hidden'
+    let trailerCont = document.querySelector('.trailer-cont') as HTMLElement
+
+    trailerCont.style.visibility = 'hidden'
+    trailerCont.style.opacity = '0'
+    if (window.innerWidth < 768) {
+      console.log('')
+      let x2 = document.querySelector('.x2') as HTMLElement
+      x2.style.visibility = 'visible'
+      x2.style.opacity = '1'
+    }
+
   }
 
   hideVideos(section: any) {
     section.classList.toggle('videos-show')
+    document.querySelector('.blur')?.classList.toggle('blur-show')
+    document.documentElement.style.overflow = 'auto'
+    let trailerCont = document.querySelector('.trailer-cont') as HTMLElement
+    let x2 = document.querySelector('.x2') as HTMLElement
+    trailerCont.style.visibility = 'visible'
+    trailerCont.style.opacity = '1'
+    x2.style.visibility = 'hidden'
+    x2.style.opacity = '0'
   }
 
 }

@@ -6,13 +6,8 @@
 app-movie-videos {
     max-width: fit-content;
     margin: 0 auto!important;
+    z-index: 1000;
 }
-
-/* app-movies-scroll-x-container {
-    display: flex;
-    justify-content: start;
-    align-items: start;
-} */
 
 .rec ::ng-deep .container {
     
@@ -237,7 +232,6 @@ h5 {
     border-bottom: 3px solid #E50914;
     border-right: 3px solid #E50914;
     transform: rotate(45deg);
-    /* z-index: 8000; */
     transition: all .3s;
 }
 
@@ -284,13 +278,28 @@ h5 {
     border-radius: 5px;
 }
 
+.blur{ 
+    opacity: 0;
+    visibility: hidden; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    transition: all .3s;
+}
+
+.blur.blur-show {
+    opacity: 1;
+    visibility: visible;
+}
 
 
 @media (max-width: 767px) {
-    /* .title {
-        flex-direction: column;
-        align-items: start;
-    } */
+
     .container {
         margin-top: 50px!important;
     }
@@ -300,8 +309,6 @@ h5 {
         color: #E50914;
         display: block;
     }
-
-    
     
 }
 @media (max-width: 992px) {

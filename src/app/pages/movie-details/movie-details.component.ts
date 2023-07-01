@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
+import { MovieVideosComponent } from 'src/app/partial/movie-videos/movie-videos.component';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.service';
 
@@ -20,14 +21,15 @@ export class MovieDetailsComponent {
   reviews!: any
   totalReviews!: number
   avatarUrl!: string
-  backdrops!: any 
+  backdrops!: any
   castLength!: number
   videos: any = []
   moreVideos: any = []
+  @ViewChild('videos') videosCont!: MovieVideosComponent
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute,
     private watchlistService: WatchlistService) {
-      this.videos = []
-      this.moreVideos = []
+    this.videos = []
+    this.moreVideos = []
     activatedRoute.params.subscribe(params => {
       if (!params) return
       movieApiService.getMovieDetails(params.id).subscribe(movieDetails => {
@@ -55,12 +57,12 @@ export class MovieDetailsComponent {
         this.backdrops = images.backdrops
       })
 
-      this.movieApiService.getMovieVideo(params.id).subscribe(videos=> {
-        videos.results.slice(0, 4).forEach((element:any) => {
+      this.movieApiService.getMovieVideo(params.id).subscribe(videos => {
+        videos.results.slice(0, 4).forEach((element: any) => {
           let url = `https://www.themoviedb.org/video/play?key=${element?.key}`
           this.videos.push(url)
         });
-        videos.results.slice(0, 9).forEach((element:any) => {
+        videos.results.slice(0, 9).forEach((element: any) => {
           let url = `https://www.themoviedb.org/video/play?key=${element?.key}`
           this.moreVideos.push(url)
         });
@@ -79,20 +81,20 @@ export class MovieDetailsComponent {
     a.classList.toggle('arrow-rotate')
   }
 
-  scrollToDet(section: any){
+  scrollToDet(section: any) {
     section.scrollIntoView()
   }
-  scrollToRec(section: any){
+  scrollToRec(section: any) {
     section.scrollIntoView()
   }
-  scrollToCast(section: any){
+  scrollToCast(section: any) {
     section.scrollIntoView()
   }
-  scrollToRev(section: any){
+  scrollToRev(section: any) {
     section.scrollIntoView()
   }
-
   
+
 }
 
 

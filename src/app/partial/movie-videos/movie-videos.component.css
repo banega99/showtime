@@ -4,6 +4,7 @@
 
 .trailer-cont {
     position: relative;
+    transition: all 0.3s;
 }
 .trailer-cont:hover {
     /* opacity: 0.6; */
@@ -64,6 +65,7 @@ h5 {
     align-items: center;
     border-radius: 3px;
     border: 2px solid #E50914;
+    /* z-index: 8000; */
 }
 
 .trailer h5{
@@ -113,17 +115,19 @@ h5 {
 
 .videos.videos-show {
     visibility: visible;
-    width: 90%;
-    height: 90%;
+    width: 80%;
+    height: 80%;
     opacity: 1;
-    z-index: 10000;
+    z-index: 90000;
+    
 }
 .videos.videos-show iframe {
     visibility: visible;
     opacity: 1;
 }
 
-.x {
+
+.x, .x2 {
     background-image: url('../../../assets/images/xRed.png');
     background-size: cover;
     position: fixed;
@@ -131,10 +135,18 @@ h5 {
     right: 10px;
     width: 30px;
     height: 30px;
-    z-index: 10000;
+    z-index: 500000;
 }
 
-.x:hover {
+.x2 {
+    visibility: hidden;
+    top: 15%;
+    right: 10%;
+    transition: all .4s;
+    opacity: 0;
+}
+
+.x:hover, .x2:hover {
     cursor: pointer;
     opacity: 0.6;
 }
@@ -156,6 +168,7 @@ h5 {
 
 }
 
+
 @media (max-width: 768px) {
     .trailer {
         justify-self: center;
@@ -174,13 +187,18 @@ h5 {
 
     .videos {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
 
     .videos.videos-show {
+        padding: 10px;
         height: 70%;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
-    
+
+    .x{
+        visibility: hidden;
+    }
 }
 @media (max-width: 992px) {
     .trailer-cover {
