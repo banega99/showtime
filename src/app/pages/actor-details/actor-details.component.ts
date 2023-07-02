@@ -28,13 +28,14 @@ export class ActorDetailsComponent {
         this.yearsOldDead = parseInt(actor.deathday.split('-')[0]) - parseInt(actor.birthday.split('-')[0])
       })
       movieApiService.getActorImages(params.id).subscribe(imgs => {
-        console.log(imgs.profiles);
+        // console.log(imgs.profiles);
         this.images = imgs.profiles
       })
     })
   }
 
   showGallery() {
+    if(this.images.length == 0) return
     let gallery = document.querySelector('.carousel') as HTMLElement
     let blur = document.querySelector('.blur') as HTMLElement
     gallery.classList.toggle('carousel-show')
