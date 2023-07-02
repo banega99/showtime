@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.service';
 
@@ -19,7 +18,7 @@ export class MovieCardComponent implements OnInit {
   @Input()visible: boolean = false
   @Input()totalRes: number = 0
   checked: boolean = false
-  constructor(private toast: ToastrService , private router: Router, private watchlistService: WatchlistService){
+  constructor(private router: Router, private watchlistService: WatchlistService){
   }
   ngOnInit(): void {
   }

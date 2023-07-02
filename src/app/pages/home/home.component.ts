@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import gsap from 'gsap';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 
 @Component({

@@ -24,6 +24,7 @@ import { ToastrModule } from 'ngx-toastr'
 import { BrowserAnimationsModule,  NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MovieVideosComponent } from './partial/movie-videos/movie-videos.component';
 import { MovieListsComponent } from './pages/movie-lists/movie-lists.component';
+import { LazyLoadImageModule, IntersectionObserverHooks } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [
@@ -51,14 +52,7 @@ import { MovieListsComponent } from './pages/movie-lists/movie-lists.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    NoopAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-top-center',
-      // newestOnTop: false
-    }),
-    
+    LazyLoadImageModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},

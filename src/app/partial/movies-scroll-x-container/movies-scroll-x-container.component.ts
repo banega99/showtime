@@ -18,9 +18,10 @@ export class MoviesScrollXContainerComponent implements OnInit {
     // console.log(this.movieList)
   }
 
-  scrollX(e: any) {
+  scrollX(e: WheelEvent) {
     e.preventDefault();
-    e.target.closest('.rowposter').scrollBy({
+    let target = e.target as HTMLElement;
+    target.closest('.rowposter')?.scrollBy({
       left: e.deltaY < 0 ? -60 : 60
     })
   }

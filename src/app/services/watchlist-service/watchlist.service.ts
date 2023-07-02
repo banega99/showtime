@@ -1,6 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Toast, ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -11,7 +10,7 @@ export class WatchlistService implements OnInit {
   watchlistSubject$ = new BehaviorSubject<any[]>(this.watchlist)
   watchlistObservable$!: Observable<any[]>
 
-  constructor(private toast: ToastrService, private router: Router) { }
+  constructor(private router: Router) { }
   ngOnInit(): void {
     this.watchlistSubject$.next(this.watchlist)
     this.watchlistObservable$ = this.watchlistSubject$.asObservable()
