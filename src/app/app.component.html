@@ -2,3 +2,7 @@
 <app-navbar #navbar></app-navbar>
 <app-filter-search #filter></app-filter-search>
 <router-outlet></router-outlet>
+<div #t (click)="t.classList.remove('show-toast', 'toast-info-custom')" class="custom-toast">
+    <img class="toast-img" src="" alt="" srcset="">
+    <p class="toast-text"></p>
+</div>

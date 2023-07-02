@@ -70,7 +70,7 @@ body {
 }
 
 .toast-span {
-    color: gray
+    color: white
 }
 
 html::-webkit-scrollbar {
@@ -88,3 +88,12 @@ html::-webkit-scrollbar-thumb {
     background: #E50914;
     /* border-radius: 5px; */
 }
+
+.toast-container .ngx-toastr {
+    color: black!important;
+}
+
+#toast-container>.toast-success {
+    background-image: url('assets/images/Daco_362138.png')!important;
+    }
+

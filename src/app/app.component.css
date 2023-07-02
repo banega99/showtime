@@ -13,3 +13,47 @@ html {
     cursor: pointer;
     opacity: 0.6;
 } */
+.custom-toast {
+    z-index: 10000;
+    display: flex;
+    position: fixed;
+    background-color: #E50914;
+    top: 0;
+    left: 50%;
+    border-radius: 3px;
+    transform: translateX(-50%);
+    transition: all .3s;
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 0 8px 0.2px white;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.custom-toast:hover {
+    cursor: pointer;
+    transform: translateX(-50%) scale(1.03);
+    /* opacity: .7; */
+}
+
+.show-toast {
+    opacity: 1;
+    visibility: visible;
+}
+
+.toast-info-custom {
+    background-color: #2F96B4!important;
+}
+
+.custom-toast img {
+    width: 60px;
+}
+
+.toast-text {
+    margin-left: 20px;
+    width: 200px;
+    font-weight: bold
+}

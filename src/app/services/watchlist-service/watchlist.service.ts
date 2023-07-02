@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -23,18 +23,45 @@ export class WatchlistService implements OnInit {
       localStorage.setItem('watchlist', JSON.stringify(newWatchlist))
       this.watchlist = JSON.parse(localStorage.getItem('watchlist') || '{[]}')
       this.watchlistSubject$.next(this.watchlist)
-      this.toast.success(`Successfully removed '${movie.title}' from watchlist`)
+      let customToast = document.querySelector('.custom-toast')
+      let toastImg = document.querySelector('.toast-img')
+      let toastText = document.querySelector('.toast-text') as HTMLElement
+      customToast?.classList.add('show-toast')
+      toastText.innerHTML = `Succesfully removed <span class="toast-span"><i> ${movie.title} </i></span>  from Watchlist!`
+      toastImg?.setAttribute('src', `https://image.tmdb.org/t/p/original${movie.poster_path}`)
+      setTimeout(() => {
+        customToast?.classList.remove('show-toast')
+      }, 1800)
+
       return
     }
     localStorage.getItem('watchlist')
     if (this.watchlist.find((watch: any) => watch.id === movie.id)) {
-      this.toast.info(`'${movie.title}' already added to watchlist`)
+      let customToast = document.querySelector('.custom-toast')
+      let toastImg = document.querySelector('.toast-img')
+      let toastText = document.querySelector('.toast-text') as HTMLElement
+      customToast?.classList.add('show-toast', 'toast-info-custom')
+      toastText.innerHTML = `Already added <span class="toast-span"><i> ${movie.title} </i></span>  to Watchlist!`
+      toastImg?.setAttribute('src', `https://image.tmdb.org/t/p/original${movie.poster_path}`)
+      setTimeout(() => {
+        customToast?.classList.remove('show-toast', 'toast-info-custom')
+      }, 1800)
       return
     }
     this.watchlist.push(movie);
     this.watchlistSubject$.next(this.watchlist)
     localStorage.setItem('watchlist', JSON.stringify(this.watchlist))
-    this.toast.success(`Successfully added '${movie.title}' to watchlist`)
+    // this.toast.success(`Successfully added '${movie.title}' to watchlist`)
+    let customToast = document.querySelector('.custom-toast')
+    let toastImg = document.querySelector('.toast-img')
+    let toastText = document.querySelector('.toast-text') as HTMLElement
+    customToast?.classList.add('show-toast')
+    toastText.innerHTML = `Succesfully added <span class="toast-span"><i> ${movie.title} </i></span>  to Watchlist!`
+    toastImg?.setAttribute('src', `https://image.tmdb.org/t/p/original${movie.poster_path}`)
+    setTimeout(() => {
+      customToast?.classList.remove('show-toast')
+    }, 1800)
+
   }
 
   watchlistAsObservable(): Observable<any> {

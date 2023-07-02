@@ -12,7 +12,7 @@ a {
     background-color: black;
     outline: #E50914;
     border-bottom: 3px solid #e509149a;
-    overflow: hidden;
+    /* overflow: hidden; */
     
 }
 
@@ -104,6 +104,7 @@ a:hover {
     padding: 3px;
     transition: 0.3s ease-out;
     font-weight: 500;
+    z-index: 3000;
 }
 
 .gray{
