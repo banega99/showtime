@@ -24,10 +24,15 @@ h3{
     0% {
         transform: translate(0px);
     }
+    25% {
+        transform: translateY(-25px);
+    }
     50% {
         transform: translateY(-50px);
     }
-
+    75% {
+        transform: translateY(-25px);
+    }
     100% {
         transform: translateY(0px);
     }
