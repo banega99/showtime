@@ -32,7 +32,7 @@ export class FilterSearchComponent {
       if(e.target.classList.contains('genre-input')){
       // console.log(e.target)
       this.genreValue.push(e.target?.value)
-      console.log(this.genreValue)
+      // console.log(this.genreValue)
     } else if (e.target.classList.contains('year-input')){
       // console.log(e.target)
       this.yearValue.push(e.target?.value)

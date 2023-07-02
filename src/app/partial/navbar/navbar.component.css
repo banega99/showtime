@@ -190,7 +190,7 @@ ul.dropdown-menu.types{
 
 .line {
     position: fixed;
-    top: 80px;
+    top: 77px;
     left: 0;
     height: 3px;
     background-color: #E50914;
@@ -222,7 +222,7 @@ ul.dropdown-menu.types{
         z-index: 0!important;
     }
     .line {
-        top: 56px;
+        top: 53px;
     }
 }
 

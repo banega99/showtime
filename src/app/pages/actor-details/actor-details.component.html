@@ -5,7 +5,7 @@
                 <img *ngIf="actorDetails?.profile_path"
                     src="https://image.tmdb.org/t/p/original{{actorDetails?.profile_path}}" alt="" width="200px">
                 <img *ngIf="!actorDetails?.profile_path" src="../../../assets/images/profile.jpg" alt="" width="200px">
-                <div class="img-cover">
+                <div *ngIf="actorDetails?.profile_path" class="img-cover">
                     SHOW {{images?.length > 1? 'GALLERY' : 'PHOTO'}}
                 </div>
             </div>
@@ -35,7 +35,7 @@
 <div #gall id="carouselExampleAutoplaying" class="carousel slide gallery" data-bs-ride="carousel">
     <div  class="carousel-inner">
         <div *ngFor="let image of images; let i = index" class="carousel-item" [ngClass]="{active:i===0}" data-bs-interval="5000">
-            <img src="https://image.tmdb.org/t/p/original{{image.file_path}}" class="d-block w-100" alt="...">
+            <img src="https://image.tmdb.org/t/p/original{{image?.file_path}}" class="d-block w-100" alt="...">
             <div class="carousel-caption">
             </div>
         </div>

@@ -34,7 +34,7 @@ export class MovieDetailsComponent {
       if (!params) return
       movieApiService.getMovieDetails(params.id).subscribe(movieDetails => {
         this.movie = movieDetails
-        console.log(movieDetails)
+        // console.log(movieDetails)
         watchlistService.watchlistAsObservable().pipe(map(watchlist => {
           return watchlist.some((movie: any) => movie.id == movieDetails.id)
         })).subscribe(res => {
@@ -77,7 +77,7 @@ export class MovieDetailsComponent {
   }
 
   expandReview(p: any, rc: any, a: any) {
-    console.log(rc.classList)
+    // console.log(rc.classList)
     rc.classList.toggle('review-expand')
     a.classList.toggle('arrow-rotate')
   }

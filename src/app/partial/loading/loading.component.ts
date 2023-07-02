@@ -7,7 +7,7 @@ import { LoadingService } from 'src/app/services/loading.service';
   styleUrls: ['./loading.component.css']
 })
 export class LoadingComponent {
-  isLoading = false;
+  isLoading!: boolean;
   constructor(private loadingService: LoadingService){
     this.loadingService.isLoading.subscribe(isLoading => this.isLoading = isLoading);
   }

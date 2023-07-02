@@ -29,7 +29,7 @@ export class MovieListsComponent {
         this.movieApiService.trendingApiData(params.page)
         .subscribe(result =>{ 
           this.movies = result.results
-          console.log(result.results);
+          // console.log(result.results);
           
           this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
           this.totalResults = result.total_results
@@ -43,7 +43,7 @@ export class MovieListsComponent {
       }else {
         this.movieApiService.getMovieLists(params.list, params.page).subscribe(result =>{ 
           this.movies = result.results
-          console.log(result.results);
+          // console.log(result.results);
           
           this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
           this.totalResults = result.total_results
@@ -68,7 +68,7 @@ export class MovieListsComponent {
     let [first, second] = this.movieList.split('_')
     first = first.slice(0, 1).toUpperCase() + first.slice(1, first.length)
     second = second?.slice(0, 1).toUpperCase() + second?.slice(1, second?.length) || ''
-    console.log(first, second)
+    // console.log(first, second)
     return first + ' ' + second
   }
 

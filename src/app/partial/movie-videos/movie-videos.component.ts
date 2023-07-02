@@ -16,7 +16,7 @@ export class MovieVideosComponent {
       this.videos = []
       this.moreVideos = []
       this.movieApiService.getMovieVideo(params.id).subscribe(videos => {
-        console.log(videos)
+        // console.log(videos)
         videos.results.slice(0, 4).forEach((element: any) => {
           let url = `https://www.themoviedb.org/video/play?key=${element?.key}`
           this.videos.push(url)
@@ -33,11 +33,10 @@ export class MovieVideosComponent {
     document.querySelector('.blur')?.classList.toggle('blur-show')
     document.documentElement.style.overflow = 'hidden'
     let trailerCont = document.querySelector('.trailer-cont') as HTMLElement
-
     trailerCont.style.visibility = 'hidden'
     trailerCont.style.opacity = '0'
     if (window.innerWidth < 768) {
-      console.log('')
+      // console.log('')
       let x2 = document.querySelector('.x2') as HTMLElement
       x2.style.visibility = 'visible'
       x2.style.opacity = '1'
