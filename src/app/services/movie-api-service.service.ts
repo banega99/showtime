@@ -27,8 +27,8 @@ export class MovieApiService{
     return this.http.get(`${this.baseUrl}/trending/movie/week?api_key=${this.apiKey}`)
   }
 
-  trendingApiData(): Observable<any>{
-    return this.http.get(`${this.baseUrl}/trending/movie/day?api_key=${this.apiKey}`)
+  trendingApiData(page: string): Observable<any>{
+    return this.http.get(`${this.baseUrl}/trending/movie/day?api_key=${this.apiKey}&page=${page}`)
   }
 
   getMovieBytitle(title: string, page: any): Observable<any>{
@@ -102,14 +102,23 @@ export class MovieApiService{
     }
 
     getUpcoming(): Observable<any>{
-      return this.http.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}`)
+      return this.http.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&page=1`)
     }
     getTopRated(): Observable<any>{
-      return this.http.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}`)
+      return this.http.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&page=1`)
     }
     getNowPlaying(): Observable<any>{
-      return this.http.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}`)
+      return this.http.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&page=1`)
     }
+    getPopular(): Observable<any>{
+      return this.http.get(`https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&page=1`)
+    }
+    getMovieLists(movieList: string, page: string): Observable<any>{
+      return this.http.get(`https://api.themoviedb.org/3/movie/${movieList}?api_key=${this.apiKey}&page=${page}`)
+    }
+
+
+
     getFilter(genres: string[], years: string[], countries: string[], sort: string): Observable<any>{
       return this.http.get(`https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&sort_by=${sort}&with_genres=${genres}&primary_release_year=${years}&with_original_language=${countries}`)
     }

@@ -1,5 +1,10 @@
 <div class="container mt-4 p-3">
-    <h5 class="text-white">{{title}}</h5>
+    <h5 *ngIf="title != 'Popular Movies' && title != 'Top Rated Movies' && title != 'Upcoming Movies' && title != 'Trending Movies' && title != 'Now Playing Movies'" class="text-white">{{title}}</h5>
+    <h5 routerLink="/movie-list/{{movieList}}/1" *ngIf="title == 'Popular Movies' || title == 'Top Rated Movies' || title == 'Upcoming Movies' || title == 'Trending Movies' || title == 'Now Playing Movies'" class="text-white link">
+        {{title}}
+        <span class="little-text">Explore All</span>
+        <span class="arrow"></span>
+     </h5>
     <div class="rowposter" #rowposter (wheel)="scrollX($event)">
         <ng-container class="imgcont" *ngFor="let movie of movies">
             <img routerLink="/movie/{{movie.id}}" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="rowimg largeposter" alt="" [ngStyle]="{width: width}" [ngClass]="{'mobile' : windowWidth < 767}">

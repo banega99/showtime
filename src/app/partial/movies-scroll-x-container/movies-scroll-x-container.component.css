@@ -42,12 +42,65 @@
     border-radius: 5px;
 }
 
+.link {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    transition: all .3s;
+}
+
+.link:hover{
+    cursor: pointer;
+    color: #E50914!important;
+    
+}
+
 .mobile {
     width: 100px !important;
 }
 
+.little-text {
+    bottom: 5px;
+    right: 20px;
+    position: absolute;
+    display: inline-block;
+    font-size: 12px;
+    color: rgb(49, 58, 73);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    transform: translateX(-80px);
+}
+
+.arrow {
+    /* position: absolute; */
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
+    transform: rotate(-45deg);
+    transition: all .3s;
+}
+
+.link:hover .arrow, .arrow:hover {
+    border-bottom: 3px solid #E50914;
+    border-right: 3px solid #E50914;
+    transform: translateX(80px)
+}
+
+
+.link:hover .little-text {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(80px)
+}
+
+
+
 @media (max-width: 767px) {
     .rowimg {
-        width: 100px;
+        width: 80px;
     }
 }

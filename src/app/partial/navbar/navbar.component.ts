@@ -43,6 +43,7 @@ export class NavbarComponent implements OnInit {
 
   search(e: Event, searchTerm: string) {
     e.preventDefault()
+    document.querySelector('form')?.classList.add('form-expand')
     if (searchTerm == '') {
       document.querySelector('.error-container')?.classList.add('show-error')
       return
@@ -78,14 +79,11 @@ export class NavbarComponent implements OnInit {
       })
       
     }
-
-
   }
 
   hideError() {
     document.querySelector('.navbar-collapse')?.classList.remove('show')
   }
-
 
   changeSearchType(value: HTMLLIElement) {
     this.searchType = value.innerText

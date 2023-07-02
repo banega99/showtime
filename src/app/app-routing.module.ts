@@ -7,6 +7,7 @@ import { GenresComponent } from './pages/genres/genres.component';
 import { FilterComponent } from './pages/filter/filter.component';
 import { ActorDetailsComponent } from './pages/actor-details/actor-details.component';
 import { WatchlistComponent } from './pages/watchlist/watchlist.component';
+import { MovieListsComponent } from './pages/movie-lists/movie-lists.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'filter/:genre/:year/:country/:sort/:page', component:FilterComponent},
   {path: 'actor-details/:id', component:ActorDetailsComponent},
   {path: 'watchlist', component:WatchlistComponent},
+  {path: 'movie-list/:list/:page', component:MovieListsComponent},
 
 ];
 

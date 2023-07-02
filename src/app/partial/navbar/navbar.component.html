@@ -23,7 +23,7 @@
                 routerLink="genres/{{genre.name}}/{{genre.id}}/1">{{genre.name}}</a></li>
           </ul>
         </li>
-        <form (mouseleave)="form.classList.remove('form-expand')" #form [formGroup]="searchForm"
+        <form #form [formGroup]="searchForm"
           (submit)="search($event, s.value)" class="d-flex" role="search">
           <div class="btn type-btn" data-bs-toggle="dropdown">{{searchType}}</div>
           <ul class="dropdown-menu types w-25">
@@ -37,7 +37,7 @@
           <!-- </div> -->
           <!-- <li class="nav-item dropdown ms-lg-auto mb-1"> -->
           <button
-            (mouseover)="img.setAttribute('src', '../../../assets/images/lupaCrvena.png'); form.classList.add('form-expand')"
+            (mouseover)="img.setAttribute('src', '../../../assets/images/lupaCrvena.png');"
             (mouseleave)="img.setAttribute('src', '../../../assets/images/lupaSiva.png')"
             (click)="search($event, s.value)" class="btn">
             <img #img src="../../../assets/images/lupaSiva.png" alt="" srcset="" width="30px">

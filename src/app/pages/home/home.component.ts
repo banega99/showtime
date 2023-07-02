@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   topRatedMovies!: any
   nowPlayingMovies!: any
   upcomingMovies!: any
+  popularMovies!: any
   constructor(private movieApiService: MovieApiService){
   }
 
@@ -22,13 +23,14 @@ export class HomeComponent implements OnInit {
     this.upcomingData()
     this.topRatedData()
     this.nowPlayingData()
+    this.popularData()
   }
 
   bannerData(){
     this.movieApiService.bannerApiData().subscribe(data => this.bannerMovies = data.results);
   }
   trendingData(){
-    this.movieApiService.trendingApiData().subscribe(data => this.trendingMovies = data.results);
+    this.movieApiService.trendingApiData('1').subscribe(data => this.trendingMovies = data.results);
   }
   topRatedData(){
     this.movieApiService.getTopRated().subscribe(data => this.topRatedMovies = data.results);
@@ -38,6 +40,9 @@ export class HomeComponent implements OnInit {
   }
   nowPlayingData(){
     this.movieApiService.getNowPlaying().subscribe(data => this.nowPlayingMovies = data.results);
+  }
+  popularData(){
+    this.movieApiService.getPopular().subscribe(data => this.popularMovies = data.results);
   }
 
 }

@@ -8,13 +8,21 @@
                 <h2>SHOWTIME</h2>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{movie.title}}</h5>
+                <h5 class="card-title">{{movie.title}} <span class="year">({{movie.release_date.split('-')[0]}})</span></h5>
                 <p class="card-text">{{movie.overview}}</p>
             </div>
             
             <div class="watchlist" (click)="addToWatchlist(movie, img)" (mouseenter)="showPopover(popover)" (mouseleave)="hidePopover(popover)">
                 <img #img src="../../../assets/images/{{title == 'Watchlist' ? 'x.png':'6748737.png'}}" alt="" srcset="">
                 <div #popover class="popover">{{!onWatchlist? 'Add to Watchlist' : 'Remove from Watchlist'}}</div>
+            </div>
+            <div class="rating" [ngClass]="{'green': movie.vote_average >= 9,
+                 'lightgreen': movie.vote_average >= 7 && movie.vote_average < 9,
+                 'greenyellow': movie.vote_average >= 5 && movie.vote_average < 7,
+                 'yellow': movie.vote_average >= 3 && movie.vote_average < 5,
+                 'red': movie.vote_average < 3 && movie.vote_average > 0,
+                }">
+                <span *ngIf="movie.vote_average > 0" class="star">⭐</span><span *ngIf="movie.vote_average > 0" class="rating-no">{{movie.vote_average | number:'1.0-1'}}</span> <span *ngIf="movie.vote_average === 0" class="rating-no"> NR</span>
             </div>
         </a>
     </div>

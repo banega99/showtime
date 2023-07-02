@@ -12,6 +12,8 @@ a {
     background-color: black;
     outline: #E50914;
     border-bottom: 3px solid #e509149a;
+    overflow: hidden;
+    
 }
 
 h5 {
@@ -23,20 +25,14 @@ a p {
     color: gray;
 }
 
-a p{
-    height: 28px;
-    width: 200px;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    margin: 0 5px 0 5px;
-    /* text-align: center; */
-    text-decoration: none;
+.card-body {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden!important;
     text-overflow:ellipsis;
-    white-space: nowrap;
-    color: gray;
-  }
+    height: 120px;
+}
 
 a:hover {
     transform: scale(1.02);
@@ -116,6 +112,52 @@ a:hover {
 
 .show-popover {
     visibility: visible;
+}
+
+.year {
+    color: rgb(49, 58, 73);
+    /* color: white; */
+    font-size: 18px;
+}
+
+.rating {
+    position: absolute;
+    top: 1px;
+    right: 12px;
+    font-size: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.534);
+    color: white;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    padding: 3px;
+}
+
+.rating .star {
+    font-size: 8px;
+}
+
+.rating-no
+
+.green {
+    border: 3px solid rgb(1, 88, 1);
+}
+.lightgreen {
+    border: 3px solid rgb(44, 185, 39);
+}
+.greenyellow {
+    border: 3px solid rgb(161, 184, 27);
+}
+.yellow {
+    border: 3px solid rgb(247, 222, 0);
+}
+.red {
+    border: 3px solid red;
 }
 
 @media (max-width: 768px) {

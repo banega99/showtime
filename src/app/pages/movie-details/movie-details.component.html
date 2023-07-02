@@ -42,12 +42,14 @@
                 </div>
             </h4>
             <div  class="little-details">
-                <h5>⭐Rating: </h5>
-                <span class="gray">{{movie.vote_average | number: '1.0-1'}}
-                    <span class="votes">
+                <h5 *ngIf="movie.vote_average > 0">⭐Rating: </h5>
+                <span *ngIf="movie.vote_average > 0" class="gray">{{movie.vote_average | number: '1.0-1'}}
+                    <span *ngIf="movie.vote_average > 0" class="votes">
                         ({{movie.vote_count / 1000| number : '1.0-1'}}k🗣️)
                     </span>
                 </span>
+                <h5 *ngIf="movie.vote_average == 0">⭐Rating: </h5>
+                <span *ngIf="movie.vote_average == 0" class="gray">NR</span>
             </div>
             <div class="little-details">
                 <h5>Genres: </h5>

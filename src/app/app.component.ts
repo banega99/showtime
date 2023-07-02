@@ -60,6 +60,10 @@ export class AppComponent implements OnChanges {
       document.documentElement.style.overflow = 'auto'
     }
 
+    if(document.querySelector('form')?.classList.contains('form-expand') && !target.closest('form')){
+      document.querySelector('form')?.classList.remove('form-expand')
+    }
+
 
   }
 

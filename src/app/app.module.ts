@@ -23,6 +23,7 @@ import { ToastrModule } from 'ngx-toastr'
 // import NoopAnimationsModule from ''
 import { BrowserAnimationsModule,  NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MovieVideosComponent } from './partial/movie-videos/movie-videos.component';
+import { MovieListsComponent } from './pages/movie-lists/movie-lists.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MovieVideosComponent } from './partial/movie-videos/movie-videos.compon
     MoviesScrollXContainerComponent,
     FilterSearchComponent,
     WatchlistComponent,
-    MovieVideosComponent
+    MovieVideosComponent,
+    MovieListsComponent
   ],
   imports: [
     BrowserModule,
