@@ -2,7 +2,7 @@
     <div class="div">
         <h3>Genres:
             <span routerLink="/genres/{{genre?.name}}/{{genre?.id}}/1" *ngFor="let genre of genresNames" class="gray"
-                [ngClass]="{red: genre?.name}">{{genre?.name? genre.name : ' / '}}</span>
+                [ngClass]="{red: genre?.name}">{{genre?.name? genre.name : ' / '}} </span>
             <span class="gray" *ngIf="genresNames?.length == 0">/</span>
         </h3>
     </div>

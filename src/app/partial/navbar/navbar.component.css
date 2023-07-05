@@ -106,6 +106,8 @@ ul.dropdown-menu.types{
     height: fit-content;
     background-color: #000000;
     transition: all .3s;
+    padding: 10px;
+    padding-bottom: 0;
 }
 
 .search-show {
@@ -174,7 +176,7 @@ ul.dropdown-menu.types{
     color: gray
 }
 
-.show-card:not(:last-child) {
+.show-card {
     border-bottom: 1px solid #E50914
 }
 
@@ -215,6 +217,11 @@ ul.dropdown-menu.types{
         transform: translateY(180px);
     }
 
+    .search-card img, .img-cover {
+        width: 60px;
+        height: 90px;
+    }
+    
     .dropdown-menu.show{
         transform: translate(0);
     }

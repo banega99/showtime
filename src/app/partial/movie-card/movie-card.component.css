@@ -143,10 +143,8 @@ a:hover {
     font-size: 8px;
 }
 
-.rating-no
-
 .green {
-    border: 3px solid rgb(1, 88, 1)!important;
+    border: 3px solid rgb(17, 77, 17);
 }
 .lightgreen {
     border: 3px solid rgb(44, 185, 39);
