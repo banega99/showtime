@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
@@ -8,7 +8,7 @@ import { MovieApiService } from 'src/app/services/movie-api-service.service';
   templateUrl: './actor-details.component.html',
   styleUrls: ['./actor-details.component.css']
 })
-export class ActorDetailsComponent {
+export class ActorDetailsComponent implements OnDestroy {
   actorDetails$!: Observable<any>
   movieCredits!: any
   yearsOld!: any
@@ -32,6 +32,13 @@ export class ActorDetailsComponent {
         this.images = imgs.profiles
       })
     })
+  }
+
+  ngOnDestroy(): void {
+    // this.activatedRoute.params
+    // this.movieApiService.getActorDetails().uns
+    // this.movieApiService.getActorImages
+    // this.movieApiService.getMovieCredits
   }
 
   showGallery() {
