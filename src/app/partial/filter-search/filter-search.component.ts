@@ -28,9 +28,7 @@ export class FilterSearchComponent {
     movieApiService.getAllLanguages().subscribe(data => {
       this.languages = data.slice(1, data.length - 1)
     })
-    for (let i = 1900; i < new Date().getFullYear() + 1; i++) {
-      this.years.push(i)
-    }
+    this.fillYears()
   }
   checkboxValue(e: any){
     if(e.target?.checked){
@@ -121,4 +119,10 @@ export class FilterSearchComponent {
       else if(attributeSrc == '../../../assets/images/guideWhite_right.png')a.setAttribute('src', '../../../assets/images/guideWhite_left.png')
     }
     
+    fillYears(){
+      console.log(new Date().getFullYear());
+      for (let i = new Date().getFullYear(); i >= 1900; i--) {
+        this.years.push(i)
+      }
+    }
 }
