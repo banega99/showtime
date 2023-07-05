@@ -146,7 +146,7 @@ a:hover {
 .rating-no
 
 .green {
-    border: 3px solid rgb(1, 88, 1);
+    border: 3px solid rgb(1, 88, 1)!important;
 }
 .lightgreen {
     border: 3px solid rgb(44, 185, 39);

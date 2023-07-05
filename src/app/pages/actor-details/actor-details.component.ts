@@ -8,7 +8,7 @@ import { MovieApiService } from 'src/app/services/movie-api-service.service';
   templateUrl: './actor-details.component.html',
   styleUrls: ['./actor-details.component.css']
 })
-export class ActorDetailsComponent implements OnDestroy {
+export class ActorDetailsComponent {
   actorDetails$!: Observable<any>
   movieCredits!: any
   yearsOld!: any
@@ -32,13 +32,6 @@ export class ActorDetailsComponent implements OnDestroy {
         this.images = imgs.profiles
       })
     })
-  }
-
-  ngOnDestroy(): void {
-    // this.activatedRoute.params
-    // this.movieApiService.getActorDetails().uns
-    // this.movieApiService.getActorImages
-    // this.movieApiService.getMovieCredits
   }
 
   showGallery() {

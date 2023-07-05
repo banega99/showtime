@@ -45,11 +45,24 @@
     <ul class="navbar-nav">
       <li class="nav-item dropdown ms-lg-auto mb-1">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Language
+        </a>
+        <ul class="dropdown-menu ">
+          <li class="dropdown-item genre-checkbox" *ngFor="let language of languages; let i = index">
+            <input #inputCheckbox class="languages-input checkbox-input" (change)="checkboxValue($event)" type="checkbox" name="checkbox" id="{{language.english_name}}" [value]="language.iso_639_1">
+            <label for="#{{language.english_name}}">{{language.english_name}}</label>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown ms-lg-auto mb-1">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Country
         </a>
         <ul class="dropdown-menu ">
           <li class="dropdown-item genre-checkbox" *ngFor="let country of countries; let i = index">
-            <input #inputCheckbox class="countries-input checkbox-input" (change)="checkboxValue($event)" type="checkbox" name="checkbox" id="{{country.english_name}}" [value]="country.iso_639_1">
+            <input #inputCheckbox class="countries-input checkbox-input" (change)="checkboxValue($event)" type="checkbox" name="checkbox" id="{{country.english_name}}" [value]="country.iso_3166_1">
             <label for="#{{country.english_name}}">{{country.english_name}}</label>
           </li>
         </ul>

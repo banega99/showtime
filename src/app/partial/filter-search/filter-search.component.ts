@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
@@ -11,16 +12,21 @@ export class FilterSearchComponent {
   genres!: any[]
   countries!: any[]
   years: number[] = []
+  languages!: any[]
   genreValue: number[] = []
   yearValue: number[] = []
   statusValue = []
   countriesValue: string[] = []
+  languagesValue: string[] = []
   sortValue!: any
   @ViewChild('a')img!: ElementRef<any>
   constructor(private router: Router, private movieApiService: MovieApiService){
     this.movieApiService.getGenres().subscribe(genres => this.genres = genres.genres)
     movieApiService.getAllCountries().subscribe(data => {
-      this.countries = data.slice(1, data.length - 1)
+      this.countries = data
+    })
+    movieApiService.getAllLanguages().subscribe(data => {
+      this.languages = data.slice(1, data.length - 1)
     })
     for (let i = 1900; i < new Date().getFullYear() + 1; i++) {
       this.years.push(i)
@@ -42,6 +48,10 @@ export class FilterSearchComponent {
       // console.log(e.target)
       this.countriesValue.push(e.target?.value)
       // console.log(this.countriesValue)
+    }else if (e.target.classList.contains('languages-input')){
+      // console.log(e.target)
+      this.languagesValue.push(e.target?.value)
+      // console.log(this.countriesValue)
     } else if(e.target.classList.contains('radio-input')){
       // console.log(e.target)
       this.sortValue = e.target?.value
@@ -58,9 +68,13 @@ export class FilterSearchComponent {
       this.yearValue.splice(index, 1)
       // console.log(this.yearValue)
       }
-      if(e.target.classList.contains('countries-input')){
+     else if(e.target.classList.contains('countries-input')){
         let index = this.countriesValue.indexOf(e.target?.value)
       this.countriesValue.splice(index, 1)
+      // console.log(this.countriesValue)
+     }else if(e.target.classList.contains('languages-input')){
+        let index = this.languagesValue.indexOf(e.target?.value)
+      this.languagesValue.splice(index, 1)
       // console.log(this.countriesValue)
       }else if(e.target.classList.contains('radio-input')){
         // console.log(e.target)
@@ -72,15 +86,18 @@ export class FilterSearchComponent {
     }    
 
     filter(){
-      if(this.genreValue.length == 0 && this.yearValue.length == 0 && this.countriesValue.length == 0 && !this.sortValue) {
+      if(this.genreValue.length == 0 && this.yearValue.length == 0 && this.countriesValue.length == 0 && this.languagesValue.length == 0 && !this.sortValue) {
         this.sortValue = undefined
         return 
       }
-      let genres = this.genreValue.length > 0 ? this.genreValue : ' '
-      let years = this.yearValue.length > 0 ? this.yearValue : ' '
-      let countries = this.countriesValue.length > 0 ? this.countriesValue : ' '
-      let sort = this.sortValue != '' ? this.sortValue : ' '
-      this.router.navigateByUrl(`/filter/${genres}/${years}/${countries}/${sort}/1`)
+      this.router.navigate(['/filter'], {queryParams:{
+        genre: this.genreValue,
+        sort: this.sortValue, 
+        year: this.yearValue, 
+        language: this.languagesValue, 
+        country: this.countriesValue,
+        page: 1
+      }})
     }
 
     resetFilter(){
@@ -93,6 +110,7 @@ export class FilterSearchComponent {
       this.genreValue = []
       this.yearValue = []
       this.countriesValue = []
+      this.languagesValue = []
     }
 
     showFilter(f: any, fb: any, a: any) {

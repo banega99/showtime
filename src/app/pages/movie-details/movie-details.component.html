@@ -62,7 +62,15 @@
             </div>
             <div class="little-details">
                 <h5>Release date: </h5>
-                <span class="gray">{{movie.release_date | date}}</span>
+                <span class="gray">{{(movie.release_date | date)?.slice(movie.release_date, -6)}}</span>
+                <a [routerLink]="['/filter']" [queryParams]="{
+                    year: year,
+                    page: 1,
+                    sort: 'popularity.desc',
+                    genre: null,
+                    language: null,
+                    country: null,
+                }">{{year}}</a>
             </div>
             <div class="little-details">
                 <h5>Status: </h5>
@@ -70,12 +78,19 @@
             </div>
             <div class="little-details">
                 <h5>Production counrties: </h5>
-                <span class="gray" *ngFor="let country of movie.production_countries">{{country.name}}</span>
+                <a [routerLink]="['/filter']" [queryParams]="{
+                    country: country.iso_3166_1,
+                    page: 1,
+                    sort: 'popularity.desc',
+                    genre: null,
+                    language: null,
+                    year: null,
+                }" *ngFor="let country of countries">{{country.english_name}}</a>
             </div>
             <div class="little-details">
                 <h5>Production companies:
                 </h5>
-                <span class="gray" *ngFor="let company of movie.production_companies">{{company.name}}</span>
+                <span  class="gray" *ngFor="let company of movie.production_companies">{{company.name}}</span>
             </div>
             
             

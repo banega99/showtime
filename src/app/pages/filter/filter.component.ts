@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
@@ -8,41 +8,96 @@ import { MovieApiService } from 'src/app/services/movie-api-service.service';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
-export class FilterComponent {
+export class FilterComponent implements OnInit {
   searchRes$!: any[]
   resLength!: number
-  genres: any[] = []
-  years!: string[]
-  countries!: any[]
+  genres: any
+  years: any
+  countries: any
+  languages: any
+  sort!: string
   sortedBy!: string
-  constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute) {
-    activatedRoute.params.subscribe(params => {
+  genresNames: any = []
+  countriesNames: any = []
+  languagesNames: any = []
+  totalPages!: number
+  totalResults!: number
+  pages!: any
+  currentPage!: any
+  countriesIso!: any
+    constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute) {
+   
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
       if (!params) return;
+      this.currentPage = params.page
+      this.pages = []
+      this.countriesNames = []
+      this.languagesNames = []
+      this.genresNames = []
+      this.years = []
       this.genres = []
       this.countries = []
-      this.years = params.year == ' ' ? ['/'] : params.year.split(',')
+      this.languages = []
+      this.countriesIso = []
+      console.log(params)
+      // // console.log(this.genres, this.countries, this.years, this.sortedBy);
+      this.sort = params.sort
+      this.genres = params.genre? [params.genre] : []
+      this.countries = params.coutry? [params.country] : []
+      this.years = !params.year || params.year.length == 0? ['/'] : [params.year] 
+      this.languages = params.language? [params.language] : []
+      console.log(this.years)
       this.sortedBy = params.sortedBy == ' ' ? '/' : this.sorted(params.sort.split('.')[0], params.sort.split('.')[1])
-      movieApiService.getFilter(params.genre, params.year, params.country, params.sort).pipe(map(data => data.results))
-        .subscribe(results => {
-          this.searchRes$ = results
-        })
-      params.genre.split(',').forEach((genre: any) => {
-        movieApiService.getGenres().pipe(map(res => res.genres.filter((res: any) => res.id == genre)))
+      
+      this.movieApiService.getFilter(params.genre, params.year, params.country, params.sort, params.language, params.page)
+        .subscribe(result => {
+          this.searchRes$ = result.results
+          // console.log(result)
+          this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
+          this.totalResults = result.total_results
+          for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {  
+            if(i > 0 && i < this.totalPages){
+              this.pages.push(i)
+            }
+            
+          }
+        });
+      [params.genre].forEach((genre: any) => {
+        this.movieApiService.getGenres().pipe(map(res => res.genres.filter((res: any) => res.id == genre)))
           .subscribe(res => {
+            // console.log(res)
             if(!res[0])return
-            this.genres.push(res[0])
+            this.genresNames.push(res[0])
           })
       });
-      params.country.split(',').forEach((country: any) => {
-        movieApiService.getAllCountries()
-        .pipe(map(res => res.filter((res: any) => res.iso_639_1 == country)))
+      [params.country].forEach((country: any) => {
+        console.log(country)
+        this.movieApiService.getAllCountries()
+        .pipe(map(res => res.filter((res: any) => res.iso_3166_1 == country)))
           .subscribe(res => {
+            // console.log(res)
             if(!res[0])return
-            this.countries.push(res[0])
+            this.countriesNames.push(res[0])
+            res.forEach((country: any) => this.countriesIso.push(country.iso_3166_1))
+          })
+      });
+      [params.language].forEach((language: any) => {
+        console.log(language)
+        this.movieApiService.getAllLanguages()
+        .pipe(map(res => res.filter((res: any) => res.iso_639_1 == language)))
+          .subscribe(res => {
+            // console.log(res)
+            if(!res[0])return
+            this.languagesNames.push(res[0])
           })
       });
     })
   }
+
+  
 
   sorted(first: string, second: string){
       let firstToUpper = first == 'vote_average'? 'Rating': first.slice(0, 1).toUpperCase() + first.slice(1, first.length)

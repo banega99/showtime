@@ -25,15 +25,32 @@ export class MovieDetailsComponent {
   castLength!: number
   videos: any = []
   moreVideos: any = []
+  year!: string
+  countries!: any
   @ViewChild('videos') videosCont!: MovieVideosComponent
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute,
     private watchlistService: WatchlistService) {
+    this.countries = []
     this.videos = []
     this.moreVideos = []
     activatedRoute.params.subscribe(params => {
       if (!params) return
+      // movieApiService.getAllCountries().subscribe(countries => {
+      //   this.countries = countries.filter(country => country
+      //   console.log(countries);
+
+      // })
       movieApiService.getMovieDetails(params.id).subscribe(movieDetails => {
+        movieDetails.production_countries.forEach((country: any) => {
+          console.log(country);
+          movieApiService.getAllCountries().subscribe(countries => {
+            this.countries.push(countries.filter((country2: any) => country2.english_name === country.name)[0])
+            console.log(this.countries)
+          })
+            
+        })
         this.movie = movieDetails
+        this.year = movieDetails.release_date.slice(0, 4)
         // console.log(movieDetails)
         watchlistService.watchlistAsObservable().pipe(map(watchlist => {
           return watchlist.some((movie: any) => movie.id == movieDetails.id)
@@ -94,7 +111,7 @@ export class MovieDetailsComponent {
   scrollToRev(section: any) {
     section.scrollIntoView()
   }
-  
+
 
 }
 

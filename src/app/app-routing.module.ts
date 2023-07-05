@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'search/:type/:title/:page', component:SearchComponent},
   {path: 'movie/:id', component:MovieDetailsComponent},
   {path: 'genres/:genre/:id/:page', component:GenresComponent},
-  {path: 'filter/:genre/:year/:country/:sort/:page', component:FilterComponent},
+  {path: 'filter', component:FilterComponent},
   {path: 'actor-details/:id', component:ActorDetailsComponent},
   {path: 'watchlist', component:WatchlistComponent},
   {path: 'movie-list/:list/:page', component:MovieListsComponent},
