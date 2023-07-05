@@ -120,7 +120,6 @@ export class FilterSearchComponent {
     }
     
     fillYears(){
-      console.log(new Date().getFullYear());
       for (let i = new Date().getFullYear(); i >= 1900; i--) {
         this.years.push(i)
       }

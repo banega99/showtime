@@ -42,10 +42,8 @@ export class MovieDetailsComponent {
       // })
       movieApiService.getMovieDetails(params.id).subscribe(movieDetails => {
         movieDetails.production_countries.forEach((country: any) => {
-          console.log(country);
           movieApiService.getAllCountries().subscribe(countries => {
             this.countries.push(countries.filter((country2: any) => country2.english_name === country.name)[0])
-            console.log(this.countries)
           })
             
         })

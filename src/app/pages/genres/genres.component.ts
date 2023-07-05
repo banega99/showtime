@@ -30,8 +30,6 @@ export class GenresComponent implements OnInit {
       if(!params) return
       this.movieApiService.fetchGenre(params.id, params.page).subscribe(result =>{ 
         this.movies = result.results
-        // console.log(result.results);
-        
         this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
         this.totalResults = result.total_results
         for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {  
