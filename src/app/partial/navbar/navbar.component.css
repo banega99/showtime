@@ -141,7 +141,7 @@ ul.dropdown-menu.types{
     text-align: center;
     text-justify: center;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 10px;
 }
 
 
@@ -221,7 +221,7 @@ ul.dropdown-menu.types{
         width: 60px;
         height: 90px;
     }
-    
+
     .dropdown-menu.show{
         transform: translate(0);
     }
