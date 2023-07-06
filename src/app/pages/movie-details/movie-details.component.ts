@@ -35,15 +35,11 @@ export class MovieDetailsComponent {
     this.moreVideos = []
     activatedRoute.params.subscribe(params => {
       if (!params) return
-      // movieApiService.getAllCountries().subscribe(countries => {
-      //   this.countries = countries.filter(country => country
-      //   console.log(countries);
-
-      // })
       movieApiService.getMovieDetails(params.id).subscribe(movieDetails => {
         movieDetails.production_countries.forEach((country: any) => {
           movieApiService.getAllCountries().subscribe(countries => {
             this.countries.push(countries.filter((country2: any) => country2.english_name === country.name)[0])
+            console.log(this.countries)
           })
             
         })

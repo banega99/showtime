@@ -79,7 +79,7 @@
             <div class="little-details">
                 <h5>Production counrties: </h5>
                 <a [routerLink]="['/filter']" [queryParams]="{
-                    country: country.iso_3166_1,
+                    country: [country.iso_3166_1],
                     page: 1,
                     sort: 'popularity.desc',
                     genre: null,

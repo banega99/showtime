@@ -26,8 +26,8 @@ export class FilterComponent implements OnInit, OnDestroy {
   currentPage!: any
   countriesIso!: any
   subscription!: Subscription
-    constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute) {
-   
+  constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {
@@ -46,7 +46,7 @@ export class FilterComponent implements OnInit, OnDestroy {
       this.sort = params.sort
       this.genres = params.genre
       this.countries = params.coutry
-      this.years = !params.year || params.year.length == 0? ['/'] : [params.year] 
+      this.years = !params.year || params.year.length == 0 ? ['/'] : [params.year]
       this.languages = params.language
       this.sortedBy = params.sortedBy == ' ' ? '/' : this.sorted(params.sort.split('.')[0], params.sort.split('.')[1])
       this.movieApiService.getFilter(params.genre, params.year, params.country, params.sort, params.language, params.page)
@@ -55,49 +55,77 @@ export class FilterComponent implements OnInit, OnDestroy {
           // console.log(result)
           this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
           this.totalResults = result.total_results
-          for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {  
-            if(i > 0 && i < this.totalPages){
+          for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {
+            if (i > 0 && i < this.totalPages) {
               this.pages.push(i)
             }
-            
+
           }
         });
-      params.genre?.forEach((genre: any) => {
-        this.movieApiService.getGenres().pipe(map(res => res.genres.filter((res: any) => res.id == genre)))
+      if (typeof (params.genre) === 'object') {
+        params.genre?.forEach((genre: any) => {
+          this.movieApiService.getGenres().pipe(map(res => res.genres.filter((res: any) => res.id == genre)))
+            .subscribe(res => {
+              if (!res[0]) return
+              this.genresNames.push(res[0])
+            })
+        });
+      } else {
+        this.movieApiService.getGenres().pipe(map(res => res.genres.filter((res: any) => res.id == params.genre)))
           .subscribe(res => {
-            if(!res[0])return
+            if (!res[0]) return
             this.genresNames.push(res[0])
           })
-      });
-      params.country?.forEach((country: any) => {
-        console.log(country)
+      }
+      if(typeof(params.country) === 'object'){
+        params.country?.forEach((country: any) => {
+          console.log(country)
+          this.movieApiService.getAllCountries()
+            .pipe(map(res => res.filter((res: any) => res.iso_3166_1 == country)))
+            .subscribe(res => {
+              if (!res[0]) return
+              this.countriesNames.push(res[0])
+              res.forEach((country: any) => this.countriesIso.push(country.iso_3166_1))
+            })
+        });
+      } else {
         this.movieApiService.getAllCountries()
-        .pipe(map(res => res.filter((res: any) => res.iso_3166_1 == country)))
-          .subscribe(res => {
-            if(!res[0])return
-            this.countriesNames.push(res[0])
-            res.forEach((country: any) => this.countriesIso.push(country.iso_3166_1))
-          })
-      });
-      params.language?.forEach((language: any) => {
-        console.log(language)
+            .pipe(map(res => res.filter((res: any) => res.iso_3166_1 == params.country)))
+            .subscribe(res => {
+              if (!res[0]) return
+              this.countriesNames.push(res[0])
+              res.forEach((country: any) => this.countriesIso.push(country.iso_3166_1))
+            })
+      }
+      if(typeof(params.language) === 'object'){
+        params.language?.forEach((language: any) => {
+          console.log(language)
+          this.movieApiService.getAllLanguages()
+            .pipe(map(res => res.filter((res: any) => res.iso_639_1 == language)))
+            .subscribe(res => {
+              if (!res[0]) return
+              this.languagesNames.push(res[0])
+            })
+        });
+      } else {
         this.movieApiService.getAllLanguages()
-        .pipe(map(res => res.filter((res: any) => res.iso_639_1 == language)))
-          .subscribe(res => {
-            if(!res[0])return
-            this.languagesNames.push(res[0])
-          })
-      });
+            .pipe(map(res => res.filter((res: any) => res.iso_639_1 == params.language)))
+            .subscribe(res => {
+              if (!res[0]) return
+              this.languagesNames.push(res[0])
+            })
+      }
+      
     })
   }
 
-  
 
-  sorted(first: string, second: string){
-      let firstToUpper = first == 'vote_average'? 'Rating': first.slice(0, 1).toUpperCase() + first.slice(1, first.length)
-      let secondEnding = second + 'ending'
-      let joined = firstToUpper + " " + secondEnding
-      return joined
+
+  sorted(first: string, second: string) {
+    let firstToUpper = first == 'vote_average' ? 'Rating' : first.slice(0, 1).toUpperCase() + first.slice(1, first.length)
+    let secondEnding = second + 'ending'
+    let joined = firstToUpper + " " + secondEnding
+    return joined
   }
 
   ngOnDestroy(): void {
