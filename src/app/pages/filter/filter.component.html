@@ -32,7 +32,7 @@
     [totalRes]="searchRes$.length"></app-movie-card>
 <div *ngIf="totalPages > 0" class="container">
     <div class="pages">
-        <a *ngIf="currentPage > 1 " [routerLink]="['/filter']" [queryParams]="{
+        <a class="prevNext" *ngIf="currentPage > 1 " [routerLink]="['/filter']" [queryParams]="{
             genre: genres,
             sort: sort, 
             year: years, 
@@ -68,7 +68,7 @@
             page: totalPages
         }" 
             [ngClass]="{'active':totalPages == currentPage}">{{totalPages}}</a>
-        <a *ngIf="currentPage < totalPages " [routerLink]="['/filter']" [queryParams]="{
+        <a class="prevNext" *ngIf="currentPage < totalPages " [routerLink]="['/filter']" [queryParams]="{
             genre: genres,
             sort: sort, 
             year: years, 

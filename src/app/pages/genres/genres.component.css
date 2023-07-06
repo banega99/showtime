@@ -38,9 +38,13 @@
     .pages a:not(:last-child){
         margin-right: 10px!important;
     }
-    .pages a {
-        font-size: 9px!important;
+    .prevNext {
+        font-size: 7px!important;
     }
+    .pages a {
+        font-size: 8px!important;
+    }
+    
 }
 
 @media (max-width:992px) {

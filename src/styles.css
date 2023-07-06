@@ -97,3 +97,8 @@ html::-webkit-scrollbar-thumb {
     background-image: url('assets/images/Daco_362138.png')!important;
     }
 
+@media (max-width: 768px) {
+    .prevNext {
+        font-size: 7px!important;
+    }
+}

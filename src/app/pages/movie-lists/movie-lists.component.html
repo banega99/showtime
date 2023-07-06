@@ -1,13 +1,13 @@
 <app-movie-card [searchRes$]="movies" type="Movie" [title]="title" [visible]="true" [totalRes]="totalResults"></app-movie-card>
 <div class="container">
     <div class="pages">
-        <a *ngIf="currentPage > 1 " routerLink="/movie-list/{{movieList}}/{{currentPage - 1}}">&larr; Prev Page</a>
+        <a class="prevNext" *ngIf="currentPage > 1 " routerLink="/movie-list/{{movieList}}/{{currentPage - 1}}">&larr; Prev Page</a>
         <a *ngIf="currentPage > 1 + 3" #fp  routerLink="/movie-list/{{movieList}}/1" [ngClass]="{'active':1 == currentPage}">1</a>
         <a *ngIf="currentPage > 1 + 4">...</a>
         <a #cp *ngFor="let page of pages" routerLink="/movie-list/{{movieList}}/{{page}}" [ngClass]="{'active':page == currentPage}">{{page}}</a>
         <a *ngIf="currentPage < totalPages - 4">...</a>
         <a #lp routerLink="/movie-list/{{movieList}}/{{totalPages}}" [ngClass]="{'active':totalPages == currentPage}">{{totalPages}}</a>
-        <a *ngIf="currentPage < totalPages " routerLink="/movie-list/{{movieList}}/{{currentPage + 1}}">Next Page &rarr;</a>
+        <a class="prevNext" *ngIf="currentPage < totalPages " routerLink="/movie-list/{{movieList}}/{{currentPage + 1}}">Next Page &rarr;</a>
 
     </div>
 </div>
