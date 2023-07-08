@@ -20,6 +20,7 @@ export class GenresComponent implements OnInit {
   totalPages!: number
   totalResults!: number
   // currentPage!: number
+  
   constructor(private activatedRoute: ActivatedRoute, 
     private movieApiService: MovieApiService, 
     private http: HttpClient,
@@ -29,7 +30,10 @@ export class GenresComponent implements OnInit {
       this.currentPage = parseInt(params.page)
       if(!params) return
       this.movieApiService.fetchGenre(params.id, params.page).subscribe(result =>{ 
-        this.movies = result.results
+        this.watchlistService.watchlistAsObservable().subscribe(watchlist =>{
+          this.movies = this.watchlistService.filterWatchlist(watchlist, result.results);
+        })
+        
         this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
         this.totalResults = result.total_results
         for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {  
