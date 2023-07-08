@@ -36,18 +36,6 @@ export class WatchlistService implements OnInit {
       return
     }
     localStorage.getItem('watchlist')
-    // if (this.watchlist.find((watch: any) => watch.id === movie.id)) {
-    //   let customToast = document.querySelector('.custom-toast')
-    //   let toastImg = document.querySelector('.toast-img')
-    //   let toastText = document.querySelector('.toast-text') as HTMLElement
-    //   customToast?.classList.add('show-toast', 'toast-info-custom')
-    //   toastText.innerHTML = `Already added <span class="toast-span"><i> ${movie.title} </i></span>  to Watchlist!`
-    //   toastImg?.setAttribute('src', `https://image.tmdb.org/t/p/original${movie.poster_path}`)
-    //   setTimeout(() => {
-    //     customToast?.classList.remove('show-toast', 'toast-info-custom')
-    //   }, 1800)
-    //   return
-    // }
     movie.watchlist = true
     this.watchlist.push(movie);
     this.watchlistSubject$.next(this.watchlist)
@@ -69,27 +57,23 @@ export class WatchlistService implements OnInit {
     return this.watchlistSubject$.asObservable();
   }
 
-  filterWatchlist(watchlist: any, results: any){
-    console.log(watchlist)
-          console.log(results)
-          let watchlistRes = results.filter(({id : id1}: any) => {
-            return watchlist.some(({id : id2} :any) => id1 === id2) 
-          })
-          let filteredRes = results.filter(({id : id1}: any) => {
-            return !watchlist.some(({id : id2} :any) => id1 === id2) 
-          })
-          
-          watchlistRes.forEach((filter: any) => filter.watchlist = true)
-          filteredRes.forEach((filter: any) => filter.watchlist = false)
-          console.log(watchlistRes);
-          console.log(filteredRes);
-          return watchlistRes.concat(filteredRes).sort((a: any, b: any) => {
-            if(a.popularity < b.popularity){
-              return 1
-            } else if(a.popularity > b.popularity) {
-              return -1
-            } else return 0
-          });
+  filterWatchlist(watchlist: any, results: any) {
+    let watchlistRes = results.filter(({ id: id1 }: any) => {
+      return watchlist.some(({ id: id2 }: any) => id1 === id2)
+    })
+    let filteredRes = results.filter(({ id: id1 }: any) => {
+      return !watchlist.some(({ id: id2 }: any) => id1 === id2)
+    })
+
+    watchlistRes.forEach((filter: any) => filter.watchlist = true)
+    filteredRes.forEach((filter: any) => filter.watchlist = false)
+    return watchlistRes.concat(filteredRes).sort((a: any, b: any) => {
+      if (a.popularity < b.popularity) {
+        return 1
+      } else if (a.popularity > b.popularity) {
+        return -1
+      } else return 0
+    });
   }
 
 }
