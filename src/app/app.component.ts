@@ -67,4 +67,10 @@ export class AppComponent implements OnChanges {
 
   }
 
+  @HostListener('window:popstate' ,['$event'])
+  onPop(e: any) {
+    if(document.documentElement.style.overflow == 'hidden')
+    document.documentElement.style.overflow = 'auto'
+  }
+
 }
