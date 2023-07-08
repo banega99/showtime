@@ -119,18 +119,22 @@ export class MovieApiService{
 
 
 
-    getFilter(genres: any, years: any, countries: any, sort: string, languages: any, page: any): Observable<any>{
+    getFilter(genres: any, years: any, countries: any,companies: any, sort: string, languages: any, page: any): Observable<any>{
       genres = genres? genres : ''
       years = years? years : ''
       countries = countries? countries : ''
       languages = languages? languages : ''
-      return this.http.get(`https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&sort_by=${sort}&with_genres=${genres}&primary_release_year=${years}&with_original_language=${languages}&with_origin_country=${countries}&page=${page}`)
+      companies = companies? companies : ''
+      return this.http.get(`https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&sort_by=${sort}&with_genres=${genres}&primary_release_year=${years}&with_original_language=${languages}&with_origin_country=${countries}&with_companies=${companies}&page=${page}`)
     }
     getAllLanguages(): Observable<any>{
       return this.http.get(`https://api.themoviedb.org/3/configuration/languages?api_key=${this.apiKey}`)
     }
     getAllCountries(): Observable<any>{
       return this.http.get(`https://api.themoviedb.org/3/configuration/countries?api_key=${this.apiKey}`)
+    }
+    getCompany(id: string): Observable<any>{
+      return this.http.get(`https://api.themoviedb.org/3/company/${id}?api_key=${this.apiKey}`)
     }
     getActorDetails(id: string): Observable<any>{
       return this.http.get(`https://api.themoviedb.org/3/person/${id}?api_key=${this.apiKey}`)

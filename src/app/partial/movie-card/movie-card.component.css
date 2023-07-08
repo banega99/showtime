@@ -163,9 +163,9 @@ a:hover {
     .card {
         width: 22rem !important;
     }
-    .img-cover {
+    /* .img-cover {
         height: 390px;
-    }
+    } */
 }
 @media (max-width: 992px) {
     .card {
@@ -179,9 +179,15 @@ a:hover {
     .card {
         width: 18rem !important;
     }
+    .img-cover {
+        height: 390px;
+    }
 }
 @media (min-width: 1198px) {
     .card {
         width: 15rem !important;
+    }
+    .img-cover {
+        height: 320px;
     }
 }

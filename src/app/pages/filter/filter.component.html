@@ -1,35 +1,41 @@
-<div class="container filter-cont">
-    <div class="div">
-        <h3>Genres:
-            <span routerLink="/genres/{{genre?.name}}/{{genre?.id}}/1" *ngFor="let genre of genresNames" class="gray"
-                [ngClass]="{red: genre?.name}">{{genre?.name? genre.name : ' / '}} </span>
-            <span class="gray" *ngIf="genresNames?.length == 0">/</span>
-        </h3>
+
+<div *ngIf="companyName != ''" class="company">
+    <app-movie-card [searchRes$]="searchRes$" type="Movie" [title]="companyName" [visible]="searchRes$.length > 0"
+        [totalRes]="searchRes$.length"></app-movie-card></div>
+<div *ngIf="companyName == ''" class="non-company">
+    <div *ngIf="companyName == ''" class="container filter-cont">
+        <div class="div">
+            <h3>Genres:
+                <span routerLink="/genres/{{genre?.name}}/{{genre?.id}}/1" *ngFor="let genre of genresNames" class="gray"
+                    [ngClass]="{red: genre?.name}">{{genre?.name? genre.name : ' / '}}</span>
+                <span class="gray" *ngIf="genresNames?.length == 0">/</span>
+            </h3>
+        </div>
+        <div class="div">
+            <h3>Year of release:
+                <span *ngFor="let year of years" class="gray">{{year}}</span>
+                <span class="gray" *ngIf="years?.length == 0 || years[0]?.length == 0">/</span>
+            </h3>
+        </div>
+        <div class="div">
+            <h3>Country production:
+                <span *ngFor="let country of countriesNames" class="gray">{{country?.english_name}}</span>
+                <span class="gray" *ngIf="countriesNames?.length == 0">/</span>
+            </h3>
+        </div>
+        <div class="div">
+            <h3>Language:
+                <span *ngFor="let language of languagesNames" class="gray">{{language?.english_name}}</span>
+                <span class="gray" *ngIf="languagesNames?.length == 0">/</span>
+            </h3>
+        </div>
+        <div class="div">
+            <h3>Sorted by: <span class="gray">{{sortedBy}}</span></h3>
+        </div>
     </div>
-    <div class="div">
-        <h3>Year of release:
-            <span *ngFor="let year of years" class="gray">{{year}}</span>
-            <span class="gray" *ngIf="years?.length == 0 || years[0]?.length == 0">/</span>
-        </h3>
-    </div>
-    <div class="div">
-        <h3>Country production:
-            <span *ngFor="let country of countriesNames" class="gray">{{country?.english_name}}</span>
-            <span class="gray" *ngIf="countriesNames?.length == 0">/</span>
-        </h3>
-    </div>
-    <div class="div">
-        <h3>Language:
-            <span *ngFor="let language of languagesNames" class="gray">{{language?.english_name}}</span>
-            <span class="gray" *ngIf="languagesNames?.length == 0">/</span>
-        </h3>
-    </div>
-    <div class="div">
-        <h3>Sorted by: <span class="gray">{{sortedBy}}</span></h3>
-    </div>
+    <app-movie-card [searchRes$]="searchRes$" type="Movie" title="" [visible]="searchRes$.length > 0"
+        [totalRes]="searchRes$.length"></app-movie-card>
 </div>
-<app-movie-card [searchRes$]="searchRes$" type="Movie" title="" [visible]="searchRes$.length > 0"
-    [totalRes]="searchRes$.length"></app-movie-card>
 <div *ngIf="totalPages > 0" class="container">
     <div class="pages">
         <a class="prevNext" *ngIf="currentPage > 1 " [routerLink]="['/filter']" [queryParams]="{
@@ -38,7 +44,8 @@
             year: years, 
             language: languages, 
             country: countriesIso,
-            page: +currentPage - 1
+            page: +currentPage - 1,
+            company: companyId
         }">&larr; Prev Page</a>
         <a *ngIf="currentPage > 1 + 3" #fp [routerLink]="['/filter']" [queryParams]="{
             genre: genres,
@@ -46,7 +53,8 @@
             year: years, 
             language: languages, 
             country: countries,
-            page: 1
+            page: 1,
+            company: companyId
         }" [ngClass]="{'active':1 == currentPage}">1</a>
         <a *ngIf="currentPage > 1 + 4">...</a>
         <a #cp *ngFor="let page of pages" [routerLink]="['/filter']" [queryParams]="{
@@ -55,9 +63,9 @@
             year: years, 
             language: languages, 
             country: countriesIso,
-            page: page
-        }" 
-            [ngClass]="{'active':page == currentPage}">{{page}}</a>
+            page: page,
+            company: companyId
+        }" [ngClass]="{'active':page == currentPage}">{{page}}</a>
         <a *ngIf="currentPage < totalPages - 4">...</a>
         <a #lp [routerLink]="['/filter']" [queryParams]="{
             genre: genres,
@@ -65,17 +73,18 @@
             year: years, 
             language: languages, 
             country: countriesIso,
-            page: totalPages
-        }" 
-            [ngClass]="{'active':totalPages == currentPage}">{{totalPages}}</a>
+            page: totalPages,
+            company: companyId
+        }" [ngClass]="{'active':totalPages == currentPage}">{{totalPages}}</a>
         <a class="prevNext" *ngIf="currentPage < totalPages " [routerLink]="['/filter']" [queryParams]="{
             genre: genres,
             sort: sort, 
             year: years, 
             language: languages, 
             country: countriesIso,
-            page: +currentPage + 1
-        }" >Next Page
+            page: +currentPage + 1,
+            company: companyId
+        }">Next Page
             &rarr;</a>
 
     </div>

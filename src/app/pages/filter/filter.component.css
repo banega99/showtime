@@ -12,6 +12,7 @@
 
 .gray:not(:last-child)::after {
     content: ', ';
+    color: white;
 }
 
 .red {

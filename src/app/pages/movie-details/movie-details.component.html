@@ -90,7 +90,15 @@
             <div class="little-details">
                 <h5>Production companies:
                 </h5>
-                <span  class="gray" *ngFor="let company of movie.production_companies">{{company.name}}</span>
+                <a [routerLink]="['/filter']" [queryParams]="{
+                    company: company.id,
+                    country: null,
+                    page: 1,
+                    sort: 'popularity.desc',
+                    genre: null,
+                    language: null,
+                    year: null,
+                }" *ngFor="let company of movie.production_companies">{{company.name}}</a>
             </div>
             
             
