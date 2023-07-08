@@ -15,10 +15,13 @@ img:hover {
 
 @media (max-width: 767px) {
     .carousel-caption {
-        background-color: transparent!important;
+        background-color: transparent !important;
     }
+
     #title {
         font-size: 20px !important;
-        text-shadow: 0px 0px 1.5px white;
+        /* font-size: 50px; */
+        -webkit-text-stroke-width: 0.1px;
+        -webkit-text-stroke-color: black;
     }
 }
