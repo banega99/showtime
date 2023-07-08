@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
+import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.service';
 
 @Component({
   selector: 'app-movie-lists',
@@ -18,7 +19,8 @@ export class MovieListsComponent {
   title!: string
   constructor(private activatedRoute: ActivatedRoute, 
     private movieApiService: MovieApiService, 
-    private http: HttpClient,) {
+    private http: HttpClient,
+    private watchlistService: WatchlistService) {
       
     activatedRoute.params.subscribe(params => {
       this.pages = []
@@ -27,7 +29,9 @@ export class MovieListsComponent {
       if(params.list == 'trending'){
         this.movieApiService.trendingApiData(params.page)
         .subscribe(result =>{ 
-          this.movies = result.results
+          this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
+            this.movies = this.watchlistService.filterWatchlist(watchlist, result.results)
+          })
           this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
           this.totalResults = result.total_results
           for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {  
@@ -39,7 +43,9 @@ export class MovieListsComponent {
         })
       }else {
         this.movieApiService.getMovieLists(params.list, params.page).subscribe(result =>{ 
-          this.movies = result.results
+          this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
+            this.movies = this.watchlistService.filterWatchlist(watchlist, result.results)
+          })
           this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
           this.totalResults = result.total_results
           for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {  

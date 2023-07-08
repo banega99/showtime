@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, map } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
+import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.service';
 
 @Component({
   selector: 'app-filter',
@@ -26,7 +27,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   currentPage!: any
   countriesIso!: any
   subscription!: Subscription
-  constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute) {
+  constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute, private watchlistService: WatchlistService) {
 
   }
 
@@ -51,7 +52,9 @@ export class FilterComponent implements OnInit, OnDestroy {
       this.sortedBy = params.sortedBy == ' ' ? '/' : this.sorted(params.sort.split('.')[0], params.sort.split('.')[1])
       this.movieApiService.getFilter(params.genre, params.year, params.country, params.sort, params.language, params.page)
         .subscribe(result => {
-          this.searchRes$ = result.results
+          this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
+            this.searchRes$ = this.watchlistService.filterWatchlist(watchlist, result.results)
+          })
           // console.log(result)
           this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
           this.totalResults = result.total_results
