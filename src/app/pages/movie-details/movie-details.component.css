@@ -10,10 +10,8 @@ app-movie-videos {
 }
 
 .rec ::ng-deep .container {
-    
     max-width: fit-content;
     margin: 0 auto 0 0;
-
 }
 
 .scrollSection {

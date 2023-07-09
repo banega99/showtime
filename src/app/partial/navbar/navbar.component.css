@@ -199,9 +199,27 @@ ul.dropdown-menu.types{
     width:0px
 }
 
+#searchInput::-webkit-search-cancel-button{
+    position:relative;
+    right:30px;  
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    background-image: url('../../../assets/images/x-Recovered.png')!important;
+    background-size: cover;
+    /* background: red; */
+}
+#searchInput::-webkit-search-cancel-button:hover{
+    cursor: pointer;
+    opacity: .6;
+}
+
 
 
 @media (max-width: 992px) {
+    #searchInput::-webkit-search-cancel-button{
+        right:0;  
+    }
     ul.dropdown-menu.show {
         width: 100%!important;
     }
@@ -252,6 +270,7 @@ ul.dropdown-menu.types{
         align-items: center;
         justify-content: center;
         background-color: #000000;
+        transition: all .3s;
         /* border: none; */
         /* z-index: 3000; */
     }

@@ -36,6 +36,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.activatedRoute.queryParams.subscribe(params => {
       if (!params) return;
+      this.totalResults = 0
       this.companyName = ''
       this.currentPage = params.page
       this.pages = []
@@ -69,7 +70,7 @@ export class FilterComponent implements OnInit, OnDestroy {
           this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
             this.searchRes$ = this.watchlistService.filterWatchlist(watchlist, result.results)
           })
-          // console.log(result)
+          console.log(result)
           this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
           this.totalResults = result.total_results
           for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {

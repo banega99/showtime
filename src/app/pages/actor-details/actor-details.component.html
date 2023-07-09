@@ -11,18 +11,19 @@
             </div>
             <div class="details-more">
                 <h3><span class="white">Name: </span> <span class="red">{{actorDetails?.name}}</span></h3>
+                <h3><span class="white">Department: </span> <span>{{actorDetails?.known_for_department}}</span></h3>
                 <h3 *ngIf="actorDetails?.birthday"><span class="white">Date of birth:</span> {{actorDetails?.birthday |
                     date}} <span *ngIf="!actorDetails?.deathday">({{yearsOld}})</span></h3>
                 <h3 *ngIf="actorDetails?.place_of_birth"><span class="white">Place of birth:</span>
-                    {{actorDetails.place_of_birth}}</h3>
+                    {{actorDetails?.place_of_birth}}</h3>
                 <h3 *ngIf="actorDetails?.deathday"><span class="white">Date of death:</span> {{actorDetails?.deathday |
                     date}} ({{yearsOldDead}})</h3>
                 <h3><span class="white">Popularity:</span> {{actorDetails?.popularity}}</h3>
             </div>
         </div>
-        <div *ngIf="actorDetails.biography" class="biography">
+        <div *ngIf="actorDetails?.biography" class="biography">
             <h3>Biography: </h3>
-            <p>{{actorDetails.biography}}</p>
+            <p>{{actorDetails?.biography}}</p>
         </div>
         <div class="rec" *ngIf="movieCredits?.length > 0">
             <app-movies-scroll-x-container title="Appears in Movies" [movies]="movieCredits"

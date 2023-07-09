@@ -29,7 +29,7 @@
           <ul class="dropdown-menu types w-25">
             <li #all (click)="changeSearchType(all)" class="dropdown-item">All</li>
             <li #movie (click)="changeSearchType(movie)" class="dropdown-item">Movie</li>
-            <li #actor (click)="changeSearchType(actor)" class="dropdown-item">Actor</li>
+            <li #actor (click)="changeSearchType(actor)" class="dropdown-item">People</li>
           </ul>
           <input id="searchInput" formControlName="searchTerm" (keyup)="showResults(s.value)" #s
             (keyup.enter)="search($event, s.value)" [value]="s.value" class="form-control me-2" type="search"

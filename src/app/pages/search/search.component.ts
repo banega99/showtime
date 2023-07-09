@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit {
   currentPage!: any
   totalPages!: number
   totalResults!: number
+  actorsTotalRes!: number
   constructor(private activatedRoute: ActivatedRoute, private movieApiService: MovieApiService,
     private watchlistService: WatchlistService) {
 
@@ -52,7 +53,8 @@ export class SearchComponent implements OnInit {
         this.movieApiService.getActor(params.title, params.page)
           .subscribe(res => {
             if (!res) return
-            this.searchActors$ = res.results.filter((actor: any) => actor.popularity > 0.6)
+            this.searchActors$ = res.results
+            this.actorsTotalRes = res.total_results
           })
       }
       else if (params.type == 'Movie') {
@@ -75,7 +77,8 @@ export class SearchComponent implements OnInit {
         this.movieApiService.getActor(params.title, params.page)
           .subscribe(res => {
             if (!res) return
-            this.searchActors$ = res.results.filter((actor: any) => actor.popularity > 0.6)
+            this.searchActors$ = res.results
+            this.actorsTotalRes = res.total_results
           })
       }
 

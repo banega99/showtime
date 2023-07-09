@@ -18,14 +18,16 @@ export class ActorDetailsComponent {
     activatedRoute.params.subscribe(params =>{
       if(!params)return
       this.actorDetails$ = movieApiService.getActorDetails(params.id)
+      movieApiService.getActorDetails(params.id).subscribe(console.log)
       movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
       .subscribe(res => {
         this.movieCredits = res
+        console.log(res)
       })
       movieApiService.getActorDetails(params.id).subscribe(actor => {
-        this.yearsOld = new Date().getFullYear() - parseInt(actor.birthday.split('-')[0])
+        this.yearsOld = new Date().getFullYear() - parseInt(actor.birthday?.split('-')[0])
         if(!actor.deathday)return
-        this.yearsOldDead = parseInt(actor.deathday.split('-')[0]) - parseInt(actor.birthday.split('-')[0])
+        this.yearsOldDead = parseInt(actor.deathday?.split('-')[0]) - parseInt(actor.birthday?.split('-')[0])
       })
       movieApiService.getActorImages(params.id).subscribe(imgs => {
         // console.log(imgs.profiles);
