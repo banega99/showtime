@@ -18,6 +18,7 @@ export class MovieCardComponent implements OnInit {
   @Input()visible: boolean = false
   @Input()totalRes: number = 0
   checked: boolean = false
+  
   constructor(private router: Router, private watchlistService: WatchlistService){
   }
   ngOnInit(): void {
