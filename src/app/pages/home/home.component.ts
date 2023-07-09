@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   nowPlayingMovies!: any
   upcomingMovies!: any
   popularMovies!: any
+  genres!: any
   constructor(private movieApiService: MovieApiService){
   }
 
@@ -23,10 +24,26 @@ export class HomeComponent implements OnInit {
     this.topRatedData()
     this.nowPlayingData()
     this.popularData()
+    this.movieApiService.getGenres().subscribe(res => {
+      // console.log(res)
+      this.genres = res.genres
+    })
   }
 
   bannerData(){
-    this.movieApiService.bannerApiData().subscribe(data => this.bannerMovies = data.results);
+    this.movieApiService.bannerApiData().subscribe(data => {
+      this.bannerMovies = data.results
+      data.results.forEach((movie: any) => {
+        this.movieApiService.getGenres().subscribe((genre: any) => {
+          let filteredGenres = genre.genres.filter(({id: id1}: any) => {
+            return movie.genre_ids.some((id2: any) => id1 === id2)
+          })
+          movie.genre_names = filteredGenres
+        });
+      })
+    });
+    
+    
   }
   trendingData(){
     this.movieApiService.trendingApiData('1').subscribe(data => this.trendingMovies = data.results);

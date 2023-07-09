@@ -1,19 +1,29 @@
-
 <div id="carouselExampleAutoplaying" class="carousel slide mt-5" data-bs-ride="carousel">
-    <div  class="carousel-inner">
-        <div *ngFor="let movie of bannerMovies; let i = index" class="carousel-item" [ngClass]="{active:i===0}" data-bs-interval="5000">
-            <img routerLink="movie/{{movie.id}}" src="https://image.tmdb.org/t/p/original{{movie.backdrop_path}}" class="d-block w-100" alt="...">
+    <div class="carousel-inner">
+        <div routerLink="movie/{{movie.id}}" *ngFor="let movie of bannerMovies; let i = index" class="carousel-item" [ngClass]="{active:i===0}"
+            data-bs-interval="5000">
+            <img  src="https://image.tmdb.org/t/p/original{{movie.backdrop_path}}"
+                class="d-block w-100" alt="...">
             <div class="carousel-caption">
-                <h5 id="title">{{movie.original_title}}</h5>
-                <p class="d-none d-md-inline">{{movie.overview}}</p>
+                <div class="details">
+                    <h5 id="title">{{movie.title}}</h5>
+                    <star-rating [starType]="'svg'" [rating]="movie.vote_average - 5" [numOfStars]="5" [showHalfStars]="true" ></star-rating>
+                    <div class="genres"><a routerLink="/genres/{{genre.name}}/{{genre.id}}/1" class="genre"
+                            *ngFor="let genre of movie.genre_names">{{genre.name}}</a></div>
+                    <div class="text-cont">
+                        <p class="d-none d-md-inline">{{movie.overview}}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <button class="carousel-control-prev crsl-btn" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <button class="carousel-control-next crsl-btn" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
@@ -23,5 +33,3 @@
 <app-movies-scroll-x-container title="Top Rated Movies" [movies]="topRatedMovies"></app-movies-scroll-x-container>
 <app-movies-scroll-x-container title="Popular Movies" [movies]="popularMovies"></app-movies-scroll-x-container>
 <app-movies-scroll-x-container title="Upcoming Movies" [movies]="upcomingMovies"></app-movies-scroll-x-container>
-
-

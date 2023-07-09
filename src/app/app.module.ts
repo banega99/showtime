@@ -25,6 +25,7 @@ import { BrowserAnimationsModule,  NoopAnimationsModule } from '@angular/platfor
 import { MovieVideosComponent } from './partial/movie-videos/movie-videos.component';
 import { MovieListsComponent } from './pages/movie-lists/movie-lists.component';
 import { LazyLoadImageModule, IntersectionObserverHooks } from 'ng-lazyload-image';
+import { StarRatingModule } from 'angular-star-rating';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { LazyLoadImageModule, IntersectionObserverHooks } from 'ng-lazyload-imag
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    StarRatingModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},

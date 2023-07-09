@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Ubuntu:wght@500&display=swap');
+@import '~css-star-rating/css/star-rating';
 
 *{
     font-family: 'Ubuntu';
