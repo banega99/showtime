@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
       this.currentPage = parseInt(params.page)
       if (params.type == 'All') {
         this.type = params.type
-        this.movieApiService.getMovieBytitle(params.title, 1).subscribe(res => {
+        this.movieApiService.getMovieBytitle(params.title, params.page).subscribe(res => {
           if (!res) return
           this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
             this.searchRes$ = this.watchlistService.filterWatchlist(watchlist, res.results)
@@ -48,8 +48,8 @@ export class SearchComponent implements OnInit {
           }
           this.searchRes$ = res.results
         })
-        this.movieApiService.getActor(params.title, 1).subscribe(console.log)
-        this.movieApiService.getActor(params.title, 1)
+        this.movieApiService.getActor(params.title, params.page).subscribe(console.log)
+        this.movieApiService.getActor(params.title, params.page)
           .subscribe(res => {
             if (!res) return
             this.searchActors$ = res.results.filter((actor: any) => actor.popularity > 0.6)
@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit {
       }
       else if (params.type == 'Movie') {
         this.type = params.type
-        this.movieApiService.getMovieBytitle(params.title, 1).subscribe(res => {
+        this.movieApiService.getMovieBytitle(params.title, params.page).subscribe(res => {
           if (!res) return
           this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
             this.searchRes$ = this.watchlistService.filterWatchlist(watchlist, res.results)
@@ -72,7 +72,7 @@ export class SearchComponent implements OnInit {
       }
       else if (params.type == 'Actor') {
         this.type = params.type
-        this.movieApiService.getActor(params.title, 1)
+        this.movieApiService.getActor(params.title, params.page)
           .subscribe(res => {
             if (!res) return
             this.searchActors$ = res.results.filter((actor: any) => actor.popularity > 0.6)
