@@ -1,5 +1,5 @@
-<app-not-found title="People not found!" [visible]="searchActors$.length== 0 && type == 'Actor'|| searchActors$.length== 0 && type == 'All'"></app-not-found>
-<div *ngIf="searchActors$.length > 0 && type == 'Actor' || searchActors$.length > 0 && type == 'All'" class="container actors p-3">
+<app-not-found title="People not found!" [visible]="searchActors$.length== 0 && type == 'People'|| searchActors$.length== 0 && type == 'All'"></app-not-found>
+<div *ngIf="searchActors$.length > 0 && type == 'People' || searchActors$.length > 0 && type == 'All'" class="container actors p-3">
     <h2 class="mb-3">People <span class="gray">({{actorsTotalRes | number}})</span></h2>
     <div class="row">
         <a routerLink="/actor-details/{{actor.id}}" *ngFor="let actor of searchActors$" class="actor col-12 col-md-6 col-lg-4 mb-3">
