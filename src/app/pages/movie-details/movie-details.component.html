@@ -146,7 +146,7 @@
 
                     <h6 class="name">{{review.author}}</h6>
                     <h6 class="date">{{review.created_at | date}}</h6>
-                    <h6 class="rating">⭐ {{review.author_details.rating}}/10</h6>
+                    <h6 class="rating">⭐ <span *ngIf="review.author_details.rating">{{review.author_details.rating}}/10</span><span *ngIf="!review.author_details.rating">N/A</span></h6>
                     <p #p>{{review.content}}</p>
                     <div #a *ngIf="p.getBoundingClientRect().height > 100" class="arrow"
                         (click)="expandReview(p, rc, a)">
