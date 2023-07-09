@@ -15,7 +15,7 @@
     </div>
 </div>
 <app-movie-card [searchRes$]="searchRes$" [type]="type" title="" [visible]="searchRes$.length > 0" [totalRes]="totalResults"></app-movie-card>
-<div *ngIf="type == 'Movie' || type == 'All'" class="container">
+<div class="container">
     <div class="pages">
         <a class="prevNext" *ngIf="currentPage > 1 " routerLink="/search/{{type}}/{{title}}/{{currentPage - 1}}">&larr; Prev Page</a>
         <a *ngIf="currentPage > 1 + 3" #fp  routerLink="/search/{{type}}/{{title}}/1" [ngClass]="{'active':1 == currentPage}">1</a>
