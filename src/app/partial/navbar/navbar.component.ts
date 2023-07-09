@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit {
         this.searchResults = this.movieResults
       })
       
-    } else if (this.searchType == 'Actor') {
+    } else if (this.searchType == 'People') {
       this.movieApiService.getActor(title, 1).subscribe(data => {
         this.actorResults = data.results.slice(0, 4).filter((data: any) => data.popularity > 0.6)
         this.searchResults = this.actorResults

@@ -72,7 +72,7 @@ export class SearchComponent implements OnInit {
             }
           }})
       }
-      else if (params.type == 'Actor') {
+      else if (params.type == 'People') {
         this.type = params.type
         this.movieApiService.getActor(params.title, params.page)
           .subscribe(res => {
