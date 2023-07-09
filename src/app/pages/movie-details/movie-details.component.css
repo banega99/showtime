@@ -251,6 +251,7 @@ h5 {
 .rating {
     color: white;
     font-size: 15px;
+    width: fit-content;
 }
 
 .date {
