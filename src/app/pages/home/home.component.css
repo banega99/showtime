@@ -101,9 +101,9 @@ igc-rating {
 }
 
 @media (max-width: 960px) {
-    .crsl-btn {
+    /* .crsl-btn {
         display: none;
-    }
+    } */
     .carousel-caption {
         justify-content: end;
     }
