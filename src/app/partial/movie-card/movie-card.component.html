@@ -24,7 +24,7 @@
                  'yellow': movie.vote_average >= 3 && movie.vote_average < 5,
                  'red': movie.vote_average < 3 && movie.vote_average > 0,
                 }">
-                <span *ngIf="movie.vote_average > 0" class="star">⭐</span><span *ngIf="movie.vote_average > 0" class="rating-no">{{movie.vote_average | number:'1.0-1'}}</span> <span *ngIf="movie.vote_average === 0" class="rating-no"> NR</span>
+                <span *ngIf="movie.vote_average > 0" class="star">⭐</span><span *ngIf="movie.vote_average > 0" class="rating-no">{{movie.vote_average | number:'1.0-1'}}</span> <span *ngIf="movie.vote_average === 0" class="rating-no"> N/A</span>
             </div>
         </a>
     </div>
