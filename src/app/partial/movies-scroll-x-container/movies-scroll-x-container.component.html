@@ -6,8 +6,8 @@
         <span class="arrow"></span>
      </h5>
     <div class="rowposter" #rowposter (wheel)="scrollX($event)">
-        <ng-container class="imgcont" *ngFor="let movie of movies">
+        <div class="imgcont" *ngFor="let movie of movies">
             <img routerLink="/movie/{{movie.id}}" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="rowimg largeposter" alt="" [ngStyle]="{width: width}" [ngClass]="{'mobile' : windowWidth < 767}">
-        </ng-container>
+        </div>
     </div>
 </div>

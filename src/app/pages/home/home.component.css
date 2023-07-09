@@ -93,14 +93,12 @@ img:hover {
     height: 70px;
 }
 
-star-rating {
-    /* z-index: 3000; */
+igc-rating {
     width: fit-content;
     height: fit-content;
-    margin-bottom: 5px;
-    margin-left: -5px!important;
+    margin-bottom: 15px;
+    color: gold;
 }
-
 
 @media (max-width: 960px) {
     .crsl-btn {
@@ -125,5 +123,10 @@ star-rating {
 
     .genre {
         font-size: 8px;
+    }
+    igc-rating {
+        margin: 0;
+        margin-top: -3px;
+        margin-left: -3px;
     }
 }

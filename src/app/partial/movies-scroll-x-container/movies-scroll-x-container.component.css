@@ -23,7 +23,13 @@
 .rowimg:hover {
     transform: scale(1.1);
     cursor: pointer;
-    opacity: 0.6;
+}
+
+
+.imgcont:hover .scale-cont{
+    width: 500px;
+    height: 800px;
+    opacity: 1;
 }
 
 .rowposter::-webkit-scrollbar {

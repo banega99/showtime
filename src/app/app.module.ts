@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +26,9 @@ import { MovieVideosComponent } from './partial/movie-videos/movie-videos.compon
 import { MovieListsComponent } from './pages/movie-lists/movie-lists.component';
 import { LazyLoadImageModule, IntersectionObserverHooks } from 'ng-lazyload-image';
 import { StarRatingModule } from 'angular-star-rating';
+import { defineComponents, IgcRatingComponent } from 'igniteui-webcomponents';
+
+defineComponents(IgcRatingComponent);
 
 @NgModule({
   declarations: [
@@ -59,6 +62,7 @@ import { StarRatingModule } from 'angular-star-rating';
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

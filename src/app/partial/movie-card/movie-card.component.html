@@ -8,7 +8,9 @@
                 <h2>SHOWTIME</h2>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{movie.title}} <span class="year">({{movie.release_date.split('-')[0]}})</span></h5>
+                <h5 class="card-title">{{movie.title}}
+                     <span class="year">({{movie.release_date?.split('-')[0]}})</span>
+                    </h5>
                 <p class="card-text">{{movie.overview}}</p>
             </div>
             

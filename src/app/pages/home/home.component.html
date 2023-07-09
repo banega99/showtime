@@ -7,7 +7,8 @@
             <div class="carousel-caption">
                 <div class="details">
                     <h5 id="title">{{movie.title}}</h5>
-                    <star-rating [starType]="'svg'" [rating]="movie.vote_average - 5" [numOfStars]="5" [showHalfStars]="true" ></star-rating>
+                    <igc-rating [value]="movie.vote_average" size="large" min="0" max="10" checkedColor="red"></igc-rating>
+                    <!-- <star-rating [starType]="'svg'" [rating]="movie.vote_average" [numOfStars]="10" [showHalfStars]="true" ></star-rating> -->
                     <div class="genres"><a routerLink="/genres/{{genre.name}}/{{genre.id}}/1" class="genre"
                             *ngFor="let genre of movie.genre_names">{{genre.name}}</a></div>
                     <div class="text-cont">
