@@ -79,6 +79,13 @@ export class SearchComponent implements OnInit {
             if (!res) return
             this.searchActors$ = res.results
             this.actorsTotalRes = res.total_results
+            this.totalPages = res.total_pages > 500 ? 500 : res.total_pages
+            this.totalResults = res.total_results
+            for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {
+              if (i > 0 && i < this.totalPages) {
+                this.pages.push(i)
+              }
+            }
           })
       }
 
