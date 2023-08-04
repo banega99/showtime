@@ -34,9 +34,7 @@ export class MoviesScrollXContainerComponent implements OnInit {
   makeMovieList() {
     let titleArr: any = this.title.split(' ')
     let moviesIndex = titleArr.indexOf('Movies')
-    // console.log(moviesIndex)
     let movieList = titleArr.toSpliced(moviesIndex, 1).join('_')
-    // console.log(movieList)
     return movieList.toLowerCase()
   }
 
