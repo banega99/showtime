@@ -16,7 +16,7 @@
             
             <div class="watchlist" (click)="addToWatchlist(movie, img)" (mouseenter)="showPopover(popover)" (mouseleave)="hidePopover(popover)">
                 <img #img src="../../../assets/images/{{movie.watchlist || title == 'Watchlist'? 'x.png':'6748737.png'}}" alt="" srcset="">
-                <div #popover class="popover">{{!movie.watchlist || title == 'Watchlist'? 'Remove from Watchlist' : 'Add to Watchlist'}}</div>
+                <div #popover class="popover">{{!movie.watchlist? 'Add to Watchlist' : 'Remove from Watchlist'}}</div>
             </div>
             <div class="rating" [ngClass]="{'green': movie.vote_average >= 9,
                  'lightgreen': movie.vote_average >= 7 && movie.vote_average < 9,
