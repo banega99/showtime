@@ -37,6 +37,7 @@ select:focus>option:checked {
 
 option {
     color: gray;
+    padding: 2px;
 }
 
 option:hover {
@@ -226,6 +227,9 @@ a:hover {
     }
     #sort {
         font-size: 9px!important;
+    }
+    option {
+        text-align: center;
     }
     .card {
         width: 22rem !important;
