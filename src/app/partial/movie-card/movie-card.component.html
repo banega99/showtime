@@ -1,6 +1,21 @@
 <app-not-found [title]="onWatchlist? 'Watchlist empty!' : 'Movie not found!'" [visible]="!visible && type == 'Movie' || !visible && type == 'All'"></app-not-found>
 <div *ngIf="visible && type == 'Movie' || visible && type == 'All'" class="container movies mt-5 p-3"[ngStyle]="{'marginTop': actors? '20px': '90px'}">
-    <h2 class="mb-3">{{title}} {{onWatchlist? '' : "Movies"}} <span class="gray">({{totalRes | number }})</span></h2>
+    <div class="d-flex justify-content-between text-center">
+        <h2 class="">{{title}} {{onWatchlist? '' : "Movies"}} <span class="gray">({{totalRes | number }})</span></h2>
+        <!-- <span class="sort text-center">Sort &uarr;&darr;</span> -->
+        <div class="sort-cont">
+            <h5 class="mb-0 text-center sort-text me-2">Sort by:</h5>
+            <select (change)="sort($event)" name="sort" id="sort" class="classic">
+                <option value="1">Popularity descending &darr;</option>
+                <option value="2">Popularity ascending &uarr;</option>
+                <option value="3">Rating descending &darr;</option>
+                <option value="4">Rating ascending &uarr;</option>
+                <option value="5">A-Z &darr;</option>
+                <option value="6">Z-A &uarr;</option>
+            </select>
+        </div>
+        
+    </div> 
     <div class="row justify-content-center justify-content-md-start">
         <a (click)="route($event, movie)" *ngFor="let movie of searchRes$" class="card ms-md-2 mb-3">
             <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="card-img-top"alt="{{movie.title}}">

@@ -22,6 +22,7 @@ export class MovieCardComponent implements OnInit {
   constructor(private router: Router, private watchlistService: WatchlistService){
   }
   ngOnInit(): void {
+    
   }
 
   route(e: any, movie:any){
@@ -39,6 +40,48 @@ export class MovieCardComponent implements OnInit {
 
   hidePopover(popover: any){
     popover.classList.remove('show-popover')
+  }
+
+  sort(e: any){
+    console.log(this.searchRes$)
+    switch(e.target.value){
+      case '1': this.searchRes$.sort((a: any,b: any) => {
+        if(a.popularity > b.popularity) return -1
+        else if(a.popularity < b.popularity) return 1
+        else return 0
+      })
+      break;
+      case '2': this.searchRes$.sort((a: any,b: any) => {
+        if(a.popularity < b.popularity) return -1
+        else if(a.popularity > b.popularity) return 1
+        else return 0
+      })
+      break;
+      case '3': this.searchRes$.sort((a: any,b: any) => {
+        if(a.vote_average > b.vote_average) return -1
+        else if(a.vote_average < b.vote_average) return 1
+        else return 0
+      })
+      break;
+      case '4': this.searchRes$.sort((a: any,b: any) => {
+        if(a.vote_average < b.vote_average) return -1
+        else if(a.vote_average > b.vote_average) return 1
+        else return 0
+      })
+      break;
+      case '5': this.searchRes$.sort((a: any,b: any) => {
+        if(a.title < b.title) return -1
+        else if(a.title > b.title) return 1
+        else return 0
+      })
+      break;
+      case '6': this.searchRes$.sort((a: any,b: any) => {
+        if(a.title > b.title) return -1
+        else if(a.title < b.title) return 1
+        else return 0
+      })
+      break;
+    }
   }
   
 }

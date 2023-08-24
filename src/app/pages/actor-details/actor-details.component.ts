@@ -25,8 +25,13 @@ export class ActorDetailsComponent {
         console.log(res)
       })
       movieApiService.getActorDetails(params.id).subscribe(actor => {
+        console.log(actor.birthday)
+        console.log(new Date(actor.birthday).getTime())
+        console.log((new Date().getTime() - new Date(actor.birthday).getTime()))
         this.yearsOld = new Date().getFullYear() - parseInt(actor.birthday?.split('-')[0])
         if(!actor.deathday)return
+        console.log(actor.deathday);
+        
         this.yearsOldDead = parseInt(actor.deathday?.split('-')[0]) - parseInt(actor.birthday?.split('-')[0])
       })
       movieApiService.getActorImages(params.id).subscribe(imgs => {

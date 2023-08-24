@@ -4,6 +4,50 @@
 
 h2 {
     color: white;
+    width: fit-content;
+    height: fit-content;
+}
+
+.sort-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sort {
+    background-color: black;
+    color: white;
+    outline: none;
+    border: none;
+    width: fit-content;
+    height: fit-content;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.sort-text {
+    color: gray;
+    height: fit-content;
+    width: fit-content;
+}
+
+select:focus>option:checked {
+    background: #000 !important;
+}
+
+option {
+    color: gray;
+}
+
+option:hover {
+    background-color: #E50914 !important;
+    color: gray !important;
+    cursor: pointer !important;
+}
+
+#sort:hover {
+    cursor: pointer;
+    color: gray;
 }
 
 a {
@@ -13,11 +57,12 @@ a {
     outline: #E50914;
     border-bottom: 3px solid #e509149a;
     /* overflow: hidden; */
-    
+
 }
 
 h5 {
-    color: #E50914;;
+    color: #E50914;
+    ;
     font-weight: bold;
 }
 
@@ -29,8 +74,8 @@ a p {
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
-    overflow: hidden!important;
-    text-overflow:ellipsis;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
     height: 120px;
 }
 
@@ -44,7 +89,7 @@ a:hover {
     padding: 0;
 }
 
-.card{
+.card {
     transition: all .4s;
 }
 
@@ -107,7 +152,7 @@ a:hover {
     z-index: 3000;
 }
 
-.gray{
+.gray {
     color: gray;
 }
 
@@ -152,47 +197,76 @@ a:hover {
 .green {
     border: 3px solid rgb(17, 77, 17);
 }
+
 .lightgreen {
     border: 3px solid rgb(44, 185, 39);
 }
+
 .greenyellow {
     border: 3px solid rgb(161, 184, 27);
 }
+
 .yellow {
     border: 3px solid rgb(247, 222, 0);
 }
+
 .red {
     border: 3px solid red;
 }
 
 @media (max-width: 768px) {
+    h2 {
+        font-size: 16px;
+    }
+    .sort-cont {
+        flex-direction: column;
+    }
+    .sort-text {
+        font-size: 10px!important;
+    }
+    #sort {
+        font-size: 9px!important;
+    }
     .card {
         width: 22rem !important;
     }
+
     /* .img-cover {
         height: 390px;
     } */
 }
+
 @media (max-width: 992px) {
+    .sort-text {
+        font-size: 16px;
+    }
+    #sort {
+        font-size: 15px;
+    }
     .card {
         width: 20rem !important;
     }
+
     .container {
-        margin-top: 50px!important;
+        margin-top: 50px !important;
     }
 }
+
 @media (max-width: 1198px) {
     .card {
         width: 18rem !important;
     }
+
     .img-cover {
         height: 390px;
     }
 }
+
 @media (min-width: 1198px) {
     .card {
         width: 15rem !important;
     }
+
     .img-cover {
         height: 320px;
     }

@@ -8,6 +8,8 @@ import { FilterComponent } from './pages/filter/filter.component';
 import { ActorDetailsComponent } from './pages/actor-details/actor-details.component';
 import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { MovieListsComponent } from './pages/movie-lists/movie-lists.component';
+import { FilterSearchComponent } from './partial/filter-search/filter-search.component';
+import { DataResolveService } from './services/data-resolve-service/data-resolve.service';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -18,7 +20,7 @@ const routes: Routes = [
   {path: 'actor-details/:id', component:ActorDetailsComponent},
   {path: 'watchlist', component:WatchlistComponent},
   {path: 'movie-list/:list/:page', component:MovieListsComponent},
-
+  // {path: '', component:FilterSearchComponent, resolve: {data: DataResolveService}}
 ];
 
 @NgModule({

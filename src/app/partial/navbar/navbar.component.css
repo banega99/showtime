@@ -93,10 +93,6 @@ ul.dropdown-menu.types{
     /* border: 1px solid #E50914; */
     width: 100px !important;
 }
-.types li.dropdown-item {
-    /* width: fit-content!important; */
-}
-
 
 .search-dropdown {
     visibility: hidden;
