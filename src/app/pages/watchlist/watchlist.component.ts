@@ -13,15 +13,15 @@ export class WatchlistComponent {
   movies1: string[] = []
   
   constructor(private watchlistService: WatchlistService, private movieApiService: MovieApiService){
-    this.watchlistService.watchlistAsObservable().subscribe(watchlist=>{
-      
-      if(!watchlist)return
+    this.watchlistService.watchlistAsObservable().pipe(map((watchlist:any)=>{
       watchlist.forEach((movie:any) => {
         movieApiService.getMovieDetails(movie.id).pipe(map((movieDetails:any) => {
-          movie = movieDetails
-          this.movies = watchlist
+          movie.vote_average = movieDetails.vote_average
+          movie.popularity = movieDetails.popularity
+          
         })).subscribe()
       })
-    })
+      return watchlist
+    })).subscribe(watchlist => this.movies = watchlist)
   }
 }
