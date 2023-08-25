@@ -10,6 +10,7 @@ import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { MovieListsComponent } from './pages/movie-lists/movie-lists.component';
 import { FilterSearchComponent } from './partial/filter-search/filter-search.component';
 import { DataResolveService } from './services/data-resolve-service/data-resolve.service';
+import { RouteResolverService } from './services/route-resolver/route-resolver.service';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -24,7 +25,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

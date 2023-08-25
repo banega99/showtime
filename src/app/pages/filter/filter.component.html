@@ -3,30 +3,38 @@
     <app-movie-card [searchRes$]="searchRes$" type="Movie" [title]="companyName" [totalRes]="totalResults" [visible]="searchRes$.length > 0"></app-movie-card></div>
 <div *ngIf="companyName == ''" class="non-company">
     <div *ngIf="companyName == ''" class="container filter-cont">
-        <div class="div">
-            <h3>Genres:
-                <span routerLink="/genres/{{genre?.name}}/{{genre?.id}}/1" *ngFor="let genre of genresNames" class="gray"
-                    [ngClass]="{red: genre?.name}">{{genre?.name? genre.name : ' / '}}</span>
-                <span class="gray" *ngIf="genresNames?.length == 0">/</span>
-            </h3>
+        <div class="div d-flex">
+            <h3>Genres: </h3>
+            <div (click)="removeFilter(genre.id, 'genre')" *ngFor="let genre of genresNames; let i=index" class="filt d-flex align-items-center">
+                <span  class="gray x">{{genre?.name? genre.name : ' / '}} <span class="del">&#10006;</span> </span>
+                <span class="comma" *ngIf="i != genresNames.length - 1">,</span>
+            </div>
+            <span class="gray" *ngIf="genresNames?.length == 0">/</span>
         </div>
-        <div class="div">
-            <h3>Year of release:
-                <span *ngFor="let year of years" class="gray">{{year}}</span>
-                <span class="gray" *ngIf="years?.length == 0 || years[0]?.length == 0">/</span>
-            </h3>
+        <div class="div d-flex">
+            <h3>Year of release: </h3>
+            <div (click)="removeFilter(year, 'year')" *ngFor="let year of years; let i=index" class="filt d-flex align-items-center">
+                <span class="gray x">{{year}} <span class="del">&#10006;</span> </span>
+                <span class="comma" *ngIf="i != years.length - 1">,</span>
+            </div>
+            <span class="gray" *ngIf="years?.length == 0 || years[0]?.length == 0">/</span>
         </div>
-        <div class="div">
-            <h3>Country production:
-                <span *ngFor="let country of countriesNames" class="gray">{{country?.english_name}}</span>
-                <span class="gray" *ngIf="countriesNames?.length == 0">/</span>
-            </h3>
+        <div class="div d-flex">
+            <h3>Country production:</h3>
+            <div (click)="removeFilter(country.iso_3166_1, 'country')" *ngFor="let country of countriesNames; let i=index" class="filt d-flex align-items-center">
+                <span  class="gray x">{{country?.english_name}} <span class="del">&#10006;</span> </span>
+                <span class="comma" *ngIf="i != countriesNames.length - 1">,</span>
+            </div>
+            <span class="gray" *ngIf="countriesNames?.length == 0">/</span>
         </div>
-        <div class="div">
-            <h3>Language:
-                <span *ngFor="let language of languagesNames" class="gray">{{language?.english_name}}</span>
-                <span class="gray" *ngIf="languagesNames?.length == 0">/</span>
-            </h3>
+
+        <div class="div d-flex">
+            <h3>Language: </h3>
+            <div (click)="removeFilter(language.iso_639_1, 'language')" *ngFor="let language of languagesNames; let i=index" class="filt d-flex align-items-center">
+                <span  class="gray x">{{language?.english_name}} <span class="del">&#10006;</span> </span>
+                <span class="comma" *ngIf="i != languagesNames.length - 1">,</span>
+            </div>
+            <span class="gray" *ngIf="languagesNames?.length == 0">/</span>
         </div>
         <div class="div">
             <h3>Sorted by: <span class="gray">{{sortedBy}}</span></h3>

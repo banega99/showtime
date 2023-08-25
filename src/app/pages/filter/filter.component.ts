@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable, Subscription, map } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
+import { NavigationRouterService } from 'src/app/services/navigation-router-service/navigation-router.service';
 import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.s
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
-export class FilterComponent implements OnInit, OnDestroy {
+export class FilterComponent implements OnInit {
   searchRes$!: any[]
   resLength!: number
   genres: any
@@ -29,12 +30,16 @@ export class FilterComponent implements OnInit, OnDestroy {
   subscription!: Subscription
   companyName: any = ''
   companyId!: any
-  constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute, private watchlistService: WatchlistService) {
-
+  constructor(private movieApiService: MovieApiService,
+    private activatedRoute: ActivatedRoute,
+    private watchlistService: WatchlistService,
+    private navService: NavigationRouterService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.activatedRoute.queryParams.subscribe(params => {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.activatedRoute.queryParams.subscribe(params => {
       if (!params) return;
       this.totalResults = 0
       this.companyName = ''
@@ -51,15 +56,15 @@ export class FilterComponent implements OnInit, OnDestroy {
       this.sort = params.sort
       this.genres = params.genre
       this.countries = params.coutry
-      this.years = !params.year || params.year.length == 0 ? ['/'] : params.year
-      this.years = typeof(params.year) === 'string' ? [this.years] : this.years
-      console.log(this.years)
+      this.years = !params.year || params.year.length == 0 ? [] : params.year
+      this.years = typeof (params.year) === 'string' ? [this.years] : this.years
+      
       this.languages = params.language
       this.sortedBy = params.sortedBy == ' ' ? '/' : this.sorted(params.sort.split('.')[0], params.sort.split('.')[1])
       if (params.company) {
-        console.log(params.company)
+        // console.log(params.company)
         this.movieApiService.getCompany(params.company).subscribe(company => {
-          console.log(company)
+          // console.log(company)
           this.companyName = company.name
           this.companyId = company.id
         })
@@ -70,7 +75,7 @@ export class FilterComponent implements OnInit, OnDestroy {
           this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
             this.searchRes$ = this.watchlistService.filterWatchlist(watchlist, result.results)
           })
-          console.log(result)
+          // console.log(result)
           this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
           this.totalResults = result.total_results
           for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {
@@ -80,7 +85,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 
           }
         });
-      if(params.genre){
+      if (params.genre) {
         if (typeof (params.genre) === 'object') {
           params.genre?.forEach((genre: any) => {
             this.movieApiService.getGenres().pipe(map(res => res.genres.filter((res: any) => res.id == genre)))
@@ -97,10 +102,10 @@ export class FilterComponent implements OnInit, OnDestroy {
             })
         }
       }
-      if(params.country){
+      if (params.country) {
         if (typeof (params.country) === 'object') {
           params.country?.forEach((country: any) => {
-            console.log(country)
+            // console.log(country)
             this.movieApiService.getAllCountries()
               .pipe(map(res => res.filter((res: any) => res.iso_3166_1 == country)))
               .subscribe(res => {
@@ -119,10 +124,10 @@ export class FilterComponent implements OnInit, OnDestroy {
             })
         }
       }
-      if(params.language){
+      if (params.language) {
         if (typeof (params.language) === 'object') {
           params.language?.forEach((language: any) => {
-            console.log(language)
+            // console.log(language)
             this.movieApiService.getAllLanguages()
               .pipe(map(res => res.filter((res: any) => res.iso_639_1 == language)))
               .subscribe(res => {
@@ -151,8 +156,47 @@ export class FilterComponent implements OnInit, OnDestroy {
     return joined
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe()
+  removeFilter(filText: any, filType: string) {
+    if (filType == 'genre') {
+      let index = this.genres.indexOf(String(filText))
+      this.genres.splice(index, 1)
+      this.genresNames = this.genresNames.filter((genre: any) => genre.id != filText)
+    } else if (filType == 'year') {
+      let index = this.years.indexOf(filText)
+      this.years.splice(index, 1)
+    } else if (filType == 'country') {
+      let index = this.countriesIso.indexOf(filText)
+      this.countriesIso.splice(index, 1)
+      this.countriesNames = this.countriesNames.filter((country: any) => country.iso_3166_1 != filText)
+
+    } else if (filType == 'language') {
+      let index = this.languages.indexOf(filText)
+      this.languages.splice(index, 1)
+      this.languagesNames = this.languagesNames.filter((language: any) => language.iso_639_1 != filText)
+    }
+    let queryParams = {
+      genre: this.genres,
+      sort: this.sort,
+      year: this.years,
+      language: this.languages,
+      country: this.countriesIso,
+      page: 1
+    }
+    // console.log(queryParams);
+    
+
+
+    this.router.navigate(['.'], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        genre: this.genres,
+        sort: this.sort,
+        year: this.years,
+        language: this.languages,
+        country: this.countriesIso,
+        page: 1
+      }
+    })
   }
 
 }

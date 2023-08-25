@@ -6,12 +6,53 @@
     color: white;
 }
 
-.gray {
-    color: gray;
+.div {
+    flex-wrap: wrap;
 }
 
-.gray:not(:last-child)::after {
-    content: ', ';
+.gray {
+    color: gray;
+    text-align: center;
+    font-size: 22px;
+    margin-left: 5px;
+}
+
+.x {
+    color: rgb(49, 58, 73);
+    text-decoration: none;
+    display: flex;
+    /* border: 1px solid gray; */
+    justify-content: center;
+    align-items: center;
+    border-radius: 10rem;
+    padding: 2px 6px;
+    margin-left: 5px;
+    font-size: 16px;
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(146, 144, 144);
+    font-weight: 600;
+    transition: all .3s;
+    text-align: center;
+}
+
+.del {
+    display: inline;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    font-size: 10px;
+    margin-left: 4px;
+}
+
+.x:hover {
+    transform: scale(1.06);
+    color: rgb(49, 58, 73);
+    background-color: #E50914;
+    cursor: pointer;
+}
+.comma {
+    font-size: 22px!important;
     color: white;
 }
 

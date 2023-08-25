@@ -16,4 +16,22 @@ export class NavigationRouterService {
    public getUrl(): string {
     return this.url
    }
+
+   filter(genreValue: any, yearValue: any, countriesValue: any, languagesValue: any, sortValue: any) {
+    if (genreValue.length == 0 && yearValue.length == 0 && countriesValue.length == 0 && languagesValue.length == 0 && !sortValue) {
+      sortValue = undefined
+      return
+    }
+    console.log('radi')
+    this.router.navigate(['/filter'], {
+      queryParams: {
+        genre: genreValue,
+        sort: sortValue,
+        year: yearValue,
+        language: languagesValue,
+        country: countriesValue,
+        page: 1
+      }
+    })
+  }
 }

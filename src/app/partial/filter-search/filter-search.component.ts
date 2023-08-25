@@ -89,20 +89,7 @@ export class FilterSearchComponent {
   }
 
   filter() {
-    if (this.genreValue.length == 0 && this.yearValue.length == 0 && this.countriesValue.length == 0 && this.languagesValue.length == 0 && !this.sortValue) {
-      this.sortValue = undefined
-      return
-    }
-    this.router.navigate(['/filter'], {
-      queryParams: {
-        genre: this.genreValue,
-        sort: this.sortValue,
-        year: this.yearValue,
-        language: this.languagesValue,
-        country: this.countriesValue,
-        page: 1
-      }
-    })
+    this.navService.filter(this.genreValue, this.yearValue, this.countriesValue, this.languagesValue, this.sortValue)
   }
 
   resetFilter() {
