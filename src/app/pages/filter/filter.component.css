@@ -4,21 +4,22 @@
 
 .filter-cont h3 {
     color: white;
+    margin-right: 5px;
 }
 
 .div {
     flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 
 .gray {
     color: gray;
     text-align: center;
     font-size: 22px;
-    margin-left: 5px;
 }
 
 .x {
-    color: rgb(49, 58, 73);
+    color: #E50914;
     text-decoration: none;
     display: flex;
     /* border: 1px solid gray; */
@@ -26,7 +27,6 @@
     align-items: center;
     border-radius: 10rem;
     padding: 2px 6px;
-    margin-left: 5px;
     font-size: 16px;
     width: fit-content;
     height: fit-content;
@@ -54,6 +54,7 @@
 .comma {
     font-size: 22px!important;
     color: white;
+    margin-right: 5px;
 }
 
 .red {
