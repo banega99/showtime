@@ -10,7 +10,6 @@ import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.s
 })
 export class WatchlistComponent {
   movies: string[] = []
-  movies1: string[] = []
   
   constructor(private watchlistService: WatchlistService, private movieApiService: MovieApiService){
     this.watchlistService.watchlistAsObservable().pipe(map((watchlist:any)=>{

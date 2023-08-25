@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Observable, Subscription, map } from 'rxjs';
+import { LoadingService } from 'src/app/services/loading.service';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 import { NavigationRouterService } from 'src/app/services/navigation-router-service/navigation-router.service';
 import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.service';
@@ -34,7 +35,7 @@ export class FilterComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private watchlistService: WatchlistService,
     private navService: NavigationRouterService,
-    private router: Router) {
+    private router: Router,) {
   }
 
   ngOnInit(): void {
