@@ -70,7 +70,7 @@ export class FilterComponent implements OnInit {
         })
       }
 
-      this.filterResults(params?.genre, params?.year, params?.country, params?.company, params?.sort, params?.language, params?.page)
+      this.filterResults(params?.genre, params?.year, params?.country, params?.company, params?.sort, params?.language, params?.page, '')
       if (params?.genre) {
         if (typeof (params?.genre) === 'object') {
           params?.genre?.forEach((genre: any) => {
@@ -160,7 +160,7 @@ export class FilterComponent implements OnInit {
       this.languages.splice(index, 1)
       this.languagesNames = this.languagesNames.filter((language: any) => language.iso_639_1 != filText)
     }
-    this.filterResults(this.genres, this.years, this.countriesIso, '', this.sort, this.languages, undefined) 
+    this.filterResults(this.genres, this.years, this.countriesIso, '', this.sort, this.languages, undefined, 'remove') 
     let queryParams = {
       genre: this.genres,
       sort: this.sort,
@@ -176,16 +176,17 @@ export class FilterComponent implements OnInit {
     })
   }
 
-  filterResults(genres: any, years: any, countries: any, companies: any, sort: any, languages: any, page: any) {
+  filterResults(genres: any, years: any, countries: any, companies: any, sort: any, languages: any, page: any, remove: any) {
     this.movieApiService.getFilter(genres, years, countries, companies, sort, languages, page)
         .subscribe(result => {
           this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
             this.searchRes$ = this.watchlistService.filterWatchlist(watchlist, result.results)
           })
           // console.log(result)
+          if(remove == 'remove')return
           this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
           this.totalResults = result.total_results
-          for (let i = page - 3; i < parseInt(page) + 4; i++) {
+          for (let i = parseInt(page) - 3; i < parseInt(page) + 4; i++) {
             if (i > 0 && i < this.totalPages) {
               this.pages.push(i)
             }
