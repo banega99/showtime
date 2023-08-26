@@ -18,20 +18,18 @@ export class ActorDetailsComponent {
     activatedRoute.params.subscribe(params =>{
       if(!params)return
       this.actorDetails$ = movieApiService.getActorDetails(params.id)
-      movieApiService.getActorDetails(params.id).subscribe(console.log)
+      // movieApiService.getActorDetails(params.id).subscribe(console.log)
       movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
       .subscribe(res => {
         this.movieCredits = res
-        console.log(res)
+        // console.log(res)
       })
       movieApiService.getActorDetails(params.id).subscribe(actor => {
-        console.log(actor.birthday)
-        console.log(new Date(actor.birthday).getTime())
-        console.log((new Date().getTime() - new Date(actor.birthday).getTime()))
-        this.yearsOld = new Date().getFullYear() - parseInt(actor.birthday?.split('-')[0])
+        let resultsYear = parseInt(actor.birthday?.split('-')[0])
+        let actorThisYear = new Date([String(new Date().getFullYear())].concat(actor.birthday.split('-').slice(1, actor.birthday.split('-').length)).join('-'))
+        this.yearsOld = new Date().getFullYear() - resultsYear
+        if(new Date().getTime() < actorThisYear.getTime())this.yearsOld -= 1
         if(!actor.deathday)return
-        console.log(actor.deathday);
-        
         this.yearsOldDead = parseInt(actor.deathday?.split('-')[0]) - parseInt(actor.birthday?.split('-')[0])
       })
       movieApiService.getActorImages(params.id).subscribe(imgs => {

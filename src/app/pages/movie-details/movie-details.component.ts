@@ -44,7 +44,7 @@ export class MovieDetailsComponent {
         })
         this.movie = movieDetails
         this.year = movieDetails.release_date.slice(0, 4)
-        console.log(movieDetails)
+        // console.log(movieDetails)
         watchlistService.watchlistAsObservable().pipe(map(watchlist => {
           return watchlist.some((movie: any) => movie.id == movieDetails.id)
         })).subscribe(res => {

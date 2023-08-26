@@ -1,13 +1,36 @@
 <div class="container mt-4 p-3">
-    <h5 *ngIf="title != 'Popular Movies' && title != 'Top Rated Movies' && title != 'Upcoming Movies' && title != 'Trending Movies' && title != 'Now Playing Movies'" class="text-white">{{title}}</h5>
-    <h5 routerLink="/movie-list/{{movieList}}/1" *ngIf="title == 'Popular Movies' || title == 'Top Rated Movies' || title == 'Upcoming Movies' || title == 'Trending Movies' || title == 'Now Playing Movies'" class="text-white link">
+    <h5 *ngIf="title != 'Popular Movies' && title != 'Top Rated Movies' && title != 'Upcoming Movies' && title != 'Trending Movies' && title != 'Now Playing Movies'"
+        class="text-white">{{title}}</h5>
+    <h5 routerLink="/movie-list/{{movieList}}/1"
+        *ngIf="title == 'Popular Movies' || title == 'Top Rated Movies' || title == 'Upcoming Movies' || title == 'Trending Movies' || title == 'Now Playing Movies'"
+        class="text-white link">
         {{title}}
         <span class="little-text">Explore All</span>
         <span class="arrow"></span>
-     </h5>
+    </h5>
     <div class="rowposter" #rowposter (wheel)="scrollX($event)">
-        <div class="imgcont" *ngFor="let movie of movies">
-            <img routerLink="/movie/{{movie.id}}" src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" class="rowimg largeposter" alt="" [ngStyle]="{width: width}" [ngClass]="{'mobile' : windowWidth < 767}">
+        <div routerLink="/movie/{{movie.id}}" class="imgcont" *ngFor="let movie of movies">
+            <img  src="https://image.tmdb.org/t/p/original{{movie.poster_path}}"
+                class="rowimg largeposter" alt="" [ngStyle]="{width: width}" [ngClass]="{'mobile' : windowWidth < 767}">
+            <div #hover class="hover d-none d-md-flex">
+                <h5 id="title">{{movie.title}}</h5>
+                <div class="rating" [ngClass]="{'green': movie.vote_average >= 9,
+                    'lightgreen': movie.vote_average >= 7 && movie.vote_average < 9,
+                    'greenyellow': movie.vote_average >= 5 && movie.vote_average < 7,
+                    'yellow': movie.vote_average >= 3 && movie.vote_average < 5,
+                    'red': movie.vote_average < 3 && movie.vote_average > 0,
+                   }">
+                   <span *ngIf="movie.vote_average > 0" class="star">⭐</span><span *ngIf="movie.vote_average > 0" class="rating-no">{{movie.vote_average | number:'1.0-1'}}</span> <span *ngIf="movie.vote_average === 0" class="rating-no"> N/A</span>
+               </div>
+                <div class="genres"><a routerLink="/genres/{{genre.name}}/{{genre.id}}/1" class="genre"
+                        *ngFor="let genre of movie.genre_names">{{genre.name}}</a></div>
+                <div class="text-cont">
+                    <p class="d-none d-md-inline">{{movie.overview.substring(0, 100)}}...</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- (mouseenter)="hover.style.visibility = 'visible'" 
+        (mouseleave)="hover.style.visibility = 'hidden'"   -->

@@ -7,7 +7,7 @@
             <h3>Genres: </h3>
             <div (click)="removeFilter(genre.id, 'genre')" *ngFor="let genre of genresNames; let i=index" class="filt d-flex align-items-center">
                 <span  class="gray x">{{genre?.name? genre.name : ' / '}} <span class="del">&#10006;</span> </span>
-                <span class="comma" *ngIf="i != genresNames.length - 1">,</span>
+                <span class="comma" *ngIf="i != genresNames?.length - 1">,</span>
             </div>
             <span class="gray" *ngIf="genresNames?.length == 0">/</span>
         </div>
@@ -15,24 +15,24 @@
             <h3>Year of release: </h3>
             <div (click)="removeFilter(year, 'year')" *ngFor="let year of years; let i=index" class="filt d-flex align-items-center">
                 <span class="gray x">{{year}} <span class="del">&#10006;</span> </span>
-                <span class="comma" *ngIf="i != years.length - 1">,</span>
+                <span class="comma" *ngIf="i != years?.length - 1">,</span>
             </div>
             <span class="gray" *ngIf="years?.length == 0 || years[0]?.length == 0">/</span>
         </div>
         <div class="div d-flex">
             <h3>Country production:</h3>
-            <div (click)="removeFilter(country.iso_3166_1, 'country')" *ngFor="let country of countriesNames; let i=index" class="filt d-flex align-items-center">
+            <div (click)="removeFilter(country?.iso_3166_1, 'country')" *ngFor="let country of countriesNames; let i=index" class="filt d-flex align-items-center">
                 <span  class="gray x">{{country?.english_name}} <span class="del">&#10006;</span> </span>
-                <span class="comma" *ngIf="i != countriesNames.length - 1">,</span>
+                <span class="comma" *ngIf="i != countriesNames?.length - 1">,</span>
             </div>
             <span class="gray" *ngIf="countriesNames?.length == 0">/</span>
         </div>
 
         <div class="div d-flex">
             <h3>Language: </h3>
-            <div (click)="removeFilter(language.iso_639_1, 'language')" *ngFor="let language of languagesNames; let i=index" class="filt d-flex align-items-center">
+            <div (click)="removeFilter(language?.iso_639_1, 'language')" *ngFor="let language of languagesNames; let i=index" class="filt d-flex align-items-center">
                 <span  class="gray x">{{language?.english_name}} <span class="del">&#10006;</span> </span>
-                <span class="comma" *ngIf="i != languagesNames.length - 1">,</span>
+                <span class="comma" *ngIf="i != languagesNames?.length - 1">,</span>
             </div>
             <span class="gray" *ngIf="languagesNames?.length == 0">/</span>
         </div>

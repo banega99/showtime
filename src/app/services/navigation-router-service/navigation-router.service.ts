@@ -34,5 +34,6 @@ export class NavigationRouterService {
         page: 1
       }
     })
+  
   }
 }

@@ -39,7 +39,6 @@ export class FilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.activatedRoute.queryParams.subscribe(params => {
       if (!params) return;
       this.totalResults = 0
@@ -57,38 +56,24 @@ export class FilterComponent implements OnInit {
       this.sort = params.sort
       this.genres = params.genre
       this.countries = params.coutry
-      this.years = !params.year || params.year.length == 0 ? [] : params.year
-      this.years = typeof (params.year) === 'string' ? [this.years] : this.years
-      
-      this.languages = params.language
-      this.sortedBy = params.sortedBy == ' ' ? '/' : this.sorted(params.sort.split('.')[0], params.sort.split('.')[1])
-      if (params.company) {
+      this.years = !params.year || params?.year.length == 0 ? [] : params?.year
+      this.years = typeof (params?.year) === 'string' ? [this.years] : this.years
+
+      this.languages = params?.language
+      this.sortedBy = params?.sortedBy == ' ' ? '/' : this.sorted(params?.sort.split('.')[0], params?.sort.split('.')[1])
+      if (params?.company) {
         // console.log(params.company)
-        this.movieApiService.getCompany(params.company).subscribe(company => {
+        this.movieApiService.getCompany(params?.company).subscribe(company => {
           // console.log(company)
           this.companyName = company.name
           this.companyId = company.id
         })
       }
 
-      this.movieApiService.getFilter(params.genre, params.year, params.country, params.company, params.sort, params.language, params.page)
-        .subscribe(result => {
-          this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
-            this.searchRes$ = this.watchlistService.filterWatchlist(watchlist, result.results)
-          })
-          // console.log(result)
-          this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
-          this.totalResults = result.total_results
-          for (let i = params.page - 3; i < parseInt(params.page) + 4; i++) {
-            if (i > 0 && i < this.totalPages) {
-              this.pages.push(i)
-            }
-
-          }
-        });
-      if (params.genre) {
-        if (typeof (params.genre) === 'object') {
-          params.genre?.forEach((genre: any) => {
+      this.filterResults(params?.genre, params?.year, params?.country, params?.company, params?.sort, params?.language, params?.page)
+      if (params?.genre) {
+        if (typeof (params?.genre) === 'object') {
+          params?.genre?.forEach((genre: any) => {
             this.movieApiService.getGenres().pipe(map(res => res.genres.filter((res: any) => res.id == genre)))
               .subscribe(res => {
                 if (!res[0]) return
@@ -175,6 +160,7 @@ export class FilterComponent implements OnInit {
       this.languages.splice(index, 1)
       this.languagesNames = this.languagesNames.filter((language: any) => language.iso_639_1 != filText)
     }
+    this.filterResults(this.genres, this.years, this.countriesIso, '', this.sort, this.languages, 1) 
     let queryParams = {
       genre: this.genres,
       sort: this.sort,
@@ -183,21 +169,29 @@ export class FilterComponent implements OnInit {
       country: this.countriesIso,
       page: 1
     }
-    // console.log(queryParams);
-    
 
-
-    this.router.navigate(['.'], {
-      relativeTo: this.activatedRoute,
-      queryParams: {
-        genre: this.genres,
-        sort: this.sort,
-        year: this.years,
-        language: this.languages,
-        country: this.countriesIso,
-        page: 1
-      }
+    this.router.navigate(['/filter'], {
+      // relativeTo: this.activatedRoute,
+      queryParams
     })
+  }
+
+  filterResults(genres: any, years: any, countries: any, companies: any, sort: any, languages: any, page: any) {
+    this.movieApiService.getFilter(genres, years, countries, companies, sort, languages, page)
+        .subscribe(result => {
+          this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
+            this.searchRes$ = this.watchlistService.filterWatchlist(watchlist, result.results)
+          })
+          // console.log(result)
+          this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
+          this.totalResults = result.total_results
+          for (let i = parseInt(page) - 3; i < parseInt(page) + 4; i++) {
+            if (i > 0 && i < this.totalPages) {
+              this.pages.push(i)
+            }
+
+          }
+        });
   }
 
 }
