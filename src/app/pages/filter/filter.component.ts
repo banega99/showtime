@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Observable, Subscription, map } from 'rxjs';
 import { LoadingService } from 'src/app/services/loading.service';
@@ -11,7 +11,7 @@ import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.s
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent implements OnChanges, OnInit  {
   searchRes$!: any[]
   resLength!: number
   genres: any
@@ -38,6 +38,10 @@ export class FilterComponent implements OnInit {
     private router: Router,) {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+  }
+
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       if (!params) return;
@@ -54,12 +58,12 @@ export class FilterComponent implements OnInit {
       this.languages = []
       this.countriesIso = []
       this.sort = params.sort
-      this.genres = params.genre
+      this.genres = typeof (params?.genre) === 'string' ? [params.genre] : params.genre
       this.countries = params.coutry
       this.years = !params.year || params?.year.length == 0 ? [] : params?.year
       this.years = typeof (params?.year) === 'string' ? [this.years] : this.years
 
-      this.languages = params?.language
+      this.languages = typeof (params?.language) === 'string' ? [params.language] : params?.language
       this.sortedBy = params?.sortedBy == ' ' ? '/' : this.sorted(params?.sort.split('.')[0], params?.sort.split('.')[1])
       if (params?.company) {
         // console.log(params.company)
@@ -133,7 +137,7 @@ export class FilterComponent implements OnInit {
     })
   }
 
-
+  
 
   sorted(first: string, second: string) {
     let firstToUpper = first == 'vote_average' ? 'Rating' : first.slice(0, 1).toUpperCase() + first.slice(1, first.length)
@@ -142,7 +146,8 @@ export class FilterComponent implements OnInit {
     return joined
   }
 
-  removeFilter(filText: any, filType: string) {
+  removeFilter(filText: any, filType: string, e: any) {
+    // e.target.closest('.gray').style.textDecoration = 'line-through'
     if (filType == 'genre') {
       let index = this.genres.indexOf(String(filText))
       this.genres.splice(index, 1)
@@ -160,7 +165,7 @@ export class FilterComponent implements OnInit {
       this.languages.splice(index, 1)
       this.languagesNames = this.languagesNames.filter((language: any) => language.iso_639_1 != filText)
     }
-    this.filterResults(this.genres, this.years, this.countriesIso, '', this.sort, this.languages, undefined, 'remove') 
+    this.filterResults(this.genres, this.years, this.countriesIso, '', this.sort, this.languages, 1, 'remove') 
     let queryParams = {
       genre: this.genres,
       sort: this.sort,
@@ -182,10 +187,9 @@ export class FilterComponent implements OnInit {
           this.watchlistService.watchlistAsObservable().subscribe(watchlist => {
             this.searchRes$ = this.watchlistService.filterWatchlist(watchlist, result.results)
           })
-          // console.log(result)
-          if(remove == 'remove')return
-          this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
+          this.pages = []
           this.totalResults = result.total_results
+          this.totalPages = result.total_pages > 500 ? 500 : result.total_pages
           for (let i = parseInt(page) - 3; i < parseInt(page) + 4; i++) {
             if (i > 0 && i < this.totalPages) {
               this.pages.push(i)

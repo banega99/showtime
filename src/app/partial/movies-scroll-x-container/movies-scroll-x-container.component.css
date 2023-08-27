@@ -211,6 +211,7 @@ igc-rating {
 }
 
 .rating .star {
+    /* text-decoration: ; */
     font-size: 6px;
     margin: 0;
     width: fit-content;
