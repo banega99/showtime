@@ -6,7 +6,7 @@ import { MovieApiService } from 'src/app/services/movie-api-service.service';
   templateUrl: './movies-scroll-x-container.component.html',
   styleUrls: ['./movies-scroll-x-container.component.css']
 })
-export class MoviesScrollXContainerComponent implements OnChanges, OnInit, AfterViewInit, AfterContentChecked, AfterContentInit {
+export class MoviesScrollXContainerComponent implements OnChanges, OnInit{
   constructor(private movieApiService: MovieApiService){
     // console.log(this.movies)
   }
@@ -16,57 +16,20 @@ export class MoviesScrollXContainerComponent implements OnChanges, OnInit, After
   windowWidth!: number
   movieList!: string
 
-  ngAfterContentInit(): void {
-    // console.log('dsdsds')
-    // console.log(this.movies)
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
     this.movies?.forEach((movie: any) => {
         this.movieApiService.getGenres().subscribe((genre: any) => {
           let filteredGenres = genre.genres.filter(({id: id1}: any) => {
             return movie.genre_ids.some((id2: any) => id1 === id2)
           })
           movie.genre_names = filteredGenres
-          console.log(filteredGenres)
         });
       })
-  }
-
-  ngAfterViewInit(){
-    // console.log('dadad')
-    // console.log(this.movies)
-  }
-
-  ngAfterContentChecked(): void {
-    // console.log('dadad')
-    // console.log(this.movies)
-    // this.movies?.forEach((movie: any) => {
-    //   this.movieApiService.getGenres().subscribe((genre: any) => {
-    //     let filteredGenres = genre.genres.filter(({id: id1}: any) => {
-    //       return movie.genre_ids.some((id2: any) => id1 === id2)
-    //     })
-    //     movie.genre_names = filteredGenres
-    //     console.log(filteredGenres)
-    //   });
-    // })
   }
 
   ngOnInit(): void {
     this.windowWidth = window.innerWidth
     this.movieList = this.makeMovieList()
-    console.log(this.movies)
-    this.movies?.forEach((movie: any) => {
-      this.movieApiService.getGenres().subscribe((genre: any) => {
-        let filteredGenres = genre.genres.filter(({id: id1}: any) => {
-          return movie.genre_ids.some((id2: any) => id1 === id2)
-        })
-        movie.genre_names = filteredGenres
-        console.log(filteredGenres)
-      });
-    })
-    // console.log(this.movieList)
   }
 
   scrollX(e: WheelEvent) {
