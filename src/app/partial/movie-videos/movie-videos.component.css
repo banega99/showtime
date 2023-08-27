@@ -140,10 +140,18 @@ h5 {
 
 .x2 {
     visibility: hidden;
-    top: 15%;
-    right: 10%;
-    transition: all .4s;
+    top: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    transition: all .3s;
     opacity: 0;
+}
+
+.x2-show {
+    top: 16%;
+    right: 6%;
+    opacity: 1;
+    visibility: visible;
 }
 
 .x:hover, .x2:hover {
@@ -197,6 +205,10 @@ h5 {
     }
 
     .x{
+        /* position: absolute!important;
+        top: 0;
+        right: 0; */
+        /* transform: translate(-95%, -95%); */
         visibility: hidden;
     }
 }

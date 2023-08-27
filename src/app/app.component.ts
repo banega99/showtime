@@ -48,8 +48,7 @@ export class AppComponent implements OnChanges {
       document.documentElement.style.overflow = 'auto'
       let trailerCont = document.querySelector('.trailer-cont') as HTMLElement
       let x2 = document.querySelector('.x2') as HTMLElement
-      x2.style.visibility = 'hidden'
-      x2.style.opacity = '0'
+      x2.classList.remove('x2-show')
       trailerCont.style.visibility = 'visible'
       trailerCont.style.opacity = '1'
     } else if (document.querySelector('.gallery')?.classList.contains('carousel-show')
