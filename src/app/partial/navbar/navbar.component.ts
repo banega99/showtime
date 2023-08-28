@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, map, mergeMap } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 
 @Component({
@@ -18,12 +18,12 @@ export class NavbarComponent implements OnInit {
   movieResults: any[] = []
   actorResults: any[] = []
   searchType: string = 'All'
-  @ViewChild('l')line!: ElementRef
+  @ViewChild('l') line!: ElementRef
   @ViewChild('s') searchInput!: ElementRef
   @ViewChildren('inputCheckbox') inputCheckbox!: QueryList<ElementRef>
   constructor(private route: Router, private movieApiService: MovieApiService, private fb: FormBuilder) {
     this.movieApiService.getGenres().subscribe(genres => this.genres = genres.genres)
-    
+
   }
 
   ngOnInit(): void {
@@ -59,25 +59,24 @@ export class NavbarComponent implements OnInit {
       return
     }
     if (this.searchType == 'All') {
-      this.movieApiService.getMovieBytitle(title, 1).subscribe(data => {
-        this.movieResults = data.results.slice(0, 2)
-      })
-      this.movieApiService.getActor(title, 1).subscribe(data => {
-        this.actorResults = data.results.filter((data: any) => data.popularity > 0.6).slice(0, 2)
-        this.searchResults = this.movieResults.concat(this.actorResults) 
-      })
+      this.movieApiService.getMovieBytitle(title, 1).pipe(mergeMap(movies => {
+        return this.movieApiService.getActor(title, 1).pipe(map(actors => {
+          this.searchResults = movies.results.length > 0 && actors.results.length > 0 && movies.results.slice(0, 2).concat(actors.results.slice(0, 2)) ||
+            movies.results.length == 0 && actors.results && actors.results.slice(0, 4) ||
+            movies.results && actors.results.length == 0 && movies.results.slice(0, 4)
+        }))
+
+      })).subscribe()
     } else if (this.searchType == 'Movie') {
       this.movieApiService.getMovieBytitle(title, 1).subscribe(data => {
-        this.movieResults = data.results.slice(0, 4)
-        this.searchResults = this.movieResults
+        this.searchResults  = data.results.slice(0, 4)
       })
-      
+
     } else if (this.searchType == 'People') {
       this.movieApiService.getActor(title, 1).subscribe(data => {
-        this.actorResults = data.results.slice(0, 4).filter((data: any) => data.popularity > 0.6)
-        this.searchResults = this.actorResults
+        this.searchResults = data.results.slice(0, 4).filter((data: any) => data.popularity > 0.6)
       })
-      
+
     }
   }
 
@@ -91,12 +90,12 @@ export class NavbarComponent implements OnInit {
   }
   i = 0
   @HostListener('window:scroll', ['$event'])
-    onScroll(e: any) {
-      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var scrolled = (winScroll / height) * 100;
-      this.line.nativeElement.style.width = scrolled + "%";
-    }
+  onScroll(e: any) {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    this.line.nativeElement.style.width = scrolled + "%";
+  }
 
 
 }
