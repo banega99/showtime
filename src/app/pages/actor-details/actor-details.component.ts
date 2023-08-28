@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 
 @Component({
@@ -15,27 +15,23 @@ export class ActorDetailsComponent {
   yearsOldDead!: any
   images!: any
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute){
-    activatedRoute.params.subscribe(params =>{
-      if(!params)return
+    activatedRoute.params.pipe(switchMap(params =>{
       this.actorDetails$ = movieApiService.getActorDetails(params.id)
-      // movieApiService.getActorDetails(params.id).subscribe(console.log)
-      movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
-      .subscribe(res => {
-        this.movieCredits = res
-        // console.log(res)
-      })
-      movieApiService.getActorDetails(params.id).subscribe(actor => {
+      let credits = movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
+      let yearsDet = movieApiService.getActorDetails(params.id).pipe(map(actor => {
         let resultsYear = parseInt(actor.birthday?.split('-')[0])
         let actorThisYear = new Date([String(new Date().getFullYear())].concat(actor.birthday.split('-').slice(1, actor.birthday.split('-').length)).join('-'))
         this.yearsOld = new Date().getFullYear() - resultsYear
         if(new Date().getTime() < actorThisYear.getTime())this.yearsOld -= 1
         if(!actor.deathday)return
         this.yearsOldDead = parseInt(actor.deathday?.split('-')[0]) - parseInt(actor.birthday?.split('-')[0])
-      })
-      movieApiService.getActorImages(params.id).subscribe(imgs => {
-        // console.log(imgs.profiles);
+      }))
+      let imgs = movieApiService.getActorImages(params.id).pipe(map(imgs => {
         this.images = imgs.profiles
-      })
+      }))
+      return forkJoin(credits, yearsDet, imgs)
+    })).subscribe(([credits, yearsDet, imgs]) => {
+      this.movieCredits = credits
     })
   }
 
