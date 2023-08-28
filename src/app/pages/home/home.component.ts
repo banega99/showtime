@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { forkJoin, map, switchMap, tap } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 
 @Component({
@@ -31,17 +32,18 @@ export class HomeComponent implements OnInit {
   }
 
   bannerData(){
-    this.movieApiService.bannerApiData().subscribe(data => {
-      this.bannerMovies = data.results
-      data.results.forEach((movie: any) => {
-        this.movieApiService.getGenres().subscribe((genre: any) => {
+    this.movieApiService.bannerApiData().pipe(switchMap(data => {
+      let genresObs = data.results.map((movie: any) => {
+        return this.movieApiService.getGenres().pipe(map((genre: any) => {
           let filteredGenres = genre.genres.filter(({id: id1}: any) => {
             return movie.genre_ids.some((id2: any) => id1 === id2)
           })
           movie.genre_names = filteredGenres
-        });
+          return movie
+        }))
       })
-    });
+      return forkJoin(genresObs)
+    })).subscribe(movieResults => this.bannerMovies = movieResults)
     
     
   }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map, of, switchMap } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.service';
 
@@ -26,6 +26,7 @@ export class GenresComponent implements OnInit {
     private http: HttpClient,
     private watchlistService: WatchlistService) {
     activatedRoute.params.pipe(switchMap(params => {
+      if (!params) return of(null);
       this.pages = []
       this.currentPage = parseInt(params.page)
       this.genre = params.genre

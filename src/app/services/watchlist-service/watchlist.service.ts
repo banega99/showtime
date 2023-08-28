@@ -16,10 +16,12 @@ export class WatchlistService implements OnInit {
     this.watchlistObservable$ = this.watchlistSubject$.asObservable()
   }
   addToWatchlist(movie: any, img: any) {
+    //Remove from Watchlist
     let imgUrl = img.getAttribute('src')
     if (imgUrl == '../../../assets/images/x.png' || imgUrl == '../../../assets/images/xRed2.png') {
       movie.watchlist = false
-      let newWatchlist = this.watchlist.filter(watchlist => watchlist.id != movie.id)
+      let newWatchlist = this.watchlist.filter(watchlist => watchlist.id != movie.id) || []
+      console.log(newWatchlist)
       localStorage.setItem('watchlist', JSON.stringify(newWatchlist))
       this.watchlist = JSON.parse(localStorage.getItem('watchlist') || '{[]}')
       this.watchlistSubject$.next(this.watchlist)
@@ -35,6 +37,7 @@ export class WatchlistService implements OnInit {
 
       return
     }
+    //Add to Watchlist
     localStorage.getItem('watchlist')
     movie.watchlist = true
     this.watchlist.push(movie);

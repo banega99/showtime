@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { of, switchMap, tap } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 
 @Component({
@@ -11,11 +12,11 @@ export class MovieVideosComponent {
   videos: any[] = []
   moreVideos: any[] = []
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute) {
-    activatedRoute.params.subscribe(params => {
-      if (!params) return
+    activatedRoute.params.pipe(switchMap(params => {
+      if (!params) return of(null);
       this.videos = []
       this.moreVideos = []
-      this.movieApiService.getMovieVideo(params.id).subscribe(videos => {
+      return this.movieApiService.getMovieVideo(params.id).pipe(tap(videos => {
         // console.log(videos)
         videos.results.slice(0, 4).forEach((element: any) => {
           let url = `https://www.themoviedb.org/video/play?key=${element?.key}`
@@ -25,8 +26,8 @@ export class MovieVideosComponent {
           let url = `https://www.themoviedb.org/video/play?key=${element?.key}`
           this.moreVideos.push(url)
         });
-      })
-    })
+      }))
+    })).subscribe()
   }
   showVideos(section: any) {
     section.classList.toggle('videos-show')

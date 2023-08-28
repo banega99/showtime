@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
+import { EMPTY, Observable, forkJoin, map, of, switchMap, tap } from 'rxjs';
 import { MovieVideosComponent } from 'src/app/partial/movie-videos/movie-videos.component';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.service';
@@ -33,42 +33,42 @@ export class MovieDetailsComponent {
     this.countries = []
     this.videos = []
     this.moreVideos = []
-    activatedRoute.params.subscribe(params => {
-      if (!params) return
-      movieApiService.getMovieDetails(params.id).subscribe(movieDetails => {
-        movieDetails.production_countries.forEach((country: any) => {
-          movieApiService.getAllCountries().subscribe(countries => {
-            this.countries.push(countries.filter((country2: any) => country2.english_name === country.name)[0])
-          })
-            
+    activatedRoute.params.pipe(switchMap(params => {
+      if (!params) return of(null);
+      let countriesWatchObs = movieApiService.getMovieDetails(params.id).pipe(switchMap(movieDetails => {
+        let countries = movieDetails.production_countries.map((country: any) => {
+          return movieApiService.getAllCountries().pipe(tap(countries => {
+            return this.countries.push(countries.filter((country2: any) => country2.english_name === country.name)[0])
+          }))
+
         })
-        this.movie = movieDetails
         this.year = movieDetails.release_date.slice(0, 4)
-        // console.log(movieDetails)
-        watchlistService.watchlistAsObservable().pipe(map(watchlist => {
-          return watchlist.some((movie: any) => movie.id == movieDetails.id)
-        })).subscribe(res => {
-          this.watchlist = res
-        })
-      })
+        let watchlist = watchlistService.watchlistAsObservable().pipe(
+          map(watchlist => {
+            return watchlist.some((movie: any) => movie.id == movieDetails.id)
+          }),
+          tap((res) => {
+            movieDetails.watchlist = res
+            this.movie = movieDetails
+          })
+        )
+        return forkJoin(...countries, watchlist)
+      }))
       this.movieTrailerUrl$ = this.movieApiService.getMovieVideo(params.id)
         .pipe(map(data => `https://www.themoviedb.org/video/play?key=${data.results[1]?.key}`))
-      this.movieApiService.getMovieCast(params.id).pipe(map(data => {
-        return data.cast
-      })).subscribe(data => {
-        this.casts = data
-      })
-      this.movieApiService.getRecommended(params.id).pipe(map(data => data.results))
-        .subscribe(res => this.movieRecommendations = res)
-      movieApiService.getMovieReviews(params.id).subscribe(reviews => {
+      let castsObs = this.movieApiService.getMovieCast(params.id).pipe(tap(data => {
+        this.casts = data.cast
+      }))
+      let recObs = this.movieApiService.getRecommended(params.id).pipe(map(data => this.movieRecommendations = data.results))
+      let revsObs = movieApiService.getMovieReviews(params.id).pipe(tap(reviews => {
         this.totalReviews = reviews.total_results
         this.reviews = reviews.results
-      })
-      movieApiService.getMovieImages(params.id).subscribe(images => {
+      }))
+      let imgsObs = movieApiService.getMovieImages(params.id).pipe(tap(images => {
         this.backdrops = images.backdrops
-      })
+      }))
 
-      this.movieApiService.getMovieVideo(params.id).subscribe(videos => {
+      let videosObs = this.movieApiService.getMovieVideo(params.id).pipe(tap(videos => {
         videos.results.slice(0, 4).forEach((element: any) => {
           let url = `https://www.themoviedb.org/video/play?key=${element?.key}`
           this.videos.push(url)
@@ -77,8 +77,9 @@ export class MovieDetailsComponent {
           let url = `https://www.themoviedb.org/video/play?key=${element?.key}`
           this.moreVideos.push(url)
         });
-      })
-    })
+      }))
+      return forkJoin(countriesWatchObs, castsObs, recObs, revsObs, imgsObs, videosObs)
+    })).subscribe()
 
   }
 

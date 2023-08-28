@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, forkJoin, map, switchMap } from 'rxjs';
+import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api-service.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class ActorDetailsComponent {
   images!: any
   constructor(private movieApiService: MovieApiService, private activatedRoute: ActivatedRoute){
     activatedRoute.params.pipe(switchMap(params =>{
+      
       this.actorDetails$ = movieApiService.getActorDetails(params.id)
       let credits = movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
       let yearsDet = movieApiService.getActorDetails(params.id).pipe(map(actor => {
