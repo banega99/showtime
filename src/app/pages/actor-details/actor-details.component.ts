@@ -21,7 +21,7 @@ export class ActorDetailsComponent {
       let credits = movieApiService.getMovieCredits(params.id).pipe(map(data => data.cast))
       let yearsDet = movieApiService.getActorDetails(params.id).pipe(map(actor => {
         let resultsYear = parseInt(actor.birthday?.split('-')[0])
-        let actorThisYear = new Date([String(new Date().getFullYear())].concat(actor.birthday.split('-').slice(1, actor.birthday.split('-').length)).join('-'))
+        let actorThisYear = new Date([String(new Date().getFullYear())].concat(actor.birthday?.split('-').slice(1, actor.birthday.split('-').length)).join('-'))
         this.yearsOld = new Date().getFullYear() - resultsYear
         if(new Date().getTime() < actorThisYear.getTime())this.yearsOld -= 1
         if(!actor.deathday)return
