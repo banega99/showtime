@@ -12,7 +12,7 @@ import { WatchlistService } from 'src/app/services/watchlist-service/watchlist.s
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit {
-  searchRes$!: any[]
+  searchRes$: any[] =[]
   resLength!: number
   genres: any
   years: any
