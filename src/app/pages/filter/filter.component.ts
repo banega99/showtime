@@ -27,7 +27,6 @@ export class FilterComponent implements OnInit {
   totalResults!: number
   pages!: any
   currentPage!: any
-  countriesIso!: any
   companyName: any = ''
   companyId!: any
   constructor(private movieApiService: MovieApiService,
@@ -53,7 +52,6 @@ export class FilterComponent implements OnInit {
       this.genres = []
       this.countries = []
       this.languages = []
-      this.countriesIso = []
       this.sort = params.sort
       this.genres = params.genre && typeof (params?.genre) === 'string' && [params.genre] ||
         params.genre && typeof (params?.genre) === 'object' && params.genre || []
@@ -126,8 +124,8 @@ export class FilterComponent implements OnInit {
       let index = this.years.indexOf(filText)
       this.years.splice(index, 1)
     } else if (filType == 'country') {
-      let index = this.countriesIso.indexOf(filText)
-      this.countriesIso.splice(index, 1)
+      let index = this.countries.indexOf(filText)
+      this.countries.splice(index, 1)
       this.countriesNames = this.countriesNames.filter((country: any) => country.iso_3166_1 != filText)
 
     } else if (filType == 'language') {
@@ -135,13 +133,13 @@ export class FilterComponent implements OnInit {
       this.languages.splice(index, 1)
       this.languagesNames = this.languagesNames.filter((language: any) => language.iso_639_1 != filText)
     }
-    this.filterResults(this.genres, this.years, this.countriesIso, '', this.sort, this.languages, 1).subscribe()
+    this.filterResults(this.genres, this.years, this.countries, '', this.sort, this.languages, 1).subscribe()
     let queryParams = {
       genre: this.genres,
       sort: this.sort,
       year: this.years,
       language: this.languages,
-      country: this.countriesIso,
+      country: this.countries,
       page: 1
     }
 
